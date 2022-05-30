@@ -1,112 +1,36 @@
-# Flower - A Friendly Federated Learning Framework
+# Testbed Implementation of FedBalancer on Flower
 
-<p align="center">
-  <a href="https://flower.dev/">
-    <img src="https://flower.dev/_next/image/?url=%2F_next%2Fstatic%2Fmedia%2Fflower_white_border.c2012e70.png&w=640&q=75" width="140px" alt="Flower Website" />
-  </a>
-</p>
-<p align="center">
-    <a href="https://flower.dev/">Website</a> |
-    <a href="https://flower.dev/blog">Blog</a> |
-    <a href="https://flower.dev/docs/">Docs</a> |
-    <a href="https://flower.dev/conf/flower-summit-2021">Conference</a> |
-    <a href="https://flower.dev/join-slack">Slack</a>
-    <br /><br />
-</p>
+This repository contains the testbed implementation and corresponding experiments of the paper:
 
-[![GitHub license](https://img.shields.io/github/license/adap/flower)](https://github.com/adap/flower/blob/main/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/adap/flower/blob/main/CONTRIBUTING.md)
-![Build](https://github.com/adap/flower/workflows/Build/badge.svg)
-![Downloads](https://pepy.tech/badge/flwr)
-[![Slack](https://img.shields.io/badge/Chat-Slack-red)](https://flower.dev/join-slack)
+> [MobiSys'22](https://www.sigmobile.org/mobisys/2022/)
+> 
+> Jaemin Shin et al., [FedBalancer: Data and Pace Control for Efficient Federated Learning on Heterogeneous Clients](https://arxiv.org/abs/2201.01601)
 
-Flower (`flwr`) is a framework for building federated learning systems. The
-design of Flower is based on a few guiding principles:
+## System Requirements
 
-* **Customizable**: Federated learning systems vary wildly from one use case to
-  another. Flower allows for a wide range of different configurations depending
-  on the needs of each individual use case.
+This system is written and evaluated based on the following setup:
+- Server: A ```Ubuntu 18.04``` server 
+- Clients: 21 Android smartphones as illustrated in ```Table 4``` of our paper, with Android OS version $\geq$ 7.0
 
-* **Extendable**: Flower originated from a research project at the Univerity of
-  Oxford, so it was build with AI research in mind. Many components can be
-  extended and overridden to build new state-of-the-art systems.
+As an alternative setup, you can use general Ubuntu servers with other Android smartphones.
 
-* **Framework-agnostic**: Different machine learning frameworks have different
-  strengths. Flower can be used with any machine learning framework, for
-  example, [PyTorch](https://pytorch.org),
-  [TensorFlow](https://tensorflow.org), [Hugging Face Transformers](https://huggingface.co/), [PyTorch Lightning](https://pytorchlightning.ai/), [MXNet](https://mxnet.apache.org/), [scikit-learn](https://scikit-learn.org/), [JAX](https://jax.readthedocs.io/), [TFLite](https://tensorflow.org/lite/), or even raw [NumPy](https://numpy.org/)
-  for users who enjoy computing gradients by hand.
+## Installation - Server
 
-* **Understandable**: Flower is written with maintainability in mind. The
-  community is encouraged to both read and contribute to the codebase.
+We recommend you to setup Python environment using ```pyenv-virtualenv``` based on ```Developer Machine Setup``` in this [link](https://flower.dev/docs/getting-started-for-contributors.html) as follows:
 
-Meet the Flower community on [flower.dev](https://flower.dev)!
+## How to run
 
-## Documentation
+TBD
 
-[Flower Docs](https://flower.dev/docs):
-* [Installation](https://flower.dev/docs/installation.html)
-* [Quickstart (TensorFlow)](https://flower.dev/docs/quickstart_tensorflow.html)
-* [Quickstart (PyTorch)](https://flower.dev/docs/quickstart_pytorch.html)
-* [Quickstart (Hugging Face [code example])](https://flower.dev/docs/quickstart_huggingface.html)
-* [Quickstart (PyTorch Lightning [code example])](https://flower.dev/docs/quickstart_pytorch_lightning.html)
-* [Quickstart (MXNet)](https://flower.dev/docs/example-mxnet-walk-through.html)
-* [Quickstart (JAX [code example])](https://github.com/adap/flower/tree/main/examples/jax_from_centralized_to_federated)
-* [Quickstart (scikit-learn)](https://github.com/adap/flower/tree/main/examples/sklearn-logreg-mnist)
-* [Quickstart (TFLite on Android [code example])](https://github.com/adap/flower/tree/main/examples/android)
+## Note
 
-## Flower Baselines
-
-Flower Baselines is a collection of community-contributed experiments that reproduce the experiments performed in popular federated learning publications. Researchers can build on Flower Baselines to quickly evaluate new ideas:
-
-* [FedBN: Federated Learning on non-IID Features via Local Batch Normalization](https://arxiv.org/pdf/2102.07623.pdf):
-  * [Convergence Rate](https://github.com/adap/flower/tree/main/baselines/flwr_baseline/publications/fedbn/convergence_rate)
-* [Adaptive Federated Optimization](https://arxiv.org/pdf/2003.00295.pdf)
-  * [CIFAR-10/100](https://github.com/adap/flower/tree/main/baselines/flwr_baseline/publications/adaptive_federated_optimization)
-
-Check the Flower documentation to learn more: [Using Baselines](https://flower.dev/docs/using-baselines.html)
-
-The Flower community loves contributions! Make your work more visible and enable others to build on it by contributing it as a baseline: [Contributing Baselines](https://flower.dev/docs/contributing-baselines.html)
-
-## Flower Usage Examples
-
-A number of examples show different usage scenarios of Flower (in combination
-with popular machine learning frameworks such as PyTorch or TensorFlow). To run
-an example, first install the necessary extras:
-
-[Usage Examples Documentation](https://flower.dev/docs/examples.html)
-
-Quickstart examples:
-
-* [Quickstart (TensorFlow)](https://github.com/adap/flower/tree/main/examples/quickstart_tensorflow)
-* [Quickstart (PyTorch)](https://github.com/adap/flower/tree/main/examples/quickstart_pytorch)
-* [Quickstart (Hugging Face)](https://github.com/adap/flower/tree/main/examples/quickstart_huggingface)
-* [Quickstart (PyTorch Lightning)](https://github.com/adap/flower/tree/main/examples/quickstart_pytorch_lightning)
-* [Quickstart (MXNet)](https://github.com/adap/flower/tree/main/examples/quickstart_mxnet)
-* [Quickstart (scikit-learn)](https://github.com/adap/flower/tree/main/examples/sklearn-logreg-mnist)
-* [Quickstart (TFLite on Android)](https://github.com/adap/flower/tree/main/examples/android)
-
-Other [examples](https://github.com/adap/flower/tree/main/examples):
-
-* [Raspberry Pi & Nvidia Jetson Tutorial](https://github.com/adap/flower/tree/main/examples/embedded_devices)
-* [Android & TFLite](https://github.com/adap/flower/tree/main/examples/android)
-* [PyTorch: From Centralized to Federated](https://github.com/adap/flower/tree/main/examples/pytorch_from_centralized_to_federated)
-* [MXNet: From Centralized to Federated](https://github.com/adap/flower/tree/main/examples/mxnet_from_centralized_to_federated)
-* [JAX: From Centralized to Federated](https://github.com/adap/flower/tree/main/examples/jax_from_centralized_to_federated)
-* [Advanced Flower with TensorFlow/Keras](https://github.com/adap/flower/tree/main/examples/advanced_tensorflow)
-* [Single-Machine Simulation of Federated Learning Systems](https://github.com/adap/flower/tree/main/examples/simulation)
-
-## Community
-
-Flower is built by a wonderful community of researchers and engineers. [Join Slack](https://flower.dev/join-slack) to meet them, [contributions](#contributing-to-flower) are welcome.
-
-<a href="https://github.com/adap/flower/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=adap/flower" />
-</a>
+This repository is built top on a forked repository of [Flower](https://github.com/adap/flower), which is a friendly federated learning framework that is maintained by a wonderful community of researchers and engineers. Therefore, this repository contains same license file as in Flower. 
 
 ## Citation
 
-If you publish work that uses Flower, please cite Flower as follows: 
+If you publish work that uses this repository, please cite FedBalancer and Flower as follows:
+
+(FedBalancer bibtext - TBD)
 
 ```bibtex
 @article{beutel2020flower,
@@ -116,10 +40,3 @@ If you publish work that uses Flower, please cite Flower as follows:
   year={2020}
 }
 ```
-
-Please also consider adding your publication to the list of Flower-based publications in the docs, just open a Pull Request.
-
-## Contributing to Flower
-
-We welcome contributions. Please see [CONTRIBUTING.md](CONTRIBUTING.md) to get
-started!
