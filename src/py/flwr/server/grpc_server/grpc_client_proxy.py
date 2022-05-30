@@ -14,13 +14,12 @@
 # ==============================================================================
 """gRPC-based Flower ClientProxy implementation."""
 
-from typing import Optional
 
 from flwr import common
 from flwr.common import serde
 from flwr.proto.transport_pb2 import ClientMessage, ServerMessage
 from flwr.server.client_proxy import ClientProxy
-from flwr.server.grpc_server.grpc_bridge import GRPCBridge, InsWrapper, ResWrapper
+from flwr.server.grpc_server.grpc_bridge import GRPCBridge
 
 
 class GrpcClientProxy(ClientProxy):
@@ -34,87 +33,64 @@ class GrpcClientProxy(ClientProxy):
         super().__init__(cid)
         self.bridge = bridge
 
-    def get_properties(
-        self,
-        ins: common.PropertiesIns,
-        timeout: Optional[float],
-    ) -> common.PropertiesRes:
+    def get_properties(self, ins: common.PropertiesIns) -> common.PropertiesRes:
         """Requests client's set of internal properties."""
         properties_msg = serde.properties_ins_to_proto(ins)
-        res_wrapper: ResWrapper = self.bridge.request(
-            ins_wrapper=InsWrapper(
-                server_message=ServerMessage(properties_ins=properties_msg),
-                timeout=timeout,
-            )
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(properties_ins=properties_msg)
         )
-        client_msg: ClientMessage = res_wrapper.client_message
         properties_res = serde.properties_res_from_proto(client_msg.properties_res)
         return properties_res
 
-    def get_parameters(
-        self,
-        timeout: Optional[float],
-    ) -> common.ParametersRes:
+    def get_parameters(self) -> common.ParametersRes:
         """Return the current local model parameters."""
         get_parameters_msg = serde.get_parameters_to_proto()
-        res_wrapper: ResWrapper = self.bridge.request(
-            ins_wrapper=InsWrapper(
-                server_message=ServerMessage(get_parameters=get_parameters_msg),
-                timeout=timeout,
-            )
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(get_parameters=get_parameters_msg)
         )
-        client_msg: ClientMessage = res_wrapper.client_message
         parameters_res = serde.parameters_res_from_proto(client_msg.parameters_res)
         return parameters_res
+    
+    def device_info(self) -> common.DeviceInfoRes:
+        device_info_msg = serde.device_info_to_proto()
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(device_info=device_info_msg)
+        )
+        device_info_res = serde.device_info_res_from_proto(client_msg.device_info_res)
+        return device_info_res
+    
+    def sample_latency(self, ins:common.SampleLatency) -> common.ParametersRes:
+        """Measure and return the latency of current local model parameters."""
+        sample_latency_msg = serde.sample_latency_to_proto(ins)
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(sample_latency=sample_latency_msg)
+        )
+        sample_latency_res = serde.sample_latency_res_from_proto(client_msg.sample_latency_res)
+        return sample_latency_res
 
-    def fit(
-        self,
-        ins: common.FitIns,
-        timeout: Optional[float],
-    ) -> common.FitRes:
+    def fit(self, ins: common.FitIns) -> common.FitRes:
         """Refine the provided weights using the locally held dataset."""
         fit_ins_msg = serde.fit_ins_to_proto(ins)
-
-        res_wrapper: ResWrapper = self.bridge.request(
-            ins_wrapper=InsWrapper(
-                server_message=ServerMessage(fit_ins=fit_ins_msg),
-                timeout=timeout,
-            )
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(fit_ins=fit_ins_msg)
         )
-        client_msg: ClientMessage = res_wrapper.client_message
         fit_res = serde.fit_res_from_proto(client_msg.fit_res)
         return fit_res
 
-    def evaluate(
-        self,
-        ins: common.EvaluateIns,
-        timeout: Optional[float],
-    ) -> common.EvaluateRes:
+    def evaluate(self, ins: common.EvaluateIns) -> common.EvaluateRes:
         """Evaluate the provided weights using the locally held dataset."""
         evaluate_msg = serde.evaluate_ins_to_proto(ins)
-        res_wrapper: ResWrapper = self.bridge.request(
-            ins_wrapper=InsWrapper(
-                server_message=ServerMessage(evaluate_ins=evaluate_msg),
-                timeout=timeout,
-            )
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(evaluate_ins=evaluate_msg)
         )
-        client_msg: ClientMessage = res_wrapper.client_message
         evaluate_res = serde.evaluate_res_from_proto(client_msg.evaluate_res)
         return evaluate_res
 
-    def reconnect(
-        self,
-        reconnect: common.Reconnect,
-        timeout: Optional[float],
-    ) -> common.Disconnect:
+    def reconnect(self, reconnect: common.Reconnect) -> common.Disconnect:
         """Disconnect and (optionally) reconnect later."""
         reconnect_msg = serde.reconnect_to_proto(reconnect)
-        res_wrapper: ResWrapper = self.bridge.request(
-            ins_wrapper=InsWrapper(
-                server_message=ServerMessage(reconnect=reconnect_msg),
-                timeout=timeout,
-            )
+        client_msg: ClientMessage = self.bridge.request(
+            ServerMessage(reconnect=reconnect_msg)
         )
-        client_msg: ClientMessage = res_wrapper.client_message
         disconnect = serde.disconnect_from_proto(client_msg.disconnect)
         return disconnect

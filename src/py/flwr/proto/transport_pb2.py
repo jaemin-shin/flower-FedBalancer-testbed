@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1a\x66lwr/proto/transport.proto\x12\x10\x66lower.transport\"?\n\x06Status\x12$\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x16.flower.transport.Code\x12\x0f\n\x07message\x18\x02 \x01(\t\"2\n\nParameters\x12\x0f\n\x07tensors\x18\x01 \x03(\x0c\x12\x13\n\x0btensor_type\x18\x02 \x01(\t\"\xdb\x07\n\rServerMessage\x12>\n\treconnect\x18\x01 \x01(\x0b\x32).flower.transport.ServerMessage.ReconnectH\x00\x12G\n\x0eget_parameters\x18\x02 \x01(\x0b\x32-.flower.transport.ServerMessage.GetParametersH\x00\x12\x39\n\x07\x66it_ins\x18\x03 \x01(\x0b\x32&.flower.transport.ServerMessage.FitInsH\x00\x12\x43\n\x0c\x65valuate_ins\x18\x04 \x01(\x0b\x32+.flower.transport.ServerMessage.EvaluateInsH\x00\x12G\n\x0eproperties_ins\x18\x05 \x01(\x0b\x32-.flower.transport.ServerMessage.PropertiesInsH\x00\x1a\x1c\n\tReconnect\x12\x0f\n\x07seconds\x18\x01 \x01(\x03\x1a\x0f\n\rGetParameters\x1a\xc7\x01\n\x06\x46itIns\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12\x42\n\x06\x63onfig\x18\x02 \x03(\x0b\x32\x32.flower.transport.ServerMessage.FitIns.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xd1\x01\n\x0b\x45valuateIns\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12G\n\x06\x63onfig\x18\x02 \x03(\x0b\x32\x37.flower.transport.ServerMessage.EvaluateIns.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xa3\x01\n\rPropertiesIns\x12I\n\x06\x63onfig\x18\x01 \x03(\x0b\x32\x39.flower.transport.ServerMessage.PropertiesIns.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x42\x05\n\x03msg\"\xed\x08\n\rClientMessage\x12@\n\ndisconnect\x18\x01 \x01(\x0b\x32*.flower.transport.ClientMessage.DisconnectH\x00\x12G\n\x0eparameters_res\x18\x02 \x01(\x0b\x32-.flower.transport.ClientMessage.ParametersResH\x00\x12\x39\n\x07\x66it_res\x18\x03 \x01(\x0b\x32&.flower.transport.ClientMessage.FitResH\x00\x12\x43\n\x0c\x65valuate_res\x18\x04 \x01(\x0b\x32+.flower.transport.ClientMessage.EvaluateResH\x00\x12G\n\x0eproperties_res\x18\x05 \x01(\x0b\x32-.flower.transport.ClientMessage.PropertiesResH\x00\x1a\x36\n\nDisconnect\x12(\n\x06reason\x18\x01 \x01(\x0e\x32\x18.flower.transport.Reason\x1a\x41\n\rParametersRes\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x1a\xe0\x01\n\x06\x46itRes\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12\x14\n\x0cnum_examples\x18\x02 \x01(\x03\x12\x44\n\x07metrics\x18\x05 \x03(\x0b\x32\x33.flower.transport.ClientMessage.FitRes.MetricsEntry\x1aH\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xc6\x01\n\x0b\x45valuateRes\x12\x14\n\x0cnum_examples\x18\x01 \x01(\x03\x12\x0c\n\x04loss\x18\x02 \x01(\x02\x12I\n\x07metrics\x18\x04 \x03(\x0b\x32\x38.flower.transport.ClientMessage.EvaluateRes.MetricsEntry\x1aH\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xd9\x01\n\rPropertiesRes\x12(\n\x06status\x18\x01 \x01(\x0b\x32\x18.flower.transport.Status\x12Q\n\nproperties\x18\x02 \x03(\x0b\x32=.flower.transport.ClientMessage.PropertiesRes.PropertiesEntry\x1aK\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x42\x05\n\x03msg\"i\n\x06Scalar\x12\x10\n\x06\x64ouble\x18\x01 \x01(\x01H\x00\x12\x10\n\x06sint64\x18\x08 \x01(\x12H\x00\x12\x0e\n\x04\x62ool\x18\r \x01(\x08H\x00\x12\x10\n\x06string\x18\x0e \x01(\tH\x00\x12\x0f\n\x05\x62ytes\x18\x0f \x01(\x0cH\x00\x42\x08\n\x06scalar*2\n\x04\x43ode\x12\x06\n\x02OK\x10\x00\x12\"\n\x1eGET_PARAMETERS_NOT_IMPLEMENTED\x10\x01*[\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\r\n\tRECONNECT\x10\x01\x12\x16\n\x12POWER_DISCONNECTED\x10\x02\x12\x14\n\x10WIFI_UNAVAILABLE\x10\x03\x12\x07\n\x03\x41\x43K\x10\x04\x32_\n\rFlowerService\x12N\n\x04Join\x12\x1f.flower.transport.ClientMessage\x1a\x1f.flower.transport.ServerMessage\"\x00(\x01\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\x1a\x66lwr/proto/transport.proto\x12\x10\x66lower.transport\"?\n\x06Status\x12$\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x16.flower.transport.Code\x12\x0f\n\x07message\x18\x02 \x01(\t\"2\n\nParameters\x12\x0f\n\x07tensors\x18\x01 \x03(\x0c\x12\x13\n\x0btensor_type\x18\x02 \x01(\t\"\xe1\n\n\rServerMessage\x12>\n\treconnect\x18\x01 \x01(\x0b\x32).flower.transport.ServerMessage.ReconnectH\x00\x12G\n\x0eget_parameters\x18\x02 \x01(\x0b\x32-.flower.transport.ServerMessage.GetParametersH\x00\x12\x39\n\x07\x66it_ins\x18\x03 \x01(\x0b\x32&.flower.transport.ServerMessage.FitInsH\x00\x12\x43\n\x0c\x65valuate_ins\x18\x04 \x01(\x0b\x32+.flower.transport.ServerMessage.EvaluateInsH\x00\x12G\n\x0eproperties_ins\x18\x05 \x01(\x0b\x32-.flower.transport.ServerMessage.PropertiesInsH\x00\x12G\n\x0esample_latency\x18\x06 \x01(\x0b\x32-.flower.transport.ServerMessage.SampleLatencyH\x00\x12\x41\n\x0b\x64\x65vice_info\x18\x07 \x01(\x0b\x32*.flower.transport.ServerMessage.DeviceInfoH\x00\x1a\x1c\n\tReconnect\x12\x0f\n\x07seconds\x18\x01 \x01(\x03\x1a\x0f\n\rGetParameters\x1a\xdb\x01\n\x06\x46itIns\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12\x42\n\x06\x63onfig\x18\x02 \x03(\x0b\x32\x32.flower.transport.ServerMessage.FitIns.ConfigEntry\x12\x12\n\nsampleloss\x18\x03 \x03(\x02\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xd1\x01\n\x0b\x45valuateIns\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12G\n\x06\x63onfig\x18\x02 \x03(\x0b\x32\x37.flower.transport.ServerMessage.EvaluateIns.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xa3\x01\n\rPropertiesIns\x12I\n\x06\x63onfig\x18\x01 \x03(\x0b\x32\x39.flower.transport.ServerMessage.PropertiesIns.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xd5\x01\n\rSampleLatency\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12I\n\x06\x63onfig\x18\x02 \x03(\x0b\x32\x39.flower.transport.ServerMessage.SampleLatency.ConfigEntry\x1aG\n\x0b\x43onfigEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\x0c\n\nDeviceInfoB\x05\n\x03msg\"\xda\x0e\n\rClientMessage\x12@\n\ndisconnect\x18\x01 \x01(\x0b\x32*.flower.transport.ClientMessage.DisconnectH\x00\x12G\n\x0eparameters_res\x18\x02 \x01(\x0b\x32-.flower.transport.ClientMessage.ParametersResH\x00\x12\x39\n\x07\x66it_res\x18\x03 \x01(\x0b\x32&.flower.transport.ClientMessage.FitResH\x00\x12\x43\n\x0c\x65valuate_res\x18\x04 \x01(\x0b\x32+.flower.transport.ClientMessage.EvaluateResH\x00\x12G\n\x0eproperties_res\x18\x05 \x01(\x0b\x32-.flower.transport.ClientMessage.PropertiesResH\x00\x12N\n\x12sample_latency_res\x18\x06 \x01(\x0b\x32\x30.flower.transport.ClientMessage.SampleLatencyResH\x00\x12H\n\x0f\x64\x65vice_info_res\x18\x07 \x01(\x0b\x32-.flower.transport.ClientMessage.DeviceInfoResH\x00\x1a\x36\n\nDisconnect\x12(\n\x06reason\x18\x01 \x01(\x0e\x32\x18.flower.transport.Reason\x1a\x41\n\rParametersRes\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x1a\xe7\x03\n\x06\x46itRes\x12\x30\n\nparameters\x18\x01 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12\x14\n\x0cnum_examples\x18\x02 \x01(\x03\x12\x44\n\x07metrics\x18\x05 \x03(\x0b\x32\x33.flower.transport.ClientMessage.FitRes.MetricsEntry\x12\x10\n\x08loss_min\x18\x06 \x01(\x02\x12\x10\n\x08loss_max\x18\x07 \x01(\x02\x12\x17\n\x0floss_square_sum\x18\x08 \x01(\x02\x12 \n\x18overthreshold_loss_count\x18\t \x01(\x03\x12\x10\n\x08loss_sum\x18\n \x01(\x02\x12\x12\n\nloss_count\x18\x0b \x01(\x03\x12\x1c\n\x14train_time_per_epoch\x18\x0c \x01(\x02\x12\x1c\n\x14train_time_per_batch\x18\r \x01(\x02\x12!\n\x19train_time_per_epoch_list\x18\x0e \x03(\x02\x12!\n\x19train_time_per_batch_list\x18\x0f \x03(\x02\x1aH\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xc6\x01\n\x0b\x45valuateRes\x12\x14\n\x0cnum_examples\x18\x01 \x01(\x03\x12\x0c\n\x04loss\x18\x02 \x01(\x02\x12I\n\x07metrics\x18\x04 \x03(\x0b\x32\x38.flower.transport.ClientMessage.EvaluateRes.MetricsEntry\x1aH\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xd9\x01\n\rPropertiesRes\x12(\n\x06status\x18\x01 \x01(\x0b\x32\x18.flower.transport.Status\x12Q\n\nproperties\x18\x02 \x03(\x0b\x32=.flower.transport.ClientMessage.PropertiesRes.PropertiesEntry\x1aK\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\'\n\x05value\x18\x02 \x01(\x0b\x32\x18.flower.transport.Scalar:\x02\x38\x01\x1a\xa5\x02\n\x10SampleLatencyRes\x12\x18\n\x10msg_receive_time\x18\x01 \x01(\t\x12\x15\n\rmsg_sent_time\x18\x02 \x01(\t\x12\x1c\n\x14train_time_per_epoch\x18\x03 \x01(\x02\x12\x1c\n\x14train_time_per_batch\x18\x04 \x01(\x02\x12\x16\n\x0einference_time\x18\x05 \x01(\x02\x12\x30\n\nparameters\x18\x06 \x01(\x0b\x32\x1c.flower.transport.Parameters\x12\x14\n\x0cnum_examples\x18\x07 \x01(\x03\x12!\n\x19train_time_per_epoch_list\x18\x08 \x03(\x02\x12!\n\x19train_time_per_batch_list\x18\t \x03(\x02\x1a\"\n\rDeviceInfoRes\x12\x11\n\tdevice_id\x18\x01 \x01(\x03\x42\x05\n\x03msg\"i\n\x06Scalar\x12\x10\n\x06\x64ouble\x18\x01 \x01(\x01H\x00\x12\x10\n\x06sint64\x18\x08 \x01(\x12H\x00\x12\x0e\n\x04\x62ool\x18\r \x01(\x08H\x00\x12\x10\n\x06string\x18\x0e \x01(\tH\x00\x12\x0f\n\x05\x62ytes\x18\x0f \x01(\x0cH\x00\x42\x08\n\x06scalar*2\n\x04\x43ode\x12\x06\n\x02OK\x10\x00\x12\"\n\x1eGET_PARAMETERS_NOT_IMPLEMENTED\x10\x01*[\n\x06Reason\x12\x0b\n\x07UNKNOWN\x10\x00\x12\r\n\tRECONNECT\x10\x01\x12\x16\n\x12POWER_DISCONNECTED\x10\x02\x12\x14\n\x10WIFI_UNAVAILABLE\x10\x03\x12\x07\n\x03\x41\x43K\x10\x04\x32_\n\rFlowerService\x12N\n\x04Join\x12\x1f.flower.transport.ClientMessage\x1a\x1f.flower.transport.ServerMessage\"\x00(\x01\x30\x01\x62\x06proto3'
 )
 
 _CODE = _descriptor.EnumDescriptor(
@@ -43,8 +43,8 @@ _CODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2398,
-  serialized_end=2448,
+  serialized_start=3537,
+  serialized_end=3587,
 )
 _sym_db.RegisterEnumDescriptor(_CODE)
 
@@ -84,8 +84,8 @@ _REASON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2450,
-  serialized_end=2541,
+  serialized_start=3589,
+  serialized_end=3680,
 )
 _sym_db.RegisterEnumDescriptor(_REASON)
 
@@ -205,8 +205,8 @@ _SERVERMESSAGE_RECONNECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=521,
-  serialized_end=549,
+  serialized_start=661,
+  serialized_end=689,
 )
 
 _SERVERMESSAGE_GETPARAMETERS = _descriptor.Descriptor(
@@ -229,8 +229,8 @@ _SERVERMESSAGE_GETPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=551,
-  serialized_end=566,
+  serialized_start=691,
+  serialized_end=706,
 )
 
 _SERVERMESSAGE_FITINS_CONFIGENTRY = _descriptor.Descriptor(
@@ -267,8 +267,8 @@ _SERVERMESSAGE_FITINS_CONFIGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=697,
-  serialized_end=768,
+  serialized_start=857,
+  serialized_end=928,
 )
 
 _SERVERMESSAGE_FITINS = _descriptor.Descriptor(
@@ -293,6 +293,13 @@ _SERVERMESSAGE_FITINS = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sampleloss', full_name='flower.transport.ServerMessage.FitIns.sampleloss', index=2,
+      number=3, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -305,8 +312,8 @@ _SERVERMESSAGE_FITINS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=569,
-  serialized_end=768,
+  serialized_start=709,
+  serialized_end=928,
 )
 
 _SERVERMESSAGE_EVALUATEINS_CONFIGENTRY = _descriptor.Descriptor(
@@ -343,8 +350,8 @@ _SERVERMESSAGE_EVALUATEINS_CONFIGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=697,
-  serialized_end=768,
+  serialized_start=857,
+  serialized_end=928,
 )
 
 _SERVERMESSAGE_EVALUATEINS = _descriptor.Descriptor(
@@ -381,8 +388,8 @@ _SERVERMESSAGE_EVALUATEINS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=771,
-  serialized_end=980,
+  serialized_start=931,
+  serialized_end=1140,
 )
 
 _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY = _descriptor.Descriptor(
@@ -419,8 +426,8 @@ _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=697,
-  serialized_end=768,
+  serialized_start=857,
+  serialized_end=928,
 )
 
 _SERVERMESSAGE_PROPERTIESINS = _descriptor.Descriptor(
@@ -450,8 +457,108 @@ _SERVERMESSAGE_PROPERTIESINS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=983,
-  serialized_end=1146,
+  serialized_start=1143,
+  serialized_end=1306,
+)
+
+_SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY = _descriptor.Descriptor(
+  name='ConfigEntry',
+  full_name='flower.transport.ServerMessage.SampleLatency.ConfigEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='flower.transport.ServerMessage.SampleLatency.ConfigEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='flower.transport.ServerMessage.SampleLatency.ConfigEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=857,
+  serialized_end=928,
+)
+
+_SERVERMESSAGE_SAMPLELATENCY = _descriptor.Descriptor(
+  name='SampleLatency',
+  full_name='flower.transport.ServerMessage.SampleLatency',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='parameters', full_name='flower.transport.ServerMessage.SampleLatency.parameters', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='config', full_name='flower.transport.ServerMessage.SampleLatency.config', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1309,
+  serialized_end=1522,
+)
+
+_SERVERMESSAGE_DEVICEINFO = _descriptor.Descriptor(
+  name='DeviceInfo',
+  full_name='flower.transport.ServerMessage.DeviceInfo',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1524,
+  serialized_end=1536,
 )
 
 _SERVERMESSAGE = _descriptor.Descriptor(
@@ -497,10 +604,24 @@ _SERVERMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sample_latency', full_name='flower.transport.ServerMessage.sample_latency', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='device_info', full_name='flower.transport.ServerMessage.device_info', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[_SERVERMESSAGE_RECONNECT, _SERVERMESSAGE_GETPARAMETERS, _SERVERMESSAGE_FITINS, _SERVERMESSAGE_EVALUATEINS, _SERVERMESSAGE_PROPERTIESINS, ],
+  nested_types=[_SERVERMESSAGE_RECONNECT, _SERVERMESSAGE_GETPARAMETERS, _SERVERMESSAGE_FITINS, _SERVERMESSAGE_EVALUATEINS, _SERVERMESSAGE_PROPERTIESINS, _SERVERMESSAGE_SAMPLELATENCY, _SERVERMESSAGE_DEVICEINFO, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -515,7 +636,7 @@ _SERVERMESSAGE = _descriptor.Descriptor(
     fields=[]),
   ],
   serialized_start=166,
-  serialized_end=1153,
+  serialized_end=1543,
 )
 
 
@@ -546,8 +667,8 @@ _CLIENTMESSAGE_DISCONNECT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1513,
-  serialized_end=1567,
+  serialized_start=2057,
+  serialized_end=2111,
 )
 
 _CLIENTMESSAGE_PARAMETERSRES = _descriptor.Descriptor(
@@ -577,8 +698,8 @@ _CLIENTMESSAGE_PARAMETERSRES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1569,
-  serialized_end=1634,
+  serialized_start=2113,
+  serialized_end=2178,
 )
 
 _CLIENTMESSAGE_FITRES_METRICSENTRY = _descriptor.Descriptor(
@@ -615,8 +736,8 @@ _CLIENTMESSAGE_FITRES_METRICSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1789,
-  serialized_end=1861,
+  serialized_start=2596,
+  serialized_end=2668,
 )
 
 _CLIENTMESSAGE_FITRES = _descriptor.Descriptor(
@@ -648,6 +769,76 @@ _CLIENTMESSAGE_FITRES = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='loss_min', full_name='flower.transport.ClientMessage.FitRes.loss_min', index=3,
+      number=6, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='loss_max', full_name='flower.transport.ClientMessage.FitRes.loss_max', index=4,
+      number=7, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='loss_square_sum', full_name='flower.transport.ClientMessage.FitRes.loss_square_sum', index=5,
+      number=8, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='overthreshold_loss_count', full_name='flower.transport.ClientMessage.FitRes.overthreshold_loss_count', index=6,
+      number=9, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='loss_sum', full_name='flower.transport.ClientMessage.FitRes.loss_sum', index=7,
+      number=10, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='loss_count', full_name='flower.transport.ClientMessage.FitRes.loss_count', index=8,
+      number=11, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_epoch', full_name='flower.transport.ClientMessage.FitRes.train_time_per_epoch', index=9,
+      number=12, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_batch', full_name='flower.transport.ClientMessage.FitRes.train_time_per_batch', index=10,
+      number=13, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_epoch_list', full_name='flower.transport.ClientMessage.FitRes.train_time_per_epoch_list', index=11,
+      number=14, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_batch_list', full_name='flower.transport.ClientMessage.FitRes.train_time_per_batch_list', index=12,
+      number=15, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -660,8 +851,8 @@ _CLIENTMESSAGE_FITRES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1637,
-  serialized_end=1861,
+  serialized_start=2181,
+  serialized_end=2668,
 )
 
 _CLIENTMESSAGE_EVALUATERES_METRICSENTRY = _descriptor.Descriptor(
@@ -698,8 +889,8 @@ _CLIENTMESSAGE_EVALUATERES_METRICSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1789,
-  serialized_end=1861,
+  serialized_start=2596,
+  serialized_end=2668,
 )
 
 _CLIENTMESSAGE_EVALUATERES = _descriptor.Descriptor(
@@ -743,8 +934,8 @@ _CLIENTMESSAGE_EVALUATERES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1864,
-  serialized_end=2062,
+  serialized_start=2671,
+  serialized_end=2869,
 )
 
 _CLIENTMESSAGE_PROPERTIESRES_PROPERTIESENTRY = _descriptor.Descriptor(
@@ -781,8 +972,8 @@ _CLIENTMESSAGE_PROPERTIESRES_PROPERTIESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2207,
-  serialized_end=2282,
+  serialized_start=3014,
+  serialized_end=3089,
 )
 
 _CLIENTMESSAGE_PROPERTIESRES = _descriptor.Descriptor(
@@ -819,8 +1010,126 @@ _CLIENTMESSAGE_PROPERTIESRES = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2065,
-  serialized_end=2282,
+  serialized_start=2872,
+  serialized_end=3089,
+)
+
+_CLIENTMESSAGE_SAMPLELATENCYRES = _descriptor.Descriptor(
+  name='SampleLatencyRes',
+  full_name='flower.transport.ClientMessage.SampleLatencyRes',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='msg_receive_time', full_name='flower.transport.ClientMessage.SampleLatencyRes.msg_receive_time', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='msg_sent_time', full_name='flower.transport.ClientMessage.SampleLatencyRes.msg_sent_time', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_epoch', full_name='flower.transport.ClientMessage.SampleLatencyRes.train_time_per_epoch', index=2,
+      number=3, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_batch', full_name='flower.transport.ClientMessage.SampleLatencyRes.train_time_per_batch', index=3,
+      number=4, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='inference_time', full_name='flower.transport.ClientMessage.SampleLatencyRes.inference_time', index=4,
+      number=5, type=2, cpp_type=6, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='parameters', full_name='flower.transport.ClientMessage.SampleLatencyRes.parameters', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='num_examples', full_name='flower.transport.ClientMessage.SampleLatencyRes.num_examples', index=6,
+      number=7, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_epoch_list', full_name='flower.transport.ClientMessage.SampleLatencyRes.train_time_per_epoch_list', index=7,
+      number=8, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='train_time_per_batch_list', full_name='flower.transport.ClientMessage.SampleLatencyRes.train_time_per_batch_list', index=8,
+      number=9, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3092,
+  serialized_end=3385,
+)
+
+_CLIENTMESSAGE_DEVICEINFORES = _descriptor.Descriptor(
+  name='DeviceInfoRes',
+  full_name='flower.transport.ClientMessage.DeviceInfoRes',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='device_id', full_name='flower.transport.ClientMessage.DeviceInfoRes.device_id', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3387,
+  serialized_end=3421,
 )
 
 _CLIENTMESSAGE = _descriptor.Descriptor(
@@ -866,10 +1175,24 @@ _CLIENTMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sample_latency_res', full_name='flower.transport.ClientMessage.sample_latency_res', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='device_info_res', full_name='flower.transport.ClientMessage.device_info_res', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[_CLIENTMESSAGE_DISCONNECT, _CLIENTMESSAGE_PARAMETERSRES, _CLIENTMESSAGE_FITRES, _CLIENTMESSAGE_EVALUATERES, _CLIENTMESSAGE_PROPERTIESRES, ],
+  nested_types=[_CLIENTMESSAGE_DISCONNECT, _CLIENTMESSAGE_PARAMETERSRES, _CLIENTMESSAGE_FITRES, _CLIENTMESSAGE_EVALUATERES, _CLIENTMESSAGE_PROPERTIESRES, _CLIENTMESSAGE_SAMPLELATENCYRES, _CLIENTMESSAGE_DEVICEINFORES, ],
   enum_types=[
   ],
   serialized_options=None,
@@ -883,8 +1206,8 @@ _CLIENTMESSAGE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1156,
-  serialized_end=2289,
+  serialized_start=1546,
+  serialized_end=3428,
 )
 
 
@@ -948,8 +1271,8 @@ _SCALAR = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=2291,
-  serialized_end=2396,
+  serialized_start=3430,
+  serialized_end=3535,
 )
 
 _STATUS.fields_by_name['code'].enum_type = _CODE
@@ -969,11 +1292,19 @@ _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY.fields_by_name['value'].message_type = 
 _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY.containing_type = _SERVERMESSAGE_PROPERTIESINS
 _SERVERMESSAGE_PROPERTIESINS.fields_by_name['config'].message_type = _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY
 _SERVERMESSAGE_PROPERTIESINS.containing_type = _SERVERMESSAGE
+_SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY.fields_by_name['value'].message_type = _SCALAR
+_SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY.containing_type = _SERVERMESSAGE_SAMPLELATENCY
+_SERVERMESSAGE_SAMPLELATENCY.fields_by_name['parameters'].message_type = _PARAMETERS
+_SERVERMESSAGE_SAMPLELATENCY.fields_by_name['config'].message_type = _SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY
+_SERVERMESSAGE_SAMPLELATENCY.containing_type = _SERVERMESSAGE
+_SERVERMESSAGE_DEVICEINFO.containing_type = _SERVERMESSAGE
 _SERVERMESSAGE.fields_by_name['reconnect'].message_type = _SERVERMESSAGE_RECONNECT
 _SERVERMESSAGE.fields_by_name['get_parameters'].message_type = _SERVERMESSAGE_GETPARAMETERS
 _SERVERMESSAGE.fields_by_name['fit_ins'].message_type = _SERVERMESSAGE_FITINS
 _SERVERMESSAGE.fields_by_name['evaluate_ins'].message_type = _SERVERMESSAGE_EVALUATEINS
 _SERVERMESSAGE.fields_by_name['properties_ins'].message_type = _SERVERMESSAGE_PROPERTIESINS
+_SERVERMESSAGE.fields_by_name['sample_latency'].message_type = _SERVERMESSAGE_SAMPLELATENCY
+_SERVERMESSAGE.fields_by_name['device_info'].message_type = _SERVERMESSAGE_DEVICEINFO
 _SERVERMESSAGE.oneofs_by_name['msg'].fields.append(
   _SERVERMESSAGE.fields_by_name['reconnect'])
 _SERVERMESSAGE.fields_by_name['reconnect'].containing_oneof = _SERVERMESSAGE.oneofs_by_name['msg']
@@ -989,6 +1320,12 @@ _SERVERMESSAGE.fields_by_name['evaluate_ins'].containing_oneof = _SERVERMESSAGE.
 _SERVERMESSAGE.oneofs_by_name['msg'].fields.append(
   _SERVERMESSAGE.fields_by_name['properties_ins'])
 _SERVERMESSAGE.fields_by_name['properties_ins'].containing_oneof = _SERVERMESSAGE.oneofs_by_name['msg']
+_SERVERMESSAGE.oneofs_by_name['msg'].fields.append(
+  _SERVERMESSAGE.fields_by_name['sample_latency'])
+_SERVERMESSAGE.fields_by_name['sample_latency'].containing_oneof = _SERVERMESSAGE.oneofs_by_name['msg']
+_SERVERMESSAGE.oneofs_by_name['msg'].fields.append(
+  _SERVERMESSAGE.fields_by_name['device_info'])
+_SERVERMESSAGE.fields_by_name['device_info'].containing_oneof = _SERVERMESSAGE.oneofs_by_name['msg']
 _CLIENTMESSAGE_DISCONNECT.fields_by_name['reason'].enum_type = _REASON
 _CLIENTMESSAGE_DISCONNECT.containing_type = _CLIENTMESSAGE
 _CLIENTMESSAGE_PARAMETERSRES.fields_by_name['parameters'].message_type = _PARAMETERS
@@ -1007,11 +1344,16 @@ _CLIENTMESSAGE_PROPERTIESRES_PROPERTIESENTRY.containing_type = _CLIENTMESSAGE_PR
 _CLIENTMESSAGE_PROPERTIESRES.fields_by_name['status'].message_type = _STATUS
 _CLIENTMESSAGE_PROPERTIESRES.fields_by_name['properties'].message_type = _CLIENTMESSAGE_PROPERTIESRES_PROPERTIESENTRY
 _CLIENTMESSAGE_PROPERTIESRES.containing_type = _CLIENTMESSAGE
+_CLIENTMESSAGE_SAMPLELATENCYRES.fields_by_name['parameters'].message_type = _PARAMETERS
+_CLIENTMESSAGE_SAMPLELATENCYRES.containing_type = _CLIENTMESSAGE
+_CLIENTMESSAGE_DEVICEINFORES.containing_type = _CLIENTMESSAGE
 _CLIENTMESSAGE.fields_by_name['disconnect'].message_type = _CLIENTMESSAGE_DISCONNECT
 _CLIENTMESSAGE.fields_by_name['parameters_res'].message_type = _CLIENTMESSAGE_PARAMETERSRES
 _CLIENTMESSAGE.fields_by_name['fit_res'].message_type = _CLIENTMESSAGE_FITRES
 _CLIENTMESSAGE.fields_by_name['evaluate_res'].message_type = _CLIENTMESSAGE_EVALUATERES
 _CLIENTMESSAGE.fields_by_name['properties_res'].message_type = _CLIENTMESSAGE_PROPERTIESRES
+_CLIENTMESSAGE.fields_by_name['sample_latency_res'].message_type = _CLIENTMESSAGE_SAMPLELATENCYRES
+_CLIENTMESSAGE.fields_by_name['device_info_res'].message_type = _CLIENTMESSAGE_DEVICEINFORES
 _CLIENTMESSAGE.oneofs_by_name['msg'].fields.append(
   _CLIENTMESSAGE.fields_by_name['disconnect'])
 _CLIENTMESSAGE.fields_by_name['disconnect'].containing_oneof = _CLIENTMESSAGE.oneofs_by_name['msg']
@@ -1027,6 +1369,12 @@ _CLIENTMESSAGE.fields_by_name['evaluate_res'].containing_oneof = _CLIENTMESSAGE.
 _CLIENTMESSAGE.oneofs_by_name['msg'].fields.append(
   _CLIENTMESSAGE.fields_by_name['properties_res'])
 _CLIENTMESSAGE.fields_by_name['properties_res'].containing_oneof = _CLIENTMESSAGE.oneofs_by_name['msg']
+_CLIENTMESSAGE.oneofs_by_name['msg'].fields.append(
+  _CLIENTMESSAGE.fields_by_name['sample_latency_res'])
+_CLIENTMESSAGE.fields_by_name['sample_latency_res'].containing_oneof = _CLIENTMESSAGE.oneofs_by_name['msg']
+_CLIENTMESSAGE.oneofs_by_name['msg'].fields.append(
+  _CLIENTMESSAGE.fields_by_name['device_info_res'])
+_CLIENTMESSAGE.fields_by_name['device_info_res'].containing_oneof = _CLIENTMESSAGE.oneofs_by_name['msg']
 _SCALAR.oneofs_by_name['scalar'].fields.append(
   _SCALAR.fields_by_name['double'])
 _SCALAR.fields_by_name['double'].containing_oneof = _SCALAR.oneofs_by_name['scalar']
@@ -1122,6 +1470,27 @@ ServerMessage = _reflection.GeneratedProtocolMessageType('ServerMessage', (_mess
     # @@protoc_insertion_point(class_scope:flower.transport.ServerMessage.PropertiesIns)
     })
   ,
+
+  'SampleLatency' : _reflection.GeneratedProtocolMessageType('SampleLatency', (_message.Message,), {
+
+    'ConfigEntry' : _reflection.GeneratedProtocolMessageType('ConfigEntry', (_message.Message,), {
+      'DESCRIPTOR' : _SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY,
+      '__module__' : 'flwr.proto.transport_pb2'
+      # @@protoc_insertion_point(class_scope:flower.transport.ServerMessage.SampleLatency.ConfigEntry)
+      })
+    ,
+    'DESCRIPTOR' : _SERVERMESSAGE_SAMPLELATENCY,
+    '__module__' : 'flwr.proto.transport_pb2'
+    # @@protoc_insertion_point(class_scope:flower.transport.ServerMessage.SampleLatency)
+    })
+  ,
+
+  'DeviceInfo' : _reflection.GeneratedProtocolMessageType('DeviceInfo', (_message.Message,), {
+    'DESCRIPTOR' : _SERVERMESSAGE_DEVICEINFO,
+    '__module__' : 'flwr.proto.transport_pb2'
+    # @@protoc_insertion_point(class_scope:flower.transport.ServerMessage.DeviceInfo)
+    })
+  ,
   'DESCRIPTOR' : _SERVERMESSAGE,
   '__module__' : 'flwr.proto.transport_pb2'
   # @@protoc_insertion_point(class_scope:flower.transport.ServerMessage)
@@ -1135,6 +1504,9 @@ _sym_db.RegisterMessage(ServerMessage.EvaluateIns)
 _sym_db.RegisterMessage(ServerMessage.EvaluateIns.ConfigEntry)
 _sym_db.RegisterMessage(ServerMessage.PropertiesIns)
 _sym_db.RegisterMessage(ServerMessage.PropertiesIns.ConfigEntry)
+_sym_db.RegisterMessage(ServerMessage.SampleLatency)
+_sym_db.RegisterMessage(ServerMessage.SampleLatency.ConfigEntry)
+_sym_db.RegisterMessage(ServerMessage.DeviceInfo)
 
 ClientMessage = _reflection.GeneratedProtocolMessageType('ClientMessage', (_message.Message,), {
 
@@ -1193,6 +1565,20 @@ ClientMessage = _reflection.GeneratedProtocolMessageType('ClientMessage', (_mess
     # @@protoc_insertion_point(class_scope:flower.transport.ClientMessage.PropertiesRes)
     })
   ,
+
+  'SampleLatencyRes' : _reflection.GeneratedProtocolMessageType('SampleLatencyRes', (_message.Message,), {
+    'DESCRIPTOR' : _CLIENTMESSAGE_SAMPLELATENCYRES,
+    '__module__' : 'flwr.proto.transport_pb2'
+    # @@protoc_insertion_point(class_scope:flower.transport.ClientMessage.SampleLatencyRes)
+    })
+  ,
+
+  'DeviceInfoRes' : _reflection.GeneratedProtocolMessageType('DeviceInfoRes', (_message.Message,), {
+    'DESCRIPTOR' : _CLIENTMESSAGE_DEVICEINFORES,
+    '__module__' : 'flwr.proto.transport_pb2'
+    # @@protoc_insertion_point(class_scope:flower.transport.ClientMessage.DeviceInfoRes)
+    })
+  ,
   'DESCRIPTOR' : _CLIENTMESSAGE,
   '__module__' : 'flwr.proto.transport_pb2'
   # @@protoc_insertion_point(class_scope:flower.transport.ClientMessage)
@@ -1206,6 +1592,8 @@ _sym_db.RegisterMessage(ClientMessage.EvaluateRes)
 _sym_db.RegisterMessage(ClientMessage.EvaluateRes.MetricsEntry)
 _sym_db.RegisterMessage(ClientMessage.PropertiesRes)
 _sym_db.RegisterMessage(ClientMessage.PropertiesRes.PropertiesEntry)
+_sym_db.RegisterMessage(ClientMessage.SampleLatencyRes)
+_sym_db.RegisterMessage(ClientMessage.DeviceInfoRes)
 
 Scalar = _reflection.GeneratedProtocolMessageType('Scalar', (_message.Message,), {
   'DESCRIPTOR' : _SCALAR,
@@ -1218,6 +1606,7 @@ _sym_db.RegisterMessage(Scalar)
 _SERVERMESSAGE_FITINS_CONFIGENTRY._options = None
 _SERVERMESSAGE_EVALUATEINS_CONFIGENTRY._options = None
 _SERVERMESSAGE_PROPERTIESINS_CONFIGENTRY._options = None
+_SERVERMESSAGE_SAMPLELATENCY_CONFIGENTRY._options = None
 _CLIENTMESSAGE_FITRES_METRICSENTRY._options = None
 _CLIENTMESSAGE_EVALUATERES_METRICSENTRY._options = None
 _CLIENTMESSAGE_PROPERTIESRES_PROPERTIESENTRY._options = None
@@ -1229,8 +1618,8 @@ _FLOWERSERVICE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=2543,
-  serialized_end=2638,
+  serialized_start=3682,
+  serialized_end=3777,
   methods=[
   _descriptor.MethodDescriptor(
     name='Join',

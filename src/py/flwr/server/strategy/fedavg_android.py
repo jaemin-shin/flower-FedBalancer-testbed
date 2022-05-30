@@ -19,6 +19,7 @@ Paper: https://arxiv.org/abs/1602.05629
 """
 
 
+from numbers import Integral
 from typing import Callable, Dict, List, Optional, Tuple, cast
 
 import numpy as np
@@ -29,6 +30,9 @@ from flwr.common import (
     FitIns,
     FitRes,
     Parameters,
+    SampleLatency,
+    SampleLatencyRes,
+    DeviceInfoRes,
     Scalar,
     Weights,
 )
@@ -37,6 +41,8 @@ from flwr.server.client_proxy import ClientProxy
 
 from .aggregate import aggregate, weighted_loss_avg
 from .strategy import Strategy
+
+import json
 
 
 class FedAvgAndroid(Strategy):
@@ -53,10 +59,30 @@ class FedAvgAndroid(Strategy):
         eval_fn: Optional[
             Callable[[Weights], Optional[Tuple[float, Dict[str, Scalar]]]]
         ] = None,
+        sample_loss_fn: Optional[
+            Callable[[Weights], Optional[Tuple[int, float]]]
+        ] = None,
         on_fit_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
         on_evaluate_config_fn: Optional[Callable[[int], Dict[str, Scalar]]] = None,
         accept_failures: bool = True,
         initial_parameters: Optional[Parameters] = None,
+        latency_sampling=False,
+        ss_baseline=False,
+        fedprox=False,
+        fedbalancer=False,
+        fb_client_selection=False,
+        ddl_baseline_fixed=True,
+        ddl_baseline_fixed_value_multiplied_at_mean=1.0,
+        num_epochs=5,
+        batch_size=10,
+        ddl_baseline_smartpc=False,
+        ddl_baseline_wfa=False,
+        clients_per_round=5,
+        fb_p=0.0,
+        lss=0.05,
+        dss=0.05,
+        w=20,
+        total_client_num=21,
     ) -> None:
         """Federated Averaging strategy.
 
@@ -90,10 +116,32 @@ class FedAvgAndroid(Strategy):
         self.fraction_eval = fraction_eval
         self.min_available_clients = min_available_clients
         self.eval_fn = eval_fn
+        self.sample_loss_fn = sample_loss_fn
+
         self.on_fit_config_fn = on_fit_config_fn
         self.on_evaluate_config_fn = on_evaluate_config_fn
         self.accept_failures = accept_failures
         self.initial_parameters = initial_parameters
+
+        self.latency_sampling = latency_sampling
+        self.ss_baseline=ss_baseline
+        self.fedprox=fedprox
+        self.fedbalancer=fedbalancer
+        self.fb_client_selection=fb_client_selection
+        self.ddl_baseline_fixed=ddl_baseline_fixed
+        self.ddl_baseline_fixed_value_multiplied_at_mean=ddl_baseline_fixed_value_multiplied_at_mean
+        self.num_epochs=num_epochs
+        self.batch_size=batch_size
+        self.ddl_baseline_smartpc=ddl_baseline_smartpc
+        self.ddl_baseline_wfa=ddl_baseline_wfa
+        self.clients_per_round=clients_per_round
+
+        self.fb_p=fb_p
+        self.lss=lss
+        self.dss=dss
+        self.w=w
+
+        self.total_client_num=total_client_num
 
     def __repr__(self) -> str:
         rep = f"FedAvg(accept_failures={self.accept_failures})"
@@ -126,32 +174,76 @@ class FedAvgAndroid(Strategy):
             # No evaluation function provided
             return None
         weights = self.parameters_to_weights(parameters)
+
+        weights[0] = weights[0].reshape((16,9,192))
+        weights[2] = weights[2].reshape((6144,256))
+        weights[4] = weights[4].reshape((256,6))
+
         eval_res = self.eval_fn(weights)
+
         if eval_res is None:
             return None
         loss, metrics = eval_res
-        return loss, metrics
+        return loss, {"accuracy": metrics}
+    
+    def calculate_sample_loss(
+        self, parameters: Parameters, x_test: np.ndarray, y_test: np.ndarray
+    ) -> List[float]:
+        """Evaluate model parameters using an evaluation function."""
+        if self.sample_loss_fn is None:
+            # No evaluation function provided
+            return None
+        weights = self.parameters_to_weights(parameters)
 
+        weights[0] = weights[0].reshape((16,9,192))
+        # weights[2] = weights[2].reshape((5376,256))
+        weights[2] = weights[2].reshape((6144,256))
+        weights[4] = weights[4].reshape((256,6))
+
+        sample_loss_res = self.sample_loss_fn(weights, x_test, y_test)
+
+        if sample_loss_res is None:
+            return None
+        return sample_loss_res
+
+    # def configure_fit(
+    #     self, rnd: int, parameters: Parameters, client_manager: ClientManager, clients_per_round: int, deadline: float, fedbalancer: bool
+    # ) -> List[Tuple[ClientProxy, FitIns]]:
     def configure_fit(
-        self, rnd: int, parameters: Parameters, client_manager: ClientManager
-    ) -> List[Tuple[ClientProxy, FitIns]]:
+        self, rnd: int, parameters: Parameters, client_manager: ClientManager, clients_per_round: int, deadline: float, fedbalancer: bool, oort_non_pacer_deadline: float, clients_explored: dict
+    ) -> List[Tuple[ClientProxy, Parameters, dict]]:
         """Configure the next round of training."""
         config = {}
         if self.on_fit_config_fn is not None:
             # Custom fit config function provided
-            config = self.on_fit_config_fn(rnd)
-        fit_ins = FitIns(parameters, config)
+            config = self.on_fit_config_fn(rnd, self.batch_size, self.num_epochs, deadline, self.fedprox, self.fedbalancer, self.fb_p, self.ss_baseline)
+        # fit_ins = FitIns(parameters, config, [])
 
-        # Sample clients
-        sample_size, min_num_clients = self.num_fit_clients(
-            client_manager.num_available()
-        )
-        clients = client_manager.sample(
-            num_clients=sample_size, min_num_clients=min_num_clients
-        )
+        if fedbalancer:
+            clients = client_manager.fb_oort_sample(
+                num_clients=clients_per_round, clients_explored=clients_explored, min_num_clients=clients_per_round, current_round = (rnd-1), # This is rnd-1 to align with how FB is implemented in FLASH
+                oort_non_pacer_deadline=oort_non_pacer_deadline, num_epochs=self.num_epochs
+            )
+        else:
+            clients = client_manager.sample(
+                num_clients=clients_per_round, min_num_clients=clients_per_round
+            )
 
         # Return client/config pairs
-        return [(client, fit_ins) for client in clients]
+        return [(client, parameters, config) for client in clients]
+    
+    def configure_sample_latency(
+        self, parameters: Parameters, client: ClientProxy
+    ) -> List[Tuple[ClientProxy, SampleLatency]]:
+        """Configure the next round of training."""
+        config = {
+            "batch_size": 10,
+            "local_epochs": 5,
+        }
+        sample_latency = SampleLatency(parameters, config)
+
+        # Return client/config pairs
+        return [(client, sample_latency)]
 
     def configure_evaluate(
         self, rnd: int, parameters: Parameters, client_manager: ClientManager
@@ -185,7 +277,7 @@ class FedAvgAndroid(Strategy):
     def aggregate_fit(
         self,
         rnd: int,
-        results: List[Tuple[ClientProxy, FitRes]],
+        results: List[Tuple[ClientProxy, FitRes, int]],
         failures: List[BaseException],
     ) -> Tuple[Optional[Parameters], Dict[str, Scalar]]:
         """Aggregate fit results using weighted average."""
@@ -194,10 +286,13 @@ class FedAvgAndroid(Strategy):
         # Do not aggregate if there are failures and failures are not accepted
         if not self.accept_failures and failures:
             return None, {}
+        
+        # for client, fit_res, time in results:
+        #     print(self.parameters_to_weights(fit_res.parameters))
         # Convert results
         weights_results = [
             (self.parameters_to_weights(fit_res.parameters), fit_res.num_examples)
-            for client, fit_res in results
+            for client, fit_res, time in results
         ]
         return self.weights_to_parameters(aggregate(weights_results)), {}
 

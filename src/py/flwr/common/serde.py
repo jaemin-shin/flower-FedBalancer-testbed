@@ -108,6 +108,44 @@ def parameters_res_from_proto(msg: ClientMessage.ParametersRes) -> typing.Parame
     return typing.ParametersRes(parameters=parameters)
 
 
+
+
+# === sample_latency messages ===
+
+def sample_latency_to_proto(ins: typing.SampleLatency) -> ServerMessage.SampleLatency:
+    """Serialize FitIns to ProtoBuf message."""
+    parameters_proto = parameters_to_proto(ins.parameters)
+    config_msg = metrics_to_proto(ins.config)
+    return ServerMessage.SampleLatency(parameters=parameters_proto, config=config_msg)
+
+def sample_latency_res_from_proto(msg: ClientMessage.SampleLatencyRes) -> typing.SampleLatencyRes:
+    """."""
+    parameters = parameters_from_proto(msg.parameters)
+    return typing.SampleLatencyRes(
+        msg_receive_time=msg.msg_receive_time,
+        msg_sent_time=msg.msg_sent_time,
+        train_time_per_epoch=msg.train_time_per_epoch,
+        train_time_per_batch=msg.train_time_per_batch,
+        inference_time=msg.inference_time,
+        parameters=parameters,
+        num_examples=msg.num_examples,
+        train_time_per_epoch_list=msg.train_time_per_epoch_list,
+        train_time_per_batch_list=msg.train_time_per_batch_list
+    )
+
+# === device_info messages ===
+
+def device_info_to_proto() -> ServerMessage.DeviceInfo:
+    """."""
+    return ServerMessage.DeviceInfo()
+
+def device_info_res_from_proto(msg: ClientMessage.DeviceInfoRes) -> typing.DeviceInfoRes:
+    """."""
+    return typing.DeviceInfoRes(
+        device_id=msg.device_id,
+    )
+
+
 # === Fit messages ===
 
 
@@ -115,7 +153,8 @@ def fit_ins_to_proto(ins: typing.FitIns) -> ServerMessage.FitIns:
     """Serialize FitIns to ProtoBuf message."""
     parameters_proto = parameters_to_proto(ins.parameters)
     config_msg = metrics_to_proto(ins.config)
-    return ServerMessage.FitIns(parameters=parameters_proto, config=config_msg)
+    sampleloss_proto = ins.sampleloss
+    return ServerMessage.FitIns(parameters=parameters_proto, config=config_msg, sampleloss=sampleloss_proto)
 
 
 def fit_ins_from_proto(msg: ServerMessage.FitIns) -> typing.FitIns:
@@ -133,6 +172,16 @@ def fit_res_to_proto(res: typing.FitRes) -> ClientMessage.FitRes:
         parameters=parameters_proto,
         num_examples=res.num_examples,
         metrics=metrics_msg,
+        loss_min=res.loss_min,
+        loss_max=res.loss_max,
+        loss_square_sum=res.loss_square_sum,
+        overthreshold_loss_count=res.overthreshold_loss_count,
+        loss_sum=res.loss_sum,
+        loss_count=res.loss_count,
+        train_time_per_epoch=res.train_time_per_epoch,
+        train_time_per_batch=res.train_time_per_batch,
+        train_time_per_epoch_list=res.train_time_per_epoch_list,
+        train_time_per_batch_list=res.train_time_per_batch_list
     )
 
 
@@ -144,6 +193,16 @@ def fit_res_from_proto(msg: ClientMessage.FitRes) -> typing.FitRes:
         parameters=parameters,
         num_examples=msg.num_examples,
         metrics=metrics,
+        loss_min=msg.loss_min,
+        loss_max=msg.loss_max,
+        loss_square_sum=msg.loss_square_sum,
+        overthreshold_loss_count=msg.overthreshold_loss_count,
+        loss_sum=msg.loss_sum,
+        loss_count=msg.loss_count,
+        train_time_per_epoch=msg.train_time_per_epoch,
+        train_time_per_batch=msg.train_time_per_batch,
+        train_time_per_epoch_list=msg.train_time_per_epoch_list,
+        train_time_per_batch_list=msg.train_time_per_batch_list
     )
 
 

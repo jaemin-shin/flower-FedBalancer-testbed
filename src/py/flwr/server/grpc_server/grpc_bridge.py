@@ -14,27 +14,11 @@
 # ==============================================================================
 """Provides class GRPCBridge."""
 
-from dataclasses import dataclass
 from enum import Enum
 from threading import Condition
 from typing import Iterator, Optional
 
 from flwr.proto.transport_pb2 import ClientMessage, ServerMessage
-
-
-@dataclass
-class InsWrapper:
-    """Instruction wrapper class for a single server message."""
-
-    server_message: ServerMessage
-    timeout: Optional[float]
-
-
-@dataclass
-class ResWrapper:
-    """Result wrapper class for a single client message."""
-
-    client_message: ClientMessage
 
 
 class GRPCBridgeClosed(Exception):
@@ -44,15 +28,15 @@ class GRPCBridgeClosed(Exception):
 class Status(Enum):
     """Status through which the bridge can transition."""
 
-    AWAITING_INS_WRAPPER = 1
-    INS_WRAPPER_AVAILABLE = 2
-    AWAITING_RES_WRAPPER = 3
-    RES_WRAPPER_AVAILABLE = 4
+    AWAITING_SERVER_MESSAGE = 1
+    SERVER_MESSAGE_AVAILABLE = 2
+    AWAITING_CLIENT_MESSAGE = 3
+    CLIENT_MESSAGE_AVAILABLE = 4
     CLOSED = 5
 
 
 class GRPCBridge:
-    """GRPCBridge holding res_wrapper and ins_wrapper.
+    """GRPCBridge holding client_message and server_message.
 
     For understanding this class it is recommended to understand how
     the threading.Condition class works. See here:
@@ -64,9 +48,9 @@ class GRPCBridge:
         # Disable all unsubscriptable-object violations in __init__ method
         # pylint: disable=unsubscriptable-object
         self._cv = Condition()  # cv stands for condition variable
-        self._status = Status.AWAITING_INS_WRAPPER
-        self._ins_wrapper: Optional[InsWrapper] = None
-        self._res_wrapper: Optional[ResWrapper] = None
+        self._status = Status.AWAITING_SERVER_MESSAGE
+        self._server_message: Optional[ServerMessage] = None
+        self._client_message: Optional[ClientMessage] = None
 
     def _is_closed(self) -> bool:
         """Return True if closed and False otherwise."""
@@ -85,31 +69,31 @@ class GRPCBridge:
         if next_status == Status.CLOSED:
             self._status = next_status
         elif (
-            self._status == Status.AWAITING_INS_WRAPPER
-            and next_status == Status.INS_WRAPPER_AVAILABLE
-            and self._ins_wrapper is not None
-            and self._res_wrapper is None
+            self._status == Status.AWAITING_SERVER_MESSAGE
+            and next_status == Status.SERVER_MESSAGE_AVAILABLE
+            and self._server_message is not None
+            and self._client_message is None
         ):
             self._status = next_status
         elif (
-            self._status == Status.INS_WRAPPER_AVAILABLE
-            and next_status == Status.AWAITING_RES_WRAPPER
-            and self._ins_wrapper is None
-            and self._res_wrapper is None
+            self._status == Status.SERVER_MESSAGE_AVAILABLE
+            and next_status == Status.AWAITING_CLIENT_MESSAGE
+            and self._server_message is None
+            and self._client_message is None
         ):
             self._status = next_status
         elif (
-            self._status == Status.AWAITING_RES_WRAPPER
-            and next_status == Status.RES_WRAPPER_AVAILABLE
-            and self._ins_wrapper is None
-            and self._res_wrapper is not None
+            self._status == Status.AWAITING_CLIENT_MESSAGE
+            and next_status == Status.CLIENT_MESSAGE_AVAILABLE
+            and self._server_message is None
+            and self._client_message is not None
         ):
             self._status = next_status
         elif (
-            self._status == Status.RES_WRAPPER_AVAILABLE
-            and next_status == Status.AWAITING_INS_WRAPPER
-            and self._ins_wrapper is None
-            and self._res_wrapper is None
+            self._status == Status.CLIENT_MESSAGE_AVAILABLE
+            and next_status == Status.AWAITING_SERVER_MESSAGE
+            and self._server_message is None
+            and self._client_message is None
         ):
             self._status = next_status
         else:
@@ -122,65 +106,65 @@ class GRPCBridge:
         with self._cv:
             self._transition(Status.CLOSED)
 
-    def request(self, ins_wrapper: InsWrapper) -> ResWrapper:
-        """Set ins_wrapper and wait for res_wrapper."""
-        # Set ins_wrapper and transition to INS_WRAPPER_AVAILABLE
+    def request(self, server_message: ServerMessage) -> ClientMessage:
+        """Set server massage and wait for client message."""
+        # Set server message and transition to SERVER_MESSAGE_AVAILABLE
         with self._cv:
             self._raise_if_closed()
 
-            if self._status != Status.AWAITING_INS_WRAPPER:
+            if self._status != Status.AWAITING_SERVER_MESSAGE:
                 raise Exception("This should not happen")
 
-            self._ins_wrapper = ins_wrapper  # Write
-            self._transition(Status.INS_WRAPPER_AVAILABLE)
+            self._server_message = server_message  # Write
+            self._transition(Status.SERVER_MESSAGE_AVAILABLE)
 
-        # Read res_wrapper and transition to AWAITING_INS_WRAPPER
+        # Read client message and transition to AWAITING_SERVER_MESSAGE
         with self._cv:
             self._cv.wait_for(
-                lambda: self._status in [Status.CLOSED, Status.RES_WRAPPER_AVAILABLE]
+                lambda: self._status in [Status.CLOSED, Status.CLIENT_MESSAGE_AVAILABLE]
             )
 
             self._raise_if_closed()
-            res_wrapper = self._res_wrapper  # Read
-            self._res_wrapper = None  # Reset
-            self._transition(Status.AWAITING_INS_WRAPPER)
+            client_message = self._client_message  # Read
+            self._client_message = None  # Reset
+            self._transition(Status.AWAITING_SERVER_MESSAGE)
 
-        if res_wrapper is None:
-            raise Exception("ResWrapper can not be None")
+        if client_message is None:
+            raise Exception("Client message can not be None")
 
-        return res_wrapper
+        return client_message
 
-    def ins_wrapper_iterator(self) -> Iterator[InsWrapper]:
-        """Return iterator over ins_wrapper objects."""
+    def server_message_iterator(self) -> Iterator[ServerMessage]:
+        """Return iterator over server messages."""
         while not self._is_closed():
             with self._cv:
                 self._cv.wait_for(
                     lambda: self._status
-                    in [Status.CLOSED, Status.INS_WRAPPER_AVAILABLE]
+                    in [Status.CLOSED, Status.SERVER_MESSAGE_AVAILABLE]
                 )
 
                 self._raise_if_closed()
 
-                ins_wrapper = self._ins_wrapper  # Read
-                self._ins_wrapper = None  # Reset
+                server_message = self._server_message  # Read
+                self._server_message = None  # Reset
 
                 # Transition before yielding as after the yield the execution of this
                 # function is paused and will resume when next is called again.
                 # Also release condition variable by exiting the context
-                self._transition(Status.AWAITING_RES_WRAPPER)
+                self._transition(Status.AWAITING_CLIENT_MESSAGE)
 
-            if ins_wrapper is None:
-                raise Exception("InsWrapper can not be None")
+            if server_message is None:
+                raise Exception("Server message can not be None")
 
-            yield ins_wrapper
+            yield server_message
 
-    def set_res_wrapper(self, res_wrapper: ResWrapper) -> None:
-        """Set res_wrapper for consumption."""
+    def set_client_message(self, client_message: ClientMessage) -> None:
+        """Set client message for consumption."""
         with self._cv:
             self._raise_if_closed()
 
-            if self._status != Status.AWAITING_RES_WRAPPER:
+            if self._status != Status.AWAITING_CLIENT_MESSAGE:
                 raise Exception("This should not happen")
 
-            self._res_wrapper = res_wrapper  # Write
-            self._transition(Status.RES_WRAPPER_AVAILABLE)
+            self._client_message = client_message  # Write
+            self._transition(Status.CLIENT_MESSAGE_AVAILABLE)

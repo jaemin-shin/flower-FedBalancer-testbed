@@ -20,12 +20,7 @@ from threading import Thread
 from typing import List, Union
 
 from flwr.proto.transport_pb2 import ClientMessage, ServerMessage
-from flwr.server.grpc_server.grpc_bridge import (
-    GRPCBridge,
-    GRPCBridgeClosed,
-    InsWrapper,
-    ResWrapper,
-)
+from flwr.server.grpc_server.grpc_bridge import GRPCBridge, GRPCBridgeClosed
 
 
 def start_worker(
@@ -34,17 +29,15 @@ def start_worker(
     """Simulate processing loop with five calls."""
 
     def _worker() -> None:
-        # Wait until the ClientMessage is available and extract
+        # Wait until the ServerMessage is available and extract
         # although here we do nothing with the return value
         for _ in range(rounds):
             try:
-                res_wrapper = bridge.request(
-                    InsWrapper(server_message=ServerMessage(), timeout=None)
-                )
+                client_message = bridge.request(ServerMessage())
             except GRPCBridgeClosed:
                 break
 
-            results.append(res_wrapper.client_message)
+            results.append(client_message)
 
     thread = Thread(target=_worker)
     thread.start()
@@ -59,7 +52,7 @@ def test_workflow_successful() -> None:
     client_messages_received: List[ClientMessage] = []
 
     bridge = GRPCBridge()
-    ins_wrapper_iterator = bridge.ins_wrapper_iterator()
+    server_message_iterator = bridge.server_message_iterator()
 
     worker_thread = start_worker(rounds, bridge, client_messages_received)
 
@@ -67,8 +60,8 @@ def test_workflow_successful() -> None:
     # Simulate remote client side
     for _ in range(rounds):
         try:
-            _ = next(ins_wrapper_iterator)
-            bridge.set_res_wrapper(ResWrapper(client_message=ClientMessage()))
+            _ = next(server_message_iterator)
+            bridge.set_client_message(ClientMessage())
         except Exception as exception:
             raise Exception from exception
 
@@ -89,7 +82,7 @@ def test_workflow_close() -> None:
     client_messages_received: List[ClientMessage] = []
 
     bridge = GRPCBridge()
-    ins_wrapper_iterator = bridge.ins_wrapper_iterator()
+    server_message_iterator = bridge.server_message_iterator()
 
     worker_thread = start_worker(rounds, bridge, client_messages_received)
 
@@ -98,13 +91,13 @@ def test_workflow_close() -> None:
     # Execute
     for i in range(rounds):
         try:
-            _ = next(ins_wrapper_iterator)
-            bridge.set_res_wrapper(ResWrapper(client_message=ClientMessage()))
+            _ = next(server_message_iterator)
+            bridge.set_client_message(ClientMessage())
 
             # Close the bridge after the third client message is set.
             # This might interrupt consumption of the message.
             if i == 2:
-                # As the bridge is closed while ins_wrapper_iterator is not
+                # As the bridge is closed while server_message_iterator is not
                 # waiting/blocking for next message it should raise StopIteration
                 # on next invocation.
                 bridge.close()
@@ -124,17 +117,17 @@ def test_workflow_close() -> None:
     assert isinstance(raised_error, StopIteration)
 
 
-def test_ins_wrapper_iterator_close_while_blocking() -> None:
+def test_server_message_iterator_close_while_blocking() -> None:
     """Test interrupted workflow.
 
-    Close bridge while blocking for next ins_wrapper.
+    Close bridge while blocking for next server_message.
     """
     # Prepare
     rounds = 5
     client_messages_received: List[ClientMessage] = []
 
     bridge = GRPCBridge()
-    ins_wrapper_iterator = bridge.ins_wrapper_iterator()
+    server_message_iterator = bridge.server_message_iterator()
 
     worker_thread = start_worker(rounds, bridge, client_messages_received)
 
@@ -153,12 +146,12 @@ def test_ins_wrapper_iterator_close_while_blocking() -> None:
             if i == 3:
                 Thread(target=close_bridge_delayed, args=(1,)).start()
 
-            _ = next(ins_wrapper_iterator)
+            _ = next(server_message_iterator)
 
             # Do not set a client message and wait until
             # the thread above closes the bridge
             if i < 2:
-                bridge.set_res_wrapper(ResWrapper(ClientMessage()))
+                bridge.set_client_message(ClientMessage())
 
         except GRPCBridgeClosed as err:
             raised_error = err

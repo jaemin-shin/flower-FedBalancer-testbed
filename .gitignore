@@ -160,3 +160,7 @@ examples/**/dataset/**
 
 # Datasets
 baselines/datasets/leaf
+
+# FedBalancer added gitignore
+data/har
+*.tflite

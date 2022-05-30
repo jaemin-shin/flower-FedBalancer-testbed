@@ -65,6 +65,32 @@ class ParametersRes:
 
     parameters: Parameters
 
+@dataclass
+class SampleLatency:
+    """."""
+
+    parameters: Parameters
+    config: Dict[str, Scalar]
+
+@dataclass
+class SampleLatencyRes:
+    """."""
+
+    msg_receive_time: float
+    msg_sent_time: float
+    train_time_per_epoch: float
+    train_time_per_batch: float
+    inference_time: float
+    parameters: Parameters
+    num_examples: int
+    train_time_per_epoch_list: List[float]
+    train_time_per_batch_list: List[float]
+
+@dataclass
+class DeviceInfoRes:
+    """."""
+
+    device_id: int
 
 @dataclass
 class FitIns:
@@ -72,7 +98,7 @@ class FitIns:
 
     parameters: Parameters
     config: Dict[str, Scalar]
-
+    sampleloss: List[float]
 
 @dataclass
 class FitRes:
@@ -81,7 +107,16 @@ class FitRes:
     parameters: Parameters
     num_examples: int
     metrics: Dict[str, Scalar]
-
+    loss_min: float
+    loss_max: float
+    loss_square_sum: float
+    overthreshold_loss_count: int
+    loss_sum: float
+    loss_count: int
+    train_time_per_epoch: float
+    train_time_per_batch: float
+    train_time_per_epoch_list: List[float]
+    train_time_per_batch_list: List[float]
 
 @dataclass
 class EvaluateIns:

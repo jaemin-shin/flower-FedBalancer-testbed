@@ -16,19 +16,19 @@ Flower's design goals was to make this simple. Read on to learn more.
    :caption: User Guide
 
    installation
-   quickstart-tensorflow
-   quickstart-pytorch
-   quickstart-huggingface
-   quickstart-pytorch-lightning
-   quickstart-mxnet
-   quickstart-scikitlearn
+   quickstart_tensorflow
+   quickstart_pytorch
+   quickstart_huggingface
+   quickstart_pytorch_lightning
+   quickstart_mxnet
+   quickstart_scikitlearn
    evaluation
    strategies
    implementing-strategies
    saving-progress
    ssl-enabled-connections
    examples
-   example-walkthrough-pytorch-mnist
+   example_walkthrough_pytorch_mnist
    example-pytorch-from-centralized-to-federated
    example-mxnet-walk-through
    example-jax-from-centralized-to-federated
@@ -73,7 +73,7 @@ intended to help along the way.
    getting-started-for-contributors
    good-first-contributions
    architecture
-   release-process
+   release_process
    creating-new-messages
    devcontainer
 

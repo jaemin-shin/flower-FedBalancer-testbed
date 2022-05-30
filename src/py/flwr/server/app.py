@@ -15,13 +15,12 @@
 """Flower server app."""
 
 
-from dataclasses import dataclass
 from logging import INFO
-from typing import Dict, Optional, Tuple, Union
+from typing import Dict, Optional, Tuple
 
 from flwr.common import GRPC_MAX_MESSAGE_LENGTH
-from flwr.common.logger import log
-from flwr.server.client_manager import ClientManager, SimpleClientManager
+from flwr.common.logger import log, configure
+from flwr.server.client_manager import SimpleClientManager
 from flwr.server.grpc_server.grpc_server import start_grpc_server
 from flwr.server.history import History
 from flwr.server.server import Server
@@ -30,27 +29,15 @@ from flwr.server.strategy import FedAvg, Strategy
 DEFAULT_SERVER_ADDRESS = "[::]:8080"
 
 
-@dataclass
-class Config:
-    """Internal Flower server config.
-
-    All attributes have default values which allows users to provide
-    just the ones they care about.
-    """
-
-    num_rounds: int = 1
-    round_timeout: Optional[float] = None
-
-
 def start_server(  # pylint: disable=too-many-arguments
     server_address: str = DEFAULT_SERVER_ADDRESS,
     server: Optional[Server] = None,
-    config: Optional[Dict[str, Union[int, Optional[float]]]] = None,
+    config: Optional[Dict[str, int]] = None,
     strategy: Optional[Strategy] = None,
-    client_manager: Optional[ClientManager] = None,
     grpc_max_message_length: int = GRPC_MAX_MESSAGE_LENGTH,
     force_final_distributed_eval: bool = False,
     certificates: Optional[Tuple[bytes, bytes, bytes]] = None,
+    filename: str = ''
 ) -> History:
     """Start a Flower server using the gRPC transport layer.
 
@@ -61,20 +48,14 @@ def start_server(  # pylint: disable=too-many-arguments
         server: Optional[flwr.server.Server] (default: None). An implementation
             of the abstract base class `flwr.server.Server`. If no instance is
             provided, then `start_server` will create one.
-        config: Optional[Dict[str, Union[int, Optional[float]]]] (default: None).
-            Currently supported values are `num_rounds` (int, default: 1) and
-            `round_timeout` in seconds (float, default: None), so a full configuration
-            object instructing the server to perform three rounds of federated
-            learning with a round timeout of 10min looks like the following:
-            `{"num_rounds": 3, "round_timeout": 600.0}`.
+        config: Optional[Dict[str, int]] (default: None). The only currently
+            supported values is `num_rounds`, so a full configuration object
+            instructing the server to perform three rounds of federated
+            learning looks like the following: `{"num_rounds": 3}`.
         strategy: Optional[flwr.server.Strategy] (default: None). An
             implementation of the abstract base class `flwr.server.Strategy`.
             If no strategy is provided, then `start_server` will use
             `flwr.server.strategy.FedAvg`.
-        client_manager: Optional[flwr.server.ClientManager] (default: None)
-            An implementation of the abstract base class `flwr.server.ClientManager`.
-            If no implementation is provided, then `start_server` will use
-            `flwr.server.client_manager.SimpleClientManager`.
         grpc_max_message_length: int (default: 536_870_912, this equals 512MB).
             The maximum length of gRPC messages that can be exchanged with the
             Flower clients. The default should be sufficient for most models.
@@ -114,12 +95,8 @@ def start_server(  # pylint: disable=too-many-arguments
     >>>     )
     >>> )
     """
-    initialized_server, initialized_config = _init_defaults(
-        server=server,
-        config=config,
-        strategy=strategy,
-        client_manager=client_manager,
-    )
+    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    initialized_server, initialized_config = _init_defaults(server, config, strategy)
 
     # Start gRPC server
     grpc_server = start_grpc_server(
@@ -128,8 +105,11 @@ def start_server(  # pylint: disable=too-many-arguments
         max_message_length=grpc_max_message_length,
         certificates=certificates,
     )
-    num_rounds = initialized_config.num_rounds
+    num_rounds = initialized_config["num_rounds"]
     ssl_status = "enabled" if certificates is not None else "disabled"
+
+    configure(identifier="FedBalancer", filename=filename)
+
     msg = f"Flower server running ({num_rounds} rounds), SSL is {ssl_status}"
     log(INFO, msg)
 
@@ -147,14 +127,12 @@ def start_server(  # pylint: disable=too-many-arguments
 
 def _init_defaults(
     server: Optional[Server],
-    config: Optional[Dict[str, Union[int, Optional[float]]]],
+    config: Optional[Dict[str, int]],
     strategy: Optional[Strategy],
-    client_manager: Optional[ClientManager],
-) -> Tuple[Server, Config]:
+) -> Tuple[Server, Dict[str, int]]:
     # Create server instance if none was given
     if server is None:
-        if client_manager is None:
-            client_manager = SimpleClientManager()
+        client_manager = SimpleClientManager()
         if strategy is None:
             strategy = FedAvg()
         server = Server(client_manager=client_manager, strategy=strategy)
@@ -162,19 +140,17 @@ def _init_defaults(
     # Set default config values
     if config is None:
         config = {}
+    if "num_rounds" not in config:
+        config["num_rounds"] = 1
 
-    conf = Config(**config)  # type: ignore
-
-    return server, conf
+    return server, config
 
 
 def _fl(
-    server: Server,
-    config: Config,
-    force_final_distributed_eval: bool,
+    server: Server, config: Dict[str, int], force_final_distributed_eval: bool
 ) -> History:
     # Fit model
-    hist = server.fit(num_rounds=config.num_rounds, timeout=config.round_timeout)
+    hist = server.fit(num_rounds=config["num_rounds"])
     log(INFO, "app_fit: losses_distributed %s", str(hist.losses_distributed))
     log(INFO, "app_fit: metrics_distributed %s", str(hist.metrics_distributed))
     log(INFO, "app_fit: losses_centralized %s", str(hist.losses_centralized))
@@ -185,7 +161,7 @@ def _fl(
         server.strategy.eval_fn = None  # type: ignore
 
         # Evaluate the final trained model
-        res = server.evaluate_round(rnd=-1, timeout=config.round_timeout)
+        res = server.evaluate_round(rnd=-1)
         if res is not None:
             loss, _, (results, failures) = res
             log(INFO, "app_evaluate: federated loss: %s", str(loss))
@@ -199,6 +175,6 @@ def _fl(
             log(INFO, "app_evaluate: no evaluation result")
 
     # Graceful shutdown
-    server.disconnect_all_clients(timeout=config.round_timeout)
+    server.disconnect_all_clients()
 
     return hist

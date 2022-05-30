@@ -18,10 +18,11 @@
 from abc import ABC, abstractmethod
 from typing import Dict, List, Optional, Tuple
 
-from flwr.common import EvaluateIns, EvaluateRes, FitIns, FitRes, Parameters, Scalar
+from flwr.common import EvaluateIns, EvaluateRes, FitIns, FitRes, Parameters, Scalar, SampleLatency, SampleLatencyRes, DeviceInfoRes
 from flwr.server.client_manager import ClientManager
 from flwr.server.client_proxy import ClientProxy
 
+import numpy as np
 
 class Strategy(ABC):
     """Abstract base class for server strategy implementations."""
@@ -44,10 +45,14 @@ class Strategy(ABC):
             initial global model parameters.
         """
 
+    # @abstractmethod
+    # def configure_fit(
+    #     self, rnd: int, parameters: Parameters, client_manager: ClientManager, clients_per_round: int, deadline: float, fedbalancer: bool
+    # ) -> List[Tuple[ClientProxy, FitIns]]:
     @abstractmethod
     def configure_fit(
-        self, rnd: int, parameters: Parameters, client_manager: ClientManager
-    ) -> List[Tuple[ClientProxy, FitIns]]:
+        self, rnd: int, parameters: Parameters, client_manager: ClientManager, clients_per_round: int, deadline: float, fedbalancer: bool
+    ) -> List[Tuple[ClientProxy, Parameters, dict]]:
         """Configure the next round of training.
 
         Parameters
@@ -66,6 +71,12 @@ class Strategy(ABC):
         is not included in this list, it means that this `ClientProxy`
         will not participate in the next round of federated learning.
         """
+    
+    @abstractmethod
+    def configure_sample_latency(
+        self, parameters: Parameters, client_manager: ClientManager
+    ) -> List[Tuple[ClientProxy, SampleLatency]]:
+        """."""
 
     @abstractmethod
     def aggregate_fit(
@@ -154,6 +165,23 @@ class Strategy(ABC):
     def evaluate(
         self, parameters: Parameters
     ) -> Optional[Tuple[float, Dict[str, Scalar]]]:
+        """Evaluate the current model parameters.
+
+        This function can be used to perform centralized (i.e., server-side) evaluation
+        of model parameters.
+
+        Arguments:
+            parameters: Parameters. The current (global) model parameters.
+
+        Returns:
+            The evaluation result, usually a Tuple containing loss and a
+            dictionary containing task-specific metrics (e.g., accuracy).
+        """
+    
+    @abstractmethod
+    def calculate_sample_loss(
+        self, parameters: Parameters, x_test: np.ndarray, y_test: np.ndarray
+    ) -> Optional[Tuple[int, float]]:
         """Evaluate the current model parameters.
 
         This function can be used to perform centralized (i.e., server-side) evaluation

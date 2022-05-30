@@ -93,6 +93,5 @@ def configure(
         # Override mapLogRecords as setFormatter has no effect on what is send via http
         FLOWER_LOGGER.addHandler(http_handler)
 
-
 logger = logging.getLogger(LOGGER_NAME)  # pylint: disable=invalid-name
 log = logger.log  # pylint: disable=invalid-name

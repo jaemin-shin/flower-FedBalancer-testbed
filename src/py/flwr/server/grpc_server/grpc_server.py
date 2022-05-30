@@ -52,7 +52,7 @@ def start_grpc_server(  # pylint: disable=too-many-arguments
     server_address: str,
     max_concurrent_workers: int = 1000,
     max_message_length: int = GRPC_MAX_MESSAGE_LENGTH,
-    keepalive_time_ms: int = 210000,
+    keepalive_time_ms: int = 60000,
     certificates: Optional[Tuple[bytes, bytes, bytes]] = None,
 ) -> grpc.Server:
     """Create gRPC server and return instance of grpc.Server.

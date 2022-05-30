@@ -16,7 +16,6 @@
 
 
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from flwr.common import (
     Disconnect,
@@ -28,6 +27,7 @@ from flwr.common import (
     Properties,
     PropertiesIns,
     PropertiesRes,
+    DeviceInfoRes,
     Reconnect,
 )
 
@@ -38,42 +38,51 @@ class ClientProxy(ABC):
     def __init__(self, cid: str):
         self.cid = cid
         self.properties: Properties = {}
+        
+        self.download_times = []
+        self.upload_times = []
+        self.per_epoch_train_times = []
+        self.per_batch_train_times = []
+        self.inference_times = []
+
+        self.round_completion_times = []
+        self.networking_times = [] # time that includes download and upload time
+
+        self.device_id = 0
+
+        self.current_whole_data_loss_list = []
+
+        self.overthreshold_loss_sum = 0.0
+        self.overthreshold_loss_count = 0
+
+        self.last_selected_round = -1
+
+        self.client_utility = 0.0
 
     @abstractmethod
-    def get_properties(
-        self,
-        ins: PropertiesIns,
-        timeout: Optional[float],
-    ) -> PropertiesRes:
+    def get_properties(self, ins: PropertiesIns) -> PropertiesRes:
         """Returns the client's properties."""
 
     @abstractmethod
-    def get_parameters(
-        self,
-        timeout: Optional[float],
-    ) -> ParametersRes:
+    def get_parameters(self) -> ParametersRes:
         """Return the current local model parameters."""
+    
+    @abstractmethod
+    def device_info(self) -> DeviceInfoRes:
+        """."""
+    
+    @abstractmethod
+    def sample_latency(self) -> ParametersRes:
+        """Measure and return the latency of current local model parameters."""
 
     @abstractmethod
-    def fit(
-        self,
-        ins: FitIns,
-        timeout: Optional[float],
-    ) -> FitRes:
+    def fit(self, ins: FitIns) -> FitRes:
         """Refine the provided weights using the locally held dataset."""
 
     @abstractmethod
-    def evaluate(
-        self,
-        ins: EvaluateIns,
-        timeout: Optional[float],
-    ) -> EvaluateRes:
+    def evaluate(self, ins: EvaluateIns) -> EvaluateRes:
         """Evaluate the provided weights using the locally held dataset."""
 
     @abstractmethod
-    def reconnect(
-        self,
-        reconnect: Reconnect,
-        timeout: Optional[float],
-    ) -> Disconnect:
+    def reconnect(self, reconnect: Reconnect) -> Disconnect:
         """Disconnect and (optionally) reconnect later."""

@@ -9,7 +9,7 @@ from hydra.utils import call, get_original_cwd, instantiate, to_absolute_path
 from omegaconf import DictConfig
 
 
-@hydra.main(config_path="conf/cifar10", config_name="config", version_base=None)
+@hydra.main(config_path="conf/cifar10", config_name="config")
 def main(cfg: DictConfig) -> None:
     """General-purpose main function that receives cfg from Hydra."""
 

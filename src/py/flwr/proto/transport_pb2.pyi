@@ -113,17 +113,21 @@ class ServerMessage(google.protobuf.message.Message):
 
         PARAMETERS_FIELD_NUMBER: builtins.int
         CONFIG_FIELD_NUMBER: builtins.int
+        SAMPLELOSS_FIELD_NUMBER: builtins.int
         @property
         def parameters(self) -> global___Parameters: ...
         @property
         def config(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___Scalar]: ...
+        @property
+        def sampleloss(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
         def __init__(self,
             *,
             parameters: typing.Optional[global___Parameters] = ...,
             config: typing.Optional[typing.Mapping[typing.Text, global___Scalar]] = ...,
+            sampleloss: typing.Optional[typing.Iterable[builtins.float]] = ...,
             ) -> None: ...
         def HasField(self, field_name: typing_extensions.Literal["parameters",b"parameters"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["config",b"config","parameters",b"parameters"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["config",b"config","parameters",b"parameters","sampleloss",b"sampleloss"]) -> None: ...
 
     class EvaluateIns(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -182,11 +186,49 @@ class ServerMessage(google.protobuf.message.Message):
             ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["config",b"config"]) -> None: ...
 
+    class SampleLatency(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        class ConfigEntry(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+            KEY_FIELD_NUMBER: builtins.int
+            VALUE_FIELD_NUMBER: builtins.int
+            key: typing.Text
+            @property
+            def value(self) -> global___Scalar: ...
+            def __init__(self,
+                *,
+                key: typing.Text = ...,
+                value: typing.Optional[global___Scalar] = ...,
+                ) -> None: ...
+            def HasField(self, field_name: typing_extensions.Literal["value",b"value"]) -> builtins.bool: ...
+            def ClearField(self, field_name: typing_extensions.Literal["key",b"key","value",b"value"]) -> None: ...
+
+        PARAMETERS_FIELD_NUMBER: builtins.int
+        CONFIG_FIELD_NUMBER: builtins.int
+        @property
+        def parameters(self) -> global___Parameters: ...
+        @property
+        def config(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___Scalar]: ...
+        def __init__(self,
+            *,
+            parameters: typing.Optional[global___Parameters] = ...,
+            config: typing.Optional[typing.Mapping[typing.Text, global___Scalar]] = ...,
+            ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["parameters",b"parameters"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["config",b"config","parameters",b"parameters"]) -> None: ...
+
+    class DeviceInfo(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        def __init__(self,
+            ) -> None: ...
+
     RECONNECT_FIELD_NUMBER: builtins.int
     GET_PARAMETERS_FIELD_NUMBER: builtins.int
     FIT_INS_FIELD_NUMBER: builtins.int
     EVALUATE_INS_FIELD_NUMBER: builtins.int
     PROPERTIES_INS_FIELD_NUMBER: builtins.int
+    SAMPLE_LATENCY_FIELD_NUMBER: builtins.int
+    DEVICE_INFO_FIELD_NUMBER: builtins.int
     @property
     def reconnect(self) -> global___ServerMessage.Reconnect: ...
     @property
@@ -197,6 +239,10 @@ class ServerMessage(google.protobuf.message.Message):
     def evaluate_ins(self) -> global___ServerMessage.EvaluateIns: ...
     @property
     def properties_ins(self) -> global___ServerMessage.PropertiesIns: ...
+    @property
+    def sample_latency(self) -> global___ServerMessage.SampleLatency: ...
+    @property
+    def device_info(self) -> global___ServerMessage.DeviceInfo: ...
     def __init__(self,
         *,
         reconnect: typing.Optional[global___ServerMessage.Reconnect] = ...,
@@ -204,10 +250,12 @@ class ServerMessage(google.protobuf.message.Message):
         fit_ins: typing.Optional[global___ServerMessage.FitIns] = ...,
         evaluate_ins: typing.Optional[global___ServerMessage.EvaluateIns] = ...,
         properties_ins: typing.Optional[global___ServerMessage.PropertiesIns] = ...,
+        sample_latency: typing.Optional[global___ServerMessage.SampleLatency] = ...,
+        device_info: typing.Optional[global___ServerMessage.DeviceInfo] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["evaluate_ins",b"evaluate_ins","fit_ins",b"fit_ins","get_parameters",b"get_parameters","msg",b"msg","properties_ins",b"properties_ins","reconnect",b"reconnect"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["evaluate_ins",b"evaluate_ins","fit_ins",b"fit_ins","get_parameters",b"get_parameters","msg",b"msg","properties_ins",b"properties_ins","reconnect",b"reconnect"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["msg",b"msg"]) -> typing.Optional[typing_extensions.Literal["reconnect","get_parameters","fit_ins","evaluate_ins","properties_ins"]]: ...
+    def HasField(self, field_name: typing_extensions.Literal["device_info",b"device_info","evaluate_ins",b"evaluate_ins","fit_ins",b"fit_ins","get_parameters",b"get_parameters","msg",b"msg","properties_ins",b"properties_ins","reconnect",b"reconnect","sample_latency",b"sample_latency"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_info",b"device_info","evaluate_ins",b"evaluate_ins","fit_ins",b"fit_ins","get_parameters",b"get_parameters","msg",b"msg","properties_ins",b"properties_ins","reconnect",b"reconnect","sample_latency",b"sample_latency"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["msg",b"msg"]) -> typing.Optional[typing_extensions.Literal["reconnect","get_parameters","fit_ins","evaluate_ins","properties_ins","sample_latency","device_info"]]: ...
 global___ServerMessage = ServerMessage
 
 class ClientMessage(google.protobuf.message.Message):
@@ -254,19 +302,51 @@ class ClientMessage(google.protobuf.message.Message):
         PARAMETERS_FIELD_NUMBER: builtins.int
         NUM_EXAMPLES_FIELD_NUMBER: builtins.int
         METRICS_FIELD_NUMBER: builtins.int
+        LOSS_MIN_FIELD_NUMBER: builtins.int
+        LOSS_MAX_FIELD_NUMBER: builtins.int
+        LOSS_SQUARE_SUM_FIELD_NUMBER: builtins.int
+        OVERTHRESHOLD_LOSS_COUNT_FIELD_NUMBER: builtins.int
+        LOSS_SUM_FIELD_NUMBER: builtins.int
+        LOSS_COUNT_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_EPOCH_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_BATCH_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_EPOCH_LIST_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_BATCH_LIST_FIELD_NUMBER: builtins.int
         @property
         def parameters(self) -> global___Parameters: ...
         num_examples: builtins.int
         @property
         def metrics(self) -> google.protobuf.internal.containers.MessageMap[typing.Text, global___Scalar]: ...
+        loss_min: builtins.float
+        loss_max: builtins.float
+        loss_square_sum: builtins.float
+        overthreshold_loss_count: builtins.int
+        loss_sum: builtins.float
+        loss_count: builtins.int
+        train_time_per_epoch: builtins.float
+        train_time_per_batch: builtins.float
+        @property
+        def train_time_per_epoch_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+        @property
+        def train_time_per_batch_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
         def __init__(self,
             *,
             parameters: typing.Optional[global___Parameters] = ...,
             num_examples: builtins.int = ...,
             metrics: typing.Optional[typing.Mapping[typing.Text, global___Scalar]] = ...,
+            loss_min: builtins.float = ...,
+            loss_max: builtins.float = ...,
+            loss_square_sum: builtins.float = ...,
+            overthreshold_loss_count: builtins.int = ...,
+            loss_sum: builtins.float = ...,
+            loss_count: builtins.int = ...,
+            train_time_per_epoch: builtins.float = ...,
+            train_time_per_batch: builtins.float = ...,
+            train_time_per_epoch_list: typing.Optional[typing.Iterable[builtins.float]] = ...,
+            train_time_per_batch_list: typing.Optional[typing.Iterable[builtins.float]] = ...,
             ) -> None: ...
         def HasField(self, field_name: typing_extensions.Literal["parameters",b"parameters"]) -> builtins.bool: ...
-        def ClearField(self, field_name: typing_extensions.Literal["metrics",b"metrics","num_examples",b"num_examples","parameters",b"parameters"]) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["loss_count",b"loss_count","loss_max",b"loss_max","loss_min",b"loss_min","loss_square_sum",b"loss_square_sum","loss_sum",b"loss_sum","metrics",b"metrics","num_examples",b"num_examples","overthreshold_loss_count",b"overthreshold_loss_count","parameters",b"parameters","train_time_per_batch",b"train_time_per_batch","train_time_per_batch_list",b"train_time_per_batch_list","train_time_per_epoch",b"train_time_per_epoch","train_time_per_epoch_list",b"train_time_per_epoch_list"]) -> None: ...
 
     class EvaluateRes(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -331,11 +411,61 @@ class ClientMessage(google.protobuf.message.Message):
         def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
         def ClearField(self, field_name: typing_extensions.Literal["properties",b"properties","status",b"status"]) -> None: ...
 
+    class SampleLatencyRes(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        MSG_RECEIVE_TIME_FIELD_NUMBER: builtins.int
+        MSG_SENT_TIME_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_EPOCH_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_BATCH_FIELD_NUMBER: builtins.int
+        INFERENCE_TIME_FIELD_NUMBER: builtins.int
+        PARAMETERS_FIELD_NUMBER: builtins.int
+        NUM_EXAMPLES_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_EPOCH_LIST_FIELD_NUMBER: builtins.int
+        TRAIN_TIME_PER_BATCH_LIST_FIELD_NUMBER: builtins.int
+        msg_receive_time: typing.Text
+        msg_sent_time: typing.Text
+        train_time_per_epoch: builtins.float
+        train_time_per_batch: builtins.float
+        inference_time: builtins.float
+        @property
+        def parameters(self) -> global___Parameters: ...
+        num_examples: builtins.int
+        @property
+        def train_time_per_epoch_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+        @property
+        def train_time_per_batch_list(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+        def __init__(self,
+            *,
+            msg_receive_time: typing.Text = ...,
+            msg_sent_time: typing.Text = ...,
+            train_time_per_epoch: builtins.float = ...,
+            train_time_per_batch: builtins.float = ...,
+            inference_time: builtins.float = ...,
+            parameters: typing.Optional[global___Parameters] = ...,
+            num_examples: builtins.int = ...,
+            train_time_per_epoch_list: typing.Optional[typing.Iterable[builtins.float]] = ...,
+            train_time_per_batch_list: typing.Optional[typing.Iterable[builtins.float]] = ...,
+            ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["parameters",b"parameters"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["inference_time",b"inference_time","msg_receive_time",b"msg_receive_time","msg_sent_time",b"msg_sent_time","num_examples",b"num_examples","parameters",b"parameters","train_time_per_batch",b"train_time_per_batch","train_time_per_batch_list",b"train_time_per_batch_list","train_time_per_epoch",b"train_time_per_epoch","train_time_per_epoch_list",b"train_time_per_epoch_list"]) -> None: ...
+
+    class DeviceInfoRes(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+        DEVICE_ID_FIELD_NUMBER: builtins.int
+        device_id: builtins.int
+        def __init__(self,
+            *,
+            device_id: builtins.int = ...,
+            ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["device_id",b"device_id"]) -> None: ...
+
     DISCONNECT_FIELD_NUMBER: builtins.int
     PARAMETERS_RES_FIELD_NUMBER: builtins.int
     FIT_RES_FIELD_NUMBER: builtins.int
     EVALUATE_RES_FIELD_NUMBER: builtins.int
     PROPERTIES_RES_FIELD_NUMBER: builtins.int
+    SAMPLE_LATENCY_RES_FIELD_NUMBER: builtins.int
+    DEVICE_INFO_RES_FIELD_NUMBER: builtins.int
     @property
     def disconnect(self) -> global___ClientMessage.Disconnect: ...
     @property
@@ -346,6 +476,10 @@ class ClientMessage(google.protobuf.message.Message):
     def evaluate_res(self) -> global___ClientMessage.EvaluateRes: ...
     @property
     def properties_res(self) -> global___ClientMessage.PropertiesRes: ...
+    @property
+    def sample_latency_res(self) -> global___ClientMessage.SampleLatencyRes: ...
+    @property
+    def device_info_res(self) -> global___ClientMessage.DeviceInfoRes: ...
     def __init__(self,
         *,
         disconnect: typing.Optional[global___ClientMessage.Disconnect] = ...,
@@ -353,10 +487,12 @@ class ClientMessage(google.protobuf.message.Message):
         fit_res: typing.Optional[global___ClientMessage.FitRes] = ...,
         evaluate_res: typing.Optional[global___ClientMessage.EvaluateRes] = ...,
         properties_res: typing.Optional[global___ClientMessage.PropertiesRes] = ...,
+        sample_latency_res: typing.Optional[global___ClientMessage.SampleLatencyRes] = ...,
+        device_info_res: typing.Optional[global___ClientMessage.DeviceInfoRes] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["disconnect",b"disconnect","evaluate_res",b"evaluate_res","fit_res",b"fit_res","msg",b"msg","parameters_res",b"parameters_res","properties_res",b"properties_res"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["disconnect",b"disconnect","evaluate_res",b"evaluate_res","fit_res",b"fit_res","msg",b"msg","parameters_res",b"parameters_res","properties_res",b"properties_res"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["msg",b"msg"]) -> typing.Optional[typing_extensions.Literal["disconnect","parameters_res","fit_res","evaluate_res","properties_res"]]: ...
+    def HasField(self, field_name: typing_extensions.Literal["device_info_res",b"device_info_res","disconnect",b"disconnect","evaluate_res",b"evaluate_res","fit_res",b"fit_res","msg",b"msg","parameters_res",b"parameters_res","properties_res",b"properties_res","sample_latency_res",b"sample_latency_res"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["device_info_res",b"device_info_res","disconnect",b"disconnect","evaluate_res",b"evaluate_res","fit_res",b"fit_res","msg",b"msg","parameters_res",b"parameters_res","properties_res",b"properties_res","sample_latency_res",b"sample_latency_res"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["msg",b"msg"]) -> typing.Optional[typing_extensions.Literal["disconnect","parameters_res","fit_res","evaluate_res","properties_res","sample_latency_res","device_info_res"]]: ...
 global___ClientMessage = ClientMessage
 
 class Scalar(google.protobuf.message.Message):
