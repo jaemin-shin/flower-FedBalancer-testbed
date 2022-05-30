@@ -162,5 +162,26 @@ examples/**/dataset/**
 baselines/datasets/leaf
 
 # FedBalancer added gitignore
-data/har
+data/har/*
 *.tflite
+android/client/app/src/main/assets/data/*
+android/client/.gradle
+android/client/.gradle/
+android/client/build/
+android/client/local.properties
+android/client/.log
+android/client/*/build/
+android/client/*/local.properties
+android/client/*/out
+android/client/*/*/build
+android/client/*/*/production
+android/client/captures
+android/client/.navigation/
+android/client/gen-external-apklibs
+*.apk
+*.aab
+*.ap_
+android/client/.externalNativeBuild
+android/client/obj/
+android/client/.idea/
+

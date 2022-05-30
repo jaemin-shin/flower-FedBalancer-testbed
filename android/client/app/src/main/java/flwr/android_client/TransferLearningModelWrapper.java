@@ -13,6 +13,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.GatheringByteChannel;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import org.tensorflow.lite.examples.transfer.api.AssetModelLoader;
@@ -43,18 +44,16 @@ public class TransferLearningModelWrapper implements Closeable {
         model =
                 new TransferLearningModel(
                         new AssetModelLoader(context, "model"),
-                        Arrays.asList("cat", "dog", "truck", "bird",
-                                "airplane", "ship", "frog", "horse", "deer",
-                                "automobile"));
+                        Arrays.asList("0", "1", "2", "3", "4", "5"));
         this.context = context;
     }
 
 
-    public void train(int epochs){
+    public void train(int epochs, List<Integer> sampleIndexToTrain){
         new Thread(() -> {
                 shouldTrain.block();
                 try {
-                    model.train(epochs, lossConsumer).get();
+                    model.train(epochs, lossConsumer, sampleIndexToTrain).get();
                 } catch (ExecutionException e) {
                     throw new RuntimeException("Exception occurred during model training", e.getCause());
                 } catch (InterruptedException e) {
@@ -64,8 +63,17 @@ public class TransferLearningModelWrapper implements Closeable {
     }
 
     // This method is thread-safe.
-    public Future<Void> addSample(float[] image, String className, Boolean isTraining) {
-        return model.addSample(image, className, isTraining);
+    public Future<Void> addSample(float[] image, String className, Boolean isTraining, int sampleIndex) {
+        return model.addSample(image, className, isTraining, sampleIndex);
+    }
+
+    // This method is thread-safe.
+    public Future<Void> addSample_UCIHAR(float[] sample, String className, Boolean isTraining, int sampleIndex) {
+        return model.addSample_UCIHAR(sample, className, isTraining, sampleIndex);
+    }
+
+    public float calculateSampleInferenceLatency(){
+        return model.getSampleInferenceLatency();
     }
 
     public Pair<Float, Float> calculateTestStatistics(){
@@ -108,6 +116,15 @@ public class TransferLearningModelWrapper implements Closeable {
         return fc;
     }
 
+    public float getMeanEpochTrainTime() {
+        return model.getMeanEpochTrainLatency();
+    }
+
+    public float getMeanBatchTrainTime() { return model.getMeanBatchTrainLatency(); }
+
+    public float[] getEpochTrainLatencies() { return model.getEpochTrainLatencies(); }
+
+    public float[] getBatchTrainLatencies() { return model.getBatchTrainLatencies(); }
 
     public int getSize_Training() {
         return model.getSize_Training();
@@ -118,6 +135,8 @@ public class TransferLearningModelWrapper implements Closeable {
     public ByteBuffer[] getParameters()  {
         return model.getParameters();
     }
+
+    public ByteBuffer[] getSavedModelParameters() { return model.getSavedModelParameters(); }
 
     public void updateParameters(ByteBuffer[] newParams) {
         model.updateParameters(newParams);

@@ -26,6 +26,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -68,7 +69,7 @@ public class ModelCorrectnessTest {
 
     for (Sample sample : readSampleList(zipFiles.get("train.txt"))) {
       try {
-        model.addSample(jpgBytesToRgb(zipFiles.get(sample.imagePath)), sample.className).get();
+        model.addSample(jpgBytesToRgb(zipFiles.get(sample.imagePath)), sample.className, true, 0).get();
       } catch (InterruptedException e) {
         return;
       } catch (ExecutionException e) {
@@ -84,7 +85,7 @@ public class ModelCorrectnessTest {
               NUM_EPOCHS,
               (epoch, loss) -> {
                 System.out.printf("Epoch %d: loss = %.5f\n", epoch, loss);
-              })
+              }, (new ArrayList<Integer>()))
           .get();
     } catch (ExecutionException e) {
       throw new RuntimeException(e.getCause());

@@ -71,12 +71,15 @@ dependencies {
 
     implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly-SNAPSHOT'
     // This dependency adds the necessary TF op support.
+    // implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT'
     implementation 'org.tensorflow:tensorflow-lite-select-tf-ops:0.0.0-nightly-SNAPSHOT'
 
     implementation 'io.grpc:grpc-okhttp:1.27.2' // CURRENT_GRPC_VERSION
     implementation 'io.grpc:grpc-protobuf-lite:1.27.2' // CURRENT_GRPC_VERSION
     implementation 'io.grpc:grpc-stub:1.27.2' // CURRENT_GRPC_VERSION
     implementation 'javax.annotation:javax.annotation-api:1.2'
+
+    // implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
     def lifecycle_version = '2.1.0-rc01'
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
@@ -107,13 +110,13 @@ task downloadModelAndData(type: DefaultTask) {
 
         // If you want to use your own models rather than pre-built models,
         // comment out the following three lines.
-        ant.get(src: modelUrl, dest: modelArchivePath)
-        ant.unzip(src: modelArchivePath, dest: modelTargetLocation)
-        ant.delete(file: modelArchivePath)
-
-        ant.get(src: dataUrl, dest: dataArchivePath)
-        ant.unzip(src: dataArchivePath, dest: dataTargetLocation)
-        ant.delete(file: dataArchivePath)
+//        ant.get(src: modelUrl, dest: modelArchivePath)
+//        ant.unzip(src: modelArchivePath, dest: modelTargetLocation)
+//        ant.delete(file: modelArchivePath)
+//
+//        ant.get(src: dataUrl, dest: dataArchivePath)
+//        ant.unzip(src: dataArchivePath, dest: dataTargetLocation)
+//        ant.delete(file: dataArchivePath)
 
     }
 }

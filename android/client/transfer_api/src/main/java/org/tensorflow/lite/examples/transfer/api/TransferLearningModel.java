@@ -72,10 +72,12 @@ public final class TransferLearningModel implements Closeable {
   private static class TrainingSample {
     ByteBuffer bottleneck;
     String className;
+    int sampleIndex;
 
-    TrainingSample(ByteBuffer bottleneck, String className) {
+    TrainingSample(ByteBuffer bottleneck, String className, int sampleIndex) {
       this.bottleneck = bottleneck;
       this.className = className;
+      this.sampleIndex = sampleIndex;
     }
   }
 
@@ -116,9 +118,14 @@ public final class TransferLearningModel implements Closeable {
   private final LiteOptimizerModel optimizerModel;
 
   private final List<TrainingSample> trainingSamples = new ArrayList<>();
+
+  private List<TrainingSample> realTrainingSamples = new ArrayList<>();
+
   private final List<TestingSample> testingSamples = new ArrayList<>();
 
   private ByteBuffer[] modelParameters;
+
+  private ByteBuffer[] savedModelParameters;
 
   // Where to store the optimizer outputs.
   private ByteBuffer[] nextModelParameters;
@@ -158,9 +165,16 @@ public final class TransferLearningModel implements Closeable {
   // Set to true when [close] has been called.
   private volatile boolean isTerminating = false;
 
+  private float meanEpochTrainLatency = 0;
+  private float meanBatchTrainLatency = 0;
+
+  private float[] epochTrainLatencies = new float[5];
+  private float[] batchTrainLatencies = new float[5];
+
   public TransferLearningModel(ModelLoader modelLoader, Collection<String> classes) {
     classesByIdx = classes.toArray(new String[0]);
     this.classes = new TreeMap<>();
+
     for (int classIdx = 0; classIdx < classes.size(); classIdx++) {
       this.classes.put(classesByIdx[classIdx], classIdx);
     }
@@ -182,6 +196,8 @@ public final class TransferLearningModel implements Closeable {
     modelGradients = new ByteBuffer[modelParameterSizes.length];
     nextModelParameters = new ByteBuffer[modelParameterSizes.length];
 
+    savedModelParameters = new ByteBuffer[modelParameterSizes.length];
+
     for (int parameterIndex = 0; parameterIndex < modelParameterSizes.length; parameterIndex++) {
       int bufferSize = modelParameterSizes[parameterIndex] * FLOAT_BYTES;
       modelParameters[parameterIndex] = allocateBuffer(bufferSize);
@@ -189,6 +205,8 @@ public final class TransferLearningModel implements Closeable {
       nextModelParameters[parameterIndex] = allocateBuffer(bufferSize);
     }
     initializeModel.initializeParameters(modelParameters);
+
+    savedModelParameters = modelParameters;
 
     int[] optimizerStateElementSizes = optimizerModel.stateElementSizes();
     optimizerState = new ByteBuffer[optimizerStateElementSizes.length];
@@ -229,7 +247,7 @@ public final class TransferLearningModel implements Closeable {
    * @param image image RGB data.
    * @param className ground truth label for image.
    */
-  public Future<Void> addSample(float[] image, String className, Boolean isTraining) {
+  public Future<Void> addSample(float[] image, String className, Boolean isTraining, int sampleIndex) {
     checkNotTerminating();
 
     if (!classes.containsKey(className)) {
@@ -252,7 +270,50 @@ public final class TransferLearningModel implements Closeable {
       trainingLock.lockInterruptibly();
       try {
         if (isTraining)
-          trainingSamples.add(new TrainingSample(bottleneck, className));
+          trainingSamples.add(new TrainingSample(bottleneck, className, sampleIndex));
+        else
+          testingSamples.add(new TestingSample(bottleneck, className));
+      } finally {
+        trainingLock.unlock();
+      }
+
+      return null;
+    });
+  }
+
+  /**
+   * Adds a new sample for training/testing.
+   *
+   * Sample bottleneck is generated in a background thread, which resolves the returned Future
+   * when the bottleneck is added to training/testing samples.
+   *
+   * @param sample sample data.
+   * @param className ground truth label for image.
+   */
+  public Future<Void> addSample_UCIHAR(float[] sample, String className, Boolean isTraining, int sampleIndex) {
+    checkNotTerminating();
+
+    if (!classes.containsKey(className)) {
+      throw new IllegalArgumentException(String.format(
+              "Class \"%s\" is not one of the classes recognized by the model", className));
+    }
+
+    return executor.submit(() -> {
+      ByteBuffer sampleBuffer = allocateBuffer(sample.length * FLOAT_BYTES);
+      for (float f : sample) {
+        sampleBuffer.putFloat(f);
+      }
+      sampleBuffer.rewind();
+
+      if (Thread.interrupted()) {
+        return null;
+      }
+      ByteBuffer bottleneck = bottleneckModel.generateBottleneck(sampleBuffer, null);
+
+      trainingLock.lockInterruptibly();
+      try {
+        if (isTraining)
+          trainingSamples.add(new TrainingSample(bottleneck, className, sampleIndex));
         else
           testingSamples.add(new TestingSample(bottleneck, className));
       } finally {
@@ -270,7 +331,7 @@ public final class TransferLearningModel implements Closeable {
    * @param lossConsumer callback to receive loss values, may be null.
    * @return future that is resolved when training is finished.
    */
-  public Future<Void> train(int numEpochs, LossConsumer lossConsumer) {
+  public Future<Void> train(int numEpochs, LossConsumer lossConsumer, List<Integer> sampleIndexToTrain) {
     checkNotTerminating();
 
     Log.e("DDFF", getTrainBatchSize() + "");
@@ -285,11 +346,27 @@ public final class TransferLearningModel implements Closeable {
     return executor.submit(
         () -> {
           trainingLock.lock();
+          meanEpochTrainLatency = 0;
+          meanBatchTrainLatency = 0;
+
+          epochTrainLatencies = new float[numEpochs];
+          batchTrainLatencies = new float[numEpochs];
+
+          if (sampleIndexToTrain.size() == 0) {
+            realTrainingSamples = trainingSamples;
+          } else {
+            realTrainingSamples = new ArrayList<TrainingSample>();
+            for(int idx=0; idx<sampleIndexToTrain.size(); idx++) {
+              realTrainingSamples.add(trainingSamples.get(sampleIndexToTrain.get(idx)));
+            }
+          }
+
           try {
             epochLoop:
             for (int epoch = 0; epoch < numEpochs; epoch++) {
               float totalLoss = 0;
               int numBatchesProcessed = 0;
+              long epochStartTime = System.currentTimeMillis();
 
               for (List<TrainingSample> batch : trainingBatches()) {
                 if (Thread.interrupted()) {
@@ -340,6 +417,7 @@ public final class TransferLearningModel implements Closeable {
                 try {
                   swapBufferArray = modelParameters;
                   modelParameters = nextModelParameters;
+                  savedModelParameters = nextModelParameters;
                   nextModelParameters = swapBufferArray;
                 } finally {
                   parameterLock.writeLock().unlock();
@@ -347,11 +425,31 @@ public final class TransferLearningModel implements Closeable {
               }
               float avgLoss = totalLoss / numBatchesProcessed;
               Log.e("Avg Loss", avgLoss +"");
+              Log.e("numBatchesProcessed", numBatchesProcessed +"");
               if (lossConsumer != null) {
                 lossConsumer.onLoss(epoch, avgLoss);
               }
-            }
+              long epochEndTime = System.currentTimeMillis();
+              float epochTrainLatency = ((float) (epochEndTime - epochStartTime) / 1000);
+              float batchTrainLatency = ((float) (epochEndTime - epochStartTime) / 1000) / numBatchesProcessed;
+              meanEpochTrainLatency += epochTrainLatency;
+              Log.e("Epoch Latency", epochTrainLatency +"");
+              meanBatchTrainLatency += batchTrainLatency;
 
+              epochTrainLatencies[epoch] = epochTrainLatency;
+              batchTrainLatencies[epoch] = batchTrainLatency;
+
+//              parameterLock.readLock().lock();
+//              try {
+//                savedModelParameters[epoch] = modelParameters;
+//                Log.e("ModelParameters", modelParameters[0] + "");
+//              } finally {
+//                parameterLock.readLock().unlock();
+//              }
+            }
+            meanEpochTrainLatency /= numEpochs;
+            meanBatchTrainLatency /= numEpochs;
+            //Log.e("Mean Epoch Latency", meanEpochTrainLatency+" "+getMeanEpochTrainLatency());
             return null;
           } finally {
             trainingLock.unlock();
@@ -370,6 +468,21 @@ public final class TransferLearningModel implements Closeable {
     }
   }
 
+  public float getSampleInferenceLatency() {
+    long inferenceStartTime = System.currentTimeMillis();
+    parameterLock.readLock().lock();
+    try {
+      for (int sampleIdx = 0; sampleIdx < trainingSamples.size(); sampleIdx++) {
+        TrainingSample sample = trainingSamples.get(sampleIdx);
+        inferenceModel.runInference(sample.bottleneck, modelParameters);
+      }
+    } finally {
+      parameterLock.readLock().unlock();
+    }
+    long inferenceEndTime = System.currentTimeMillis();
+    //Log.e("Mean Epoch Latency", meanEpochTrainLatency+" "+getMeanEpochTrainLatency());
+    return ((float)(inferenceEndTime - inferenceStartTime)/1000);
+  }
 
   public Pair<Float, Float> getTestStatistics() {
     float[] confidences;
@@ -474,6 +587,10 @@ public final class TransferLearningModel implements Closeable {
       return modelParameters;
   }
 
+  public ByteBuffer[] getSavedModelParameters()  {
+    return savedModelParameters;
+  }
+
   /**
    * Overwrites the current model parameter values with the values read from a channel.
    *
@@ -510,14 +627,14 @@ public final class TransferLearningModel implements Closeable {
     }
     trainingLock.unlock();
 
-    Collections.shuffle(trainingSamples);
+    Collections.shuffle(realTrainingSamples);
     return () ->
         new Iterator<List<TrainingSample>>() {
           private int nextIndex = 0;
 
           @Override
           public boolean hasNext() {
-            return nextIndex < trainingSamples.size();
+            return nextIndex < realTrainingSamples.size();
           }
 
           @Override
@@ -525,13 +642,13 @@ public final class TransferLearningModel implements Closeable {
             int fromIndex = nextIndex;
             int toIndex = nextIndex + getTrainBatchSize();
             nextIndex = toIndex;
-            if (toIndex >= trainingSamples.size()) {
+            if (toIndex >= realTrainingSamples.size()) {
               // To keep batch size consistent, last batch may include some elements from the
               // next-to-last batch.
-              return trainingSamples.subList(
-                  trainingSamples.size() - getTrainBatchSize(), trainingSamples.size());
+              return realTrainingSamples.subList(
+                  realTrainingSamples.size() - getTrainBatchSize(), realTrainingSamples.size());
             } else {
-              return trainingSamples.subList(fromIndex, toIndex);
+              return realTrainingSamples.subList(fromIndex, toIndex);
             }
           }
         };
@@ -590,14 +707,29 @@ public final class TransferLearningModel implements Closeable {
     return buffer;
   }
 
+  public float getMeanEpochTrainLatency() {
+    return meanEpochTrainLatency;
+  }
+  public float getMeanBatchTrainLatency() {
+    return meanBatchTrainLatency;
+  }
+
+  public float[] getEpochTrainLatencies() {
+    return epochTrainLatencies;
+  }
+
+  public float[] getBatchTrainLatencies() {
+    return batchTrainLatencies;
+  }
+
   public int getSize_Training() {
-    return trainingSamples.size();
+    // return trainingSamples.size();
+    return realTrainingSamples.size();
   }
 
   public int getSize_Testing() {
     return testingSamples.size();
   }
-
 
   public void updateParameters(ByteBuffer[] newParams){
     parameterLock.writeLock().lock();

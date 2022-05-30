@@ -44,18 +44,26 @@ message ServerMessage {
     message FitIns {
         Parameters parameters = 1;
         map<string, Scalar> config = 2;
+        repeated float sampleloss = 3;
     }
     message EvaluateIns {
         Parameters parameters = 1;
         map<string, Scalar> config = 2;
     }
     message PropertiesIns { map<string, Scalar> config = 1; }
+    message SampleLatency {
+        Parameters parameters = 1;
+        map<string, Scalar> config = 2;
+    }
+    message DeviceInfo {}
     oneof msg {
         Reconnect reconnect = 1;
         GetParameters get_parameters = 2;
         FitIns fit_ins = 3;
         EvaluateIns evaluate_ins = 4;
         PropertiesIns properties_ins = 5;
+        SampleLatency sample_latency = 6;
+        DeviceInfo device_info = 7;
     }
 }
 
@@ -68,6 +76,16 @@ message ClientMessage {
         int64 num_examples_ceil = 3 [ deprecated = true ];
         float fit_duration = 4 [ deprecated = true ];
         map<string, Scalar> metrics = 5;
+        float loss_min = 6;
+        float loss_max = 7;
+        float loss_square_sum = 8;
+        int64 overthreshold_loss_count = 9;
+        float loss_sum = 10;
+        int64 loss_count = 11;
+        float train_time_per_epoch = 12;
+        float train_time_per_batch = 13;
+        repeated float train_time_per_epoch_list = 14;
+        repeated float train_time_per_batch_list = 15;
     }
     message EvaluateRes {
         int64 num_examples = 1;
@@ -76,12 +94,28 @@ message ClientMessage {
         map<string, Scalar> metrics = 4;
     }
     message PropertiesRes { map<string, Scalar> properties = 1; }
+    message SampleLatencyRes {
+        string msg_receive_time = 1;
+        string msg_sent_time = 2;
+        float train_time_per_epoch = 3;
+        float train_time_per_batch = 4;
+        float inference_time = 5;
+        Parameters parameters = 6;
+        int64 num_examples = 7;
+        repeated float train_time_per_epoch_list = 8;
+        repeated float train_time_per_batch_list = 9;
+    }
+    message DeviceInfoRes {
+        int64 device_id = 1;
+    }
     oneof msg {
         Disconnect disconnect = 1;
         ParametersRes parameters_res = 2;
         FitRes fit_res = 3;
         EvaluateRes evaluate_res = 4;
         PropertiesRes properties_res = 5;
+        SampleLatencyRes sample_latency_res = 6;
+        DeviceInfoRes device_info_res = 7;
     }
 }
 
