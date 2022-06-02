@@ -9,14 +9,30 @@ This repository contains the testbed implementation and corresponding experiment
 ## System Requirements
 
 This system is written and evaluated based on the following setup:
-- Server: A ```Ubuntu 18.04``` server 
+- Server: A ```Ubuntu 18.04``` server running ```Python 3.7.12``` with ```pyenv-virtualenv```
 - Clients: 21 Android smartphones as illustrated in ```Table 4``` of our paper, with Android OS version $\geq$ 7.0
 
 As an alternative setup, you can use general Ubuntu servers with other Android smartphones.
 
 ## Installation - Server
 
-We recommend you to setup Python environment using ```pyenv-virtualenv``` based on ```Developer Machine Setup``` in this [link](https://flower.dev/docs/getting-started-for-contributors.html) as follows:
+- Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv). We recommend using [pyenv-installer](https://github.com/pyenv/pyenv-installer) for Ubuntu servers.
+- Install Python build dependencies
+```
+$ sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
+libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
+libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+```
+- Setup Flower and install required packages in development mode (as pip install -e)
+```
+$ pyenv install 3.7.12
+$ git clone https://github.com/jaemin-shin/flower-FedBalancer-testbed.git
+$ cd flower-FedBalancer-testbed
+$ ./dev/venv-create.sh
+$ ./dev/bootstrap.sh
+```
+
+<!-- We recommend you to setup Python environment using ```pyenv-virtualenv``` based on ```Developer Machine Setup``` in this [link](https://flower.dev/docs/getting-started-for-contributors.html) as follows: -->
 
 ## How to run
 
