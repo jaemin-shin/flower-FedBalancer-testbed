@@ -29,11 +29,6 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Stream;
 
-//import org.json.simple.JSONArray;
-//import org.json.simple.JSONObject;
-//import org.json.simple.parser.JSONParser;
-//import org.json.simple.parser.ParseException;
-
 public class FlowerClient {
 
     private TransferLearningModelWrapper tlModel;
@@ -49,9 +44,6 @@ public class FlowerClient {
         this.context = context;
     }
 
-//    public ByteBuffer[] getWeights() {
-//        return tlModel.getParameters();
-//    }
     public ByteBuffer[] getWeights() {
         return tlModel.getSavedModelParameters();
     }
@@ -106,8 +98,6 @@ public class FlowerClient {
         int user_whole_data_len = num_data;
 
         int batch_size = 10;
-
-        // List<Pair<Integer, Float>> whole_data_loss_list = FedBalancerSingleton.getInstance().getWholeDataLossList();
 
         List<Pair<Integer, Float>> whole_data_loss_list =  new ArrayList<>();
         whole_data_loss_list.addAll(FedBalancerSingleton.getInstance().getWholeDataLossList());
@@ -214,7 +204,6 @@ public class FlowerClient {
 
         SampleLatencyReturnValues slrv = new SampleLatencyReturnValues(tlModel.getMeanEpochTrainTime(), tlModel.getMeanBatchTrainTime(), tlModel.getEpochTrainLatencies(), tlModel.getBatchTrainLatencies(), getWeights(), tlModel.getSize_Training());
 
-        //return Pair.create(tlModel.getMeanEpochTrainTime(), tlModel.getMeanBatchTrainTime(), getWeights(), tlModel.getSize_Training());
         return slrv;
     }
 
@@ -254,49 +243,6 @@ public class FlowerClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        try {
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("data/partition_" + (device_id - 1) + "_train.txt")));
-//            String line;
-//            int i = 0;
-//            while ((line = reader.readLine()) != null) {
-//                i++;
-//                Log.e(TAG, i + "th training image loaded");
-//                addSample("data/" + line, true);
-//            }
-//            reader.close();
-//
-//            i = 0;
-//            reader = new BufferedReader(new InputStreamReader(this.context.getAssets().open("data/partition_" +  (device_id - 1)  + "_test.txt")));
-//            while ((line = reader.readLine()) != null) {
-//                i++;
-//                Log.e(TAG, i + "th test image loaded");
-//                addSample("data/" + line, false);
-//            }
-//            reader.close();
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
-    }
-
-    private void addSample(String photoPath, Boolean isTraining, int sampleIndex) throws IOException {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap =  BitmapFactory.decodeStream(this.context.getAssets().open(photoPath), null, options);
-        String sampleClass = get_class(photoPath);
-
-        // get rgb equivalent and class
-        float[] rgbImage = prepareImage(bitmap);
-
-        // add to the list.
-        try {
-            this.tlModel.addSample(rgbImage, sampleClass, isTraining, sampleIndex).get();
-        } catch (ExecutionException e) {
-            throw new RuntimeException("Failed to add sample to model", e.getCause());
-        } catch (InterruptedException e) {
-            // no-op
-        }
     }
 
     private void addSample_UCIHAR(String samplePath, Boolean isTraining, int sampleIndex) throws IOException {
@@ -314,39 +260,8 @@ public class FlowerClient {
         }
     }
 
-    public String get_class(String path) {
+    public String get_class_UCIHAR(String path) {
         String label = path.split("/")[2];
         return label;
-    }
-
-    public String get_class_UCIHAR(String path) {
-        String label = path.split("/")[3];
-        return label;
-    }
-
-    /**
-     * Normalizes a camera image to [0; 1], cropping it
-     * to size expected by the model and adjusting for camera rotation.
-     */
-    private static float[] prepareImage(Bitmap bitmap)  {
-        int modelImageSize = TransferLearningModelWrapper.IMAGE_SIZE;
-
-        float[] normalizedRgb = new float[modelImageSize * modelImageSize * 3];
-        int nextIdx = 0;
-        for (int y = 0; y < modelImageSize; y++) {
-            for (int x = 0; x < modelImageSize; x++) {
-                int rgb = bitmap.getPixel(x, y);
-
-                float r = ((rgb >> 16) & LOWER_BYTE_MASK) * (1 / 255.0f);
-                float g = ((rgb >> 8) & LOWER_BYTE_MASK) * (1 / 255.0f);
-                float b = (rgb & LOWER_BYTE_MASK) * (1 / 255.0f);
-
-                normalizedRgb[nextIdx++] = r;
-                normalizedRgb[nextIdx++] = g;
-                normalizedRgb[nextIdx++] = b;
-            }
-        }
-
-        return normalizedRgb;
     }
 }

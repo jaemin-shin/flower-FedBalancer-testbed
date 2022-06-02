@@ -88,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
         resultText = (TextView) findViewById(R.id.grpc_response_text);
         resultText.setMovementMethod(new ScrollingMovementMethod());
         device_id = (EditText) findViewById(R.id.device_id_edit_text);
-//        ip = (EditText) findViewById(R.id.serverIP);
-//        port = (EditText) findViewById(R.id.serverPort);
-        ip = "143.248.36.214";
+
+        ip = "143.248.36.214"; //TODO: ENTER YOUR IP HERE
         port = "8999";
 
         loadDataButton = (Button) findViewById(R.id.load_data) ;
@@ -99,39 +98,15 @@ public class MainActivity extends AppCompatActivity {
 
         runOnUiThread(new Runnable(){
             @Override public void run() {
-                device_id.setText(Integer.toString(7));
+                device_id.setText(Integer.toString(1));
             }
         });
 
         Log.e(TAG, Build.MODEL);
 
-//        List<Integer> tmp = new ArrayList<>();
-//        tmp.add(5);
-//        tmp.add(3);
-//        tmp.add(2);
-//
-//        List<Integer> tmp2 = new ArrayList<>();
-//        tmp2.addAll(tmp);
-//
-//        Log.e(TAG, tmp.toString());
-//        Log.e(TAG, tmp2.toString());
-//
-//        Collections.sort(tmp2);
-//        Log.e(TAG, tmp.toString());
-//        Log.e(TAG, tmp2.toString());
-
-        // device_id.setText('5');
-//        if (Build.MODEL.equals("SM-G991N")) {
-//            Log.e(TAG, "HAHA");
-//        } else if (Build.MODEL.equals("Pixel 5")) {
-//            Log.e(TAG, "Pixel!!");
-//        }
-
         fc = new FlowerClient(this);
 
-        loadDataWithoutView();
-//        connectWithoutView();
-//        runGRCPWithoutView();
+        // loadDataWithoutView();
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -152,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
                 resultText.append("\n" + time + "   " + text);
             }
         });
-//        resultText.append("\n" + time + "   " + text);
     }
 
     public void loadData(View view){
@@ -232,8 +206,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void connect(View view) {
-//        String host = ip.getText().toString();
-//        String portStr = port.getText().toString();
         if (is_latency_sampling) {
             port = latency_sampling_port;
         }
@@ -423,15 +395,9 @@ public class MainActivity extends AppCompatActivity {
 
                     List<Float> sampleloss = message.getFitIns().getSamplelossList();
 
-//                    if (FedBalancerSingleton.getInstance().getWholeDataLossList() != null) {
-//                        Log.e(TAG, FedBalancerSingleton.getInstance().getWholeDataLossList().toString());
-//                    }
                     Log.e(TAG, sampleloss.toString());
                     Log.e(TAG, sampleloss.size()+"");
 
-                    // Our model has 10 layers -> CIFAR-10
-                    // Our model has 2 layers -> UCIHAR
-                    // Our new model has 4 layers -> UCIHAR_DNN
                     // Our new new model has 6 layers -> UCIHAR_CNN
                     ByteBuffer[] newWeights = new ByteBuffer[6] ;
                     for (int i = 0; i < 6; i++) {
@@ -493,17 +459,13 @@ public class MainActivity extends AppCompatActivity {
                             ne = 1;
                         }
 
-                        // outputs = activity.fc.fit(newWeights, ne, sampleIndexToTrain);
                         slrv = activity.fc.fit(newWeights, ne, sampleIndexToTrain);
                     }
                     else {
-                        // outputs = activity.fc.fit(newWeights, local_epochs, sampleIndexToTrain);
                         slrv = activity.fc.fit(newWeights, local_epochs, sampleIndexToTrain);
                     }
 
                     FedBalancerSingleton.getInstance().addTrainEpochAndBatchLatencyHistory(Pair.create(slrv.getTrain_time_per_epoch(), slrv.getTrain_time_per_batch()));
-
-                    //Log.e(TAG, "TRAIN FINISH TIME: " + (System.currentTimeMillis() - handleStartTime));
 
                     float current_round_loss_min = (float) 0.0;
                     float current_round_loss_max = (float) 0.0;
@@ -535,8 +497,6 @@ public class MainActivity extends AppCompatActivity {
 
                     weights = activity.fc.getWeights();
 
-                    //Log.e(TAG, "LOSS UPDATE AND SORTED LOSS PROCESING TIME: " + (System.currentTimeMillis() - handleStartTime));
-
                     c = fitResAsProto(weights, slrv.getSize_training(), current_round_loss_min, current_round_loss_max, loss_square_summ, overthreshold_loss_count, loss_summ, loss_count, slrv.getTrain_time_per_epoch(), slrv.getTrain_time_per_batch(), slrv.getTrain_time_per_epoch_list(), slrv.getTrain_time_per_batch_list());
                 } else if (message.hasSampleLatency()) {
                     SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -552,45 +512,19 @@ public class MainActivity extends AppCompatActivity {
 
                     int local_epochs = (int) epoch_config.getSint64();
 
-                    // Our model has 10 layers -> CIFAR-10
-                    // Our model has 2 layers -> UCIHAR
-                    // Our new model has 4 layers -> UCIHAR_DNN
                     // Our new new model has 6 layers -> UCIHAR_CNN
                     ByteBuffer[] newWeights = new ByteBuffer[6] ;
                     for (int i = 0; i < 6; i++) {
                         newWeights[i] = ByteBuffer.wrap(layers.get(i).toByteArray());
                     }
 
-                    // Pair<Float, Float> outputs = activity.fc.sampleLatency(newWeights, local_epochs);
-
                     SampleLatencyReturnValues slrv = activity.fc.sampleLatency(newWeights, local_epochs);
 
                     float inference_time = activity.fc.sampleInferenceLatency(newWeights);
 
-                    // Log.e(TAG, "Train epoch latency "+ slrv.getTrain_time_per_epoch()+"");
-                    // Log.e(TAG, "Inference time "+ inference_time+"");
-
                     date = new Date(System.currentTimeMillis());
                     String msg_sent_time = formatter.format(date);
                     c = sampleLatencyResAsProto(msg_receive_time, msg_sent_time, slrv.getTrain_time_per_epoch(), slrv.getTrain_time_per_batch(), inference_time, slrv.getWeights(), slrv.getSize_training(), slrv.getTrain_time_per_epoch_list(), slrv.getTrain_time_per_batch_list());
-                } else if (message.hasEvaluateIns()) {
-                    Log.e(TAG, "Handling EvaluateIns");
-                    activity.setResultText("Handling Evaluate request from the server");
-
-                    List<ByteString> layers = message.getEvaluateIns().getParameters().getTensorsList();
-
-                    // Our model has 10 layers
-                    ByteBuffer[] newWeights = new ByteBuffer[10] ;
-                    for (int i = 0; i < 10; i++) {
-                        newWeights[i] = ByteBuffer.wrap(layers.get(i).toByteArray());
-                    }
-                    Pair<Pair<Float, Float>, Integer> inference = activity.fc.evaluate(newWeights);
-
-                    float loss = inference.first.first;
-                    float accuracy = inference.first.second;
-                    activity.setResultText("Test Accuracy after this round = " + accuracy);
-                    int test_size = inference.second;
-                    c = evaluateResAsProto(loss, test_size);
                 }
                 requestObserver.onNext(c);
                 activity.setResultText("Response sent to the server");
@@ -663,10 +597,5 @@ public class MainActivity extends AppCompatActivity {
     private static ClientMessage deviceInfoAsProto(int device_id){
         ClientMessage.DeviceInfoRes res = ClientMessage.DeviceInfoRes.newBuilder().setDeviceId(device_id).build();
         return ClientMessage.newBuilder().setDeviceInfoRes(res).build();
-    }
-
-    private static ClientMessage evaluateResAsProto(float accuracy, int testing_size){
-        ClientMessage.EvaluateRes res = ClientMessage.EvaluateRes.newBuilder().setLoss(accuracy).setNumExamples(testing_size).build();
-        return ClientMessage.newBuilder().setEvaluateRes(res).build();
     }
 }

@@ -29,12 +29,6 @@ import org.tensorflow.lite.examples.transfer.api.TransferLearningModel.Predictio
  */
 public class TransferLearningModelWrapper implements Closeable {
 
-    /**
-     * CIFAR10 image size. This cannot be changed as the TFLite model's input layer expects
-     * a 32x32x3 input.
-     */
-    public static final int IMAGE_SIZE = 32;
-
     private final TransferLearningModel model;
 
     private final ConditionVariable shouldTrain = new ConditionVariable();

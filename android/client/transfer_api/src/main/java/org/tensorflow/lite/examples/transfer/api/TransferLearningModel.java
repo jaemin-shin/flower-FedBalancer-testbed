@@ -439,17 +439,9 @@ public final class TransferLearningModel implements Closeable {
               epochTrainLatencies[epoch] = epochTrainLatency;
               batchTrainLatencies[epoch] = batchTrainLatency;
 
-//              parameterLock.readLock().lock();
-//              try {
-//                savedModelParameters[epoch] = modelParameters;
-//                Log.e("ModelParameters", modelParameters[0] + "");
-//              } finally {
-//                parameterLock.readLock().unlock();
-//              }
             }
             meanEpochTrainLatency /= numEpochs;
             meanBatchTrainLatency /= numEpochs;
-            //Log.e("Mean Epoch Latency", meanEpochTrainLatency+" "+getMeanEpochTrainLatency());
             return null;
           } finally {
             trainingLock.unlock();
