@@ -1,0 +1,105 @@
+FedBalancer | INFO flower 2022-05-18 19:14:39,432 | app.py:114 | Flower server running (1000 rounds), SSL is disabled
+FedBalancer | INFO flower 2022-05-18 19:14:39,432 | server.py:124 | Initializing global parameters
+FedBalancer | INFO flower 2022-05-18 19:14:39,432 | server.py:670 | Requesting initial parameters from one random client
+FedBalancer | INFO flower 2022-05-18 19:14:51,997 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:14:51,997 | server.py:672 | <flwr.server.grpc_server.grpc_client_proxy.GrpcClientProxy object at 0x7f193f516dd0>
+FedBalancer | INFO flower 2022-05-18 19:14:52,644 | server.py:674 | Received initial parameters from one random client
+FedBalancer | INFO flower 2022-05-18 19:14:52,644 | server.py:126 | Evaluating initial parameters
+FedBalancer | INFO flower 2022-05-18 19:14:53,340 | server.py:133 | initial parameters (loss, other metrics): 1.7820651531219482, {'accuracy': 0.25822871923446655}
+FedBalancer | INFO flower 2022-05-18 19:14:54,811 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:14:54,811 | server.py:745 | Requesting device info from all clients
+FedBalancer | INFO flower 2022-05-18 19:14:54,864 | server.py:750 | Device_id 9
+FedBalancer | INFO flower 2022-05-18 19:14:54,865 | server.py:751 | Received device info from all clients
+FedBalancer | INFO flower 2022-05-18 19:14:54,865 | server.py:165 | Requesting latency sampling over all clients (1 clients currently)
+FedBalancer | INFO flower 2022-05-18 19:14:54,865 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:15:19,866 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:238 | download_times,[7.865]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:239 | upload_times,[0]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:240 | per_epoch_train_times,[2.938]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:241 | per_batch_train_times,[0.089]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:242 | inference_times,[4.816]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:243 | round_completion_times,[24.997]
+FedBalancer | INFO flower 2022-05-18 19:15:19,867 | server.py:244 | networking_times,[5.492]
+FedBalancer | INFO flower 2022-05-18 19:15:19,868 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:15:47,066 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:238 | download_times,[7.865, 10.428]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:239 | upload_times,[0, 0]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:240 | per_epoch_train_times,[2.938, 2.903]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:241 | per_batch_train_times,[0.089, 0.088]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:242 | inference_times,[4.816, 4.779]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:243 | round_completion_times,[24.997, 27.198]
+FedBalancer | INFO flower 2022-05-18 19:15:47,067 | server.py:244 | networking_times,[5.492, 7.905]
+FedBalancer | INFO flower 2022-05-18 19:15:47,068 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:16:29,968 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:238 | download_times,[7.865, 10.428, 25.525]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:239 | upload_times,[0, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:242 | inference_times,[4.816, 4.779, 4.797]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9]
+FedBalancer | INFO flower 2022-05-18 19:16:29,969 | server.py:244 | networking_times,[5.492, 7.905, 23.361]
+FedBalancer | INFO flower 2022-05-18 19:16:29,970 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:17:03,329 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:17:03,329 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:239 | upload_times,[0, 0, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759]
+FedBalancer | INFO flower 2022-05-18 19:17:03,330 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:17:33,954 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765]
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969]
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922]
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089]
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267]
+FedBalancer | INFO flower 2022-05-18 19:17:33,955 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623]
+FedBalancer | INFO flower 2022-05-18 19:17:33,956 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747]
+FedBalancer | INFO flower 2022-05-18 19:17:33,956 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:18:06,113 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:18:06,113 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765, 14.703]
+FedBalancer | INFO flower 2022-05-18 19:18:06,113 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969, 0]
+FedBalancer | INFO flower 2022-05-18 19:18:06,113 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922, 2.924]
+FedBalancer | INFO flower 2022-05-18 19:18:06,114 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089, 0.089]
+FedBalancer | INFO flower 2022-05-18 19:18:06,114 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267, 5.481]
+FedBalancer | INFO flower 2022-05-18 19:18:06,114 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623, 32.156]
+FedBalancer | INFO flower 2022-05-18 19:18:06,114 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747, 12.054]
+FedBalancer | INFO flower 2022-05-18 19:18:06,114 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:18:36,605 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:18:36,605 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765, 14.703, 11.893]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922, 2.924, 2.895]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089, 0.089, 0.088]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267, 5.481, 5.495]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623, 32.156, 30.49]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747, 12.054, 10.521]
+FedBalancer | INFO flower 2022-05-18 19:18:36,606 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:19:03,792 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765, 14.703, 11.893, 7.384]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969, 0, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922, 2.924, 2.895, 2.898]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089, 0.089, 0.088, 0.088]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267, 5.481, 5.495, 6.646]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623, 32.156, 30.49, 27.185]
+FedBalancer | INFO flower 2022-05-18 19:19:03,793 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747, 12.054, 10.521, 6.047]
+FedBalancer | INFO flower 2022-05-18 19:19:03,794 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:19:31,956 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765, 14.703, 11.893, 7.384, 8.938]
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969, 0, 0, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922, 2.924, 2.895, 2.898, 2.921]
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089, 0.089, 0.088, 0.088, 0.089]
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267, 5.481, 5.495, 6.646, 6.715]
+FedBalancer | INFO flower 2022-05-18 19:19:31,957 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623, 32.156, 30.49, 27.185, 28.162]
+FedBalancer | INFO flower 2022-05-18 19:19:31,958 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747, 12.054, 10.521, 6.047, 6.842]
+FedBalancer | INFO flower 2022-05-18 19:19:31,958 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-18 19:19:57,408 | server.py:237 | client_id,9
+FedBalancer | INFO flower 2022-05-18 19:19:57,408 | server.py:238 | download_times,[7.865, 10.428, 25.525, 14.658, 9.765, 14.703, 11.893, 7.384, 8.938, 6.802]
+FedBalancer | INFO flower 2022-05-18 19:19:57,408 | server.py:239 | upload_times,[0, 0, 0, 0, 0.969, 0, 0, 0, 0, 0]
+FedBalancer | INFO flower 2022-05-18 19:19:57,408 | server.py:240 | per_epoch_train_times,[2.938, 2.903, 2.948, 2.929, 2.922, 2.924, 2.895, 2.898, 2.921, 2.959]
+FedBalancer | INFO flower 2022-05-18 19:19:57,409 | server.py:241 | per_batch_train_times,[0.089, 0.088, 0.089, 0.089, 0.089, 0.089, 0.088, 0.088, 0.089, 0.09]
+FedBalancer | INFO flower 2022-05-18 19:19:57,409 | server.py:242 | inference_times,[4.816, 4.779, 4.797, 4.953, 5.267, 5.481, 5.495, 6.646, 6.715, 6.718]
+FedBalancer | INFO flower 2022-05-18 19:19:57,409 | server.py:243 | round_completion_times,[24.997, 27.198, 42.9, 33.359, 30.623, 32.156, 30.49, 27.185, 28.162, 25.449]
+FedBalancer | INFO flower 2022-05-18 19:19:57,409 | server.py:244 | networking_times,[5.492, 7.905, 23.361, 13.759, 10.747, 12.054, 10.521, 6.047, 6.842, 3.934]
+FedBalancer | INFO flower 2022-05-18 19:19:57,410 | server.py:279 | CLIENT ID: 9 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-18 19:19:57,411 | server.py:329 | Deadline 30.2519

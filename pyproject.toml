@@ -52,6 +52,7 @@ protobuf = "^3.19.0"
 importlib-metadata = { version = "^4.0.0", markers = "python_version < '3.8'" }
 # Optional dependencies
 ray = { extras = ["default"], version = "^1.9.2", optional = true }
+tensorflow-cpu = ">=2.6.3"
 
 [tool.poetry.extras]
 simulation = ["ray"]

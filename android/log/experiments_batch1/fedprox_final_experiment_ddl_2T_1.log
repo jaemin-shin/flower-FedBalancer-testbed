@@ -1,0 +1,685 @@
+FedBalancer | INFO flower 2022-05-17 21:57:55,263 | app.py:114 | Flower server running (1000 rounds), SSL is disabled
+FedBalancer | INFO flower 2022-05-17 21:57:55,263 | server.py:124 | Initializing global parameters
+FedBalancer | INFO flower 2022-05-17 21:57:55,263 | server.py:670 | Requesting initial parameters from one random client
+FedBalancer | INFO flower 2022-05-17 21:58:50,511 | client_manager.py:156 | Alive clients count: 1
+FedBalancer | INFO flower 2022-05-17 21:58:50,511 | server.py:672 | <flwr.server.grpc_server.grpc_client_proxy.GrpcClientProxy object at 0x7fac40079250>
+FedBalancer | INFO flower 2022-05-17 21:58:53,497 | server.py:674 | Received initial parameters from one random client
+FedBalancer | INFO flower 2022-05-17 21:58:53,497 | server.py:126 | Evaluating initial parameters
+FedBalancer | INFO flower 2022-05-17 21:58:54,214 | server.py:133 | initial parameters (loss, other metrics): 1.7820651531219482, {'accuracy': 0.25822871923446655}
+FedBalancer | INFO flower 2022-05-17 21:59:13,954 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | INFO flower 2022-05-17 21:59:13,955 | server.py:745 | Requesting device info from all clients
+FedBalancer | INFO flower 2022-05-17 21:59:14,097 | server.py:750 | Device_id 19
+FedBalancer | INFO flower 2022-05-17 21:59:14,184 | server.py:750 | Device_id 6
+FedBalancer | INFO flower 2022-05-17 21:59:14,265 | server.py:750 | Device_id 7
+FedBalancer | INFO flower 2022-05-17 21:59:14,366 | server.py:750 | Device_id 1
+FedBalancer | INFO flower 2022-05-17 21:59:14,503 | server.py:750 | Device_id 15
+FedBalancer | INFO flower 2022-05-17 21:59:14,599 | server.py:750 | Device_id 8
+FedBalancer | INFO flower 2022-05-17 21:59:14,706 | server.py:750 | Device_id 12
+FedBalancer | INFO flower 2022-05-17 21:59:14,806 | server.py:750 | Device_id 9
+FedBalancer | INFO flower 2022-05-17 21:59:14,909 | server.py:750 | Device_id 16
+FedBalancer | INFO flower 2022-05-17 21:59:15,009 | server.py:750 | Device_id 18
+FedBalancer | INFO flower 2022-05-17 21:59:15,110 | server.py:750 | Device_id 17
+FedBalancer | INFO flower 2022-05-17 21:59:15,216 | server.py:750 | Device_id 11
+FedBalancer | INFO flower 2022-05-17 21:59:15,410 | server.py:750 | Device_id 20
+FedBalancer | INFO flower 2022-05-17 21:59:15,526 | server.py:750 | Device_id 3
+FedBalancer | INFO flower 2022-05-17 21:59:15,625 | server.py:750 | Device_id 10
+FedBalancer | INFO flower 2022-05-17 21:59:15,729 | server.py:750 | Device_id 4
+FedBalancer | INFO flower 2022-05-17 21:59:15,808 | server.py:750 | Device_id 2
+FedBalancer | INFO flower 2022-05-17 21:59:16,067 | server.py:750 | Device_id 13
+FedBalancer | INFO flower 2022-05-17 21:59:16,204 | server.py:750 | Device_id 21
+FedBalancer | INFO flower 2022-05-17 21:59:16,421 | server.py:750 | Device_id 5
+FedBalancer | INFO flower 2022-05-17 21:59:16,737 | server.py:750 | Device_id 14
+FedBalancer | INFO flower 2022-05-17 21:59:16,738 | server.py:751 | Received device info from all clients
+FedBalancer | INFO flower 2022-05-17 21:59:16,738 | server.py:165 | Requesting latency sampling over all clients (21 clients currently)
+FedBalancer | INFO flower 2022-05-17 21:59:16,739 | server.py:279 | CLIENT ID: 19 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,740 | server.py:279 | CLIENT ID: 6 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,741 | server.py:279 | CLIENT ID: 7 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,742 | server.py:279 | CLIENT ID: 1 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,743 | server.py:279 | CLIENT ID: 15 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,744 | server.py:279 | CLIENT ID: 8 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,745 | server.py:279 | CLIENT ID: 12 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,746 | server.py:279 | CLIENT ID: 9 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,747 | server.py:279 | CLIENT ID: 16 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,749 | server.py:279 | CLIENT ID: 18 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,749 | server.py:279 | CLIENT ID: 17 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,750 | server.py:279 | CLIENT ID: 11 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,750 | server.py:279 | CLIENT ID: 20 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,751 | server.py:279 | CLIENT ID: 3 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,751 | server.py:279 | CLIENT ID: 10 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,752 | server.py:279 | CLIENT ID: 4 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,752 | server.py:279 | CLIENT ID: 2 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,752 | server.py:279 | CLIENT ID: 13 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,753 | server.py:279 | CLIENT ID: 21 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,753 | server.py:279 | CLIENT ID: 5 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,754 | server.py:279 | CLIENT ID: 14 LATENCY SAMPLE LENGTH: 10
+FedBalancer | INFO flower 2022-05-17 21:59:16,754 | server.py:329 | Deadline 38.678180952380956
+FedBalancer | INFO flower 2022-05-17 21:59:16,754 | server.py:336 | FL starting
+FedBalancer | INFO flower 2022-05-17 21:59:16,754 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 21:59:16,754 | server.py:567 | elapsed_time: 0:00:00.000126 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 21:59:36,235 | server.py:597 | elapsed_time: 0:00:19.480124 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 21:59:36,273 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 21:59:36,273 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 21:59:36,273 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 21:59:36,273 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 21:59:36,273 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 21:59:36,580 | server.py:361 | fit progress: (1, 1.0988121032714844, {'accuracy': 0.6538853049278259}, 19.82596090901643)
+FedBalancer | INFO flower 2022-05-17 21:59:36,581 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 21:59:36,581 | server.py:567 | elapsed_time: 0:00:19.826430 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 21:59:55,673 | server.py:597 | elapsed_time: 0:00:38.918510 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 21:59:55,705 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 21:59:55,705 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 21:59:55,705 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 21:59:55,705 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 21:59:55,706 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 21:59:55,999 | server.py:361 | fit progress: (2, 0.8926575183868408, {'accuracy': 0.6437054872512817}, 39.245006600394845)
+FedBalancer | INFO flower 2022-05-17 21:59:56,000 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 21:59:56,000 | server.py:567 | elapsed_time: 0:00:39.245629 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:00:22,391 | server.py:597 | elapsed_time: 0:01:05.636867 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:00:22,418 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:00:22,418 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:00:22,418 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:00:22,418 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:00:22,418 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:00:22,730 | server.py:361 | fit progress: (3, 0.8130320906639099, {'accuracy': 0.6901934146881104}, 65.97581194713712)
+FedBalancer | INFO flower 2022-05-17 22:00:22,731 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:00:22,731 | server.py:567 | elapsed_time: 0:01:05.976494 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:00:42,004 | server.py:597 | elapsed_time: 0:01:25.249163 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:00:42,035 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:00:42,035 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:00:42,035 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:00:42,035 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:00:42,036 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:00:42,338 | server.py:361 | fit progress: (4, 0.8555613160133362, {'accuracy': 0.6946046948432922}, 85.58341230172664)
+FedBalancer | INFO flower 2022-05-17 22:00:42,338 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:00:42,339 | server.py:567 | elapsed_time: 0:01:25.584201 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:01:01,971 | server.py:597 | elapsed_time: 0:01:45.216640 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:01:01,995 | server.py:635 | Num examples from client 15: 372
+FedBalancer | INFO flower 2022-05-17 22:01:01,995 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:01:01,995 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:01:01,995 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:01:01,996 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:01:02,309 | server.py:361 | fit progress: (5, 0.8738733530044556, {'accuracy': 0.6708517074584961}, 105.55433642305434)
+FedBalancer | INFO flower 2022-05-17 22:01:02,309 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:01:02,309 | server.py:567 | elapsed_time: 0:01:45.554940 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:01:22,268 | server.py:597 | elapsed_time: 0:02:05.514065 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:01:22,292 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:01:22,292 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:01:22,292 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:01:22,292 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:01:22,293 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:01:22,627 | server.py:361 | fit progress: (6, 0.899278998374939, {'accuracy': 0.689854085445404}, 125.87243033666164)
+FedBalancer | INFO flower 2022-05-17 22:01:22,627 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:01:22,627 | server.py:567 | elapsed_time: 0:02:05.873031 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:01:41,832 | server.py:597 | elapsed_time: 0:02:25.077609 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:01:41,858 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:01:41,858 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:01:41,858 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:01:41,858 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:01:41,858 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:01:42,168 | server.py:361 | fit progress: (7, 1.003514289855957, {'accuracy': 0.7068204879760742}, 145.41359391342849)
+FedBalancer | INFO flower 2022-05-17 22:01:42,169 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:01:42,169 | server.py:567 | elapsed_time: 0:02:25.414741 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:02:08,430 | server.py:597 | elapsed_time: 0:02:51.675627 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:02:08,451 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:02:08,452 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:02:08,452 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:02:08,452 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:02:08,452 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:02:08,750 | server.py:361 | fit progress: (8, 0.9173910617828369, {'accuracy': 0.7136070728302002}, 171.9953874638304)
+FedBalancer | INFO flower 2022-05-17 22:02:08,750 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:02:08,750 | server.py:567 | elapsed_time: 0:02:51.995973 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:02:36,019 | server.py:597 | elapsed_time: 0:03:19.264236 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:02:36,044 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:02:36,044 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:02:36,044 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:02:36,044 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:02:36,044 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:02:36,361 | server.py:361 | fit progress: (9, 0.8342939019203186, {'accuracy': 0.7373600006103516}, 199.6062345067039)
+FedBalancer | INFO flower 2022-05-17 22:02:36,361 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:02:36,362 | server.py:567 | elapsed_time: 0:03:19.607197 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:02:59,270 | server.py:597 | elapsed_time: 0:03:42.515721 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:02:59,304 | server.py:635 | Num examples from client 15: 372
+FedBalancer | INFO flower 2022-05-17 22:02:59,304 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:02:59,304 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:02:59,304 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:02:59,305 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:02:59,602 | server.py:361 | fit progress: (10, 0.782558262348175, {'accuracy': 0.7370206713676453}, 222.8475093608722)
+FedBalancer | INFO flower 2022-05-17 22:02:59,602 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:02:59,603 | server.py:567 | elapsed_time: 0:03:42.848321 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:03:24,024 | server.py:597 | elapsed_time: 0:04:07.269901 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:03:24,045 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:03:24,046 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:03:24,046 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:03:24,046 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:03:24,046 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:03:24,349 | server.py:361 | fit progress: (11, 0.8621844053268433, {'accuracy': 0.7539871335029602}, 247.5943841058761)
+FedBalancer | INFO flower 2022-05-17 22:03:24,349 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:03:24,349 | server.py:567 | elapsed_time: 0:04:07.595003 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:03:48,324 | server.py:597 | elapsed_time: 0:04:31.569772 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:03:48,345 | server.py:635 | Num examples from client 15: 372
+FedBalancer | INFO flower 2022-05-17 22:03:48,345 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:03:48,346 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:03:48,346 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:03:48,346 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:03:48,644 | server.py:361 | fit progress: (12, 0.8693070411682129, {'accuracy': 0.7455039024353027}, 271.88941463269293)
+FedBalancer | INFO flower 2022-05-17 22:03:48,644 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:03:48,645 | server.py:567 | elapsed_time: 0:04:31.890154 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:04:09,124 | server.py:597 | elapsed_time: 0:04:52.369968 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:04:09,146 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:04:09,146 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:04:09,146 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:04:09,146 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:04:09,146 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:04:09,454 | server.py:361 | fit progress: (13, 0.9345527291297913, {'accuracy': 0.745843231678009}, 292.69969784654677)
+FedBalancer | INFO flower 2022-05-17 22:04:09,455 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:04:09,455 | server.py:567 | elapsed_time: 0:04:52.700469 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:04:20,216 | server.py:597 | elapsed_time: 0:05:03.461221 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:04:20,236 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:04:20,236 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:04:20,236 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:04:20,236 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:04:20,236 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:04:20,520 | server.py:361 | fit progress: (14, 0.8856561183929443, {'accuracy': 0.7472005486488342}, 303.7657771985978)
+FedBalancer | INFO flower 2022-05-17 22:04:20,521 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:04:20,521 | server.py:567 | elapsed_time: 0:05:03.766642 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:04:39,819 | server.py:597 | elapsed_time: 0:05:23.064581 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:04:39,841 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:04:39,841 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:04:39,841 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:04:39,841 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:04:39,842 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:04:40,126 | server.py:361 | fit progress: (15, 0.9563181400299072, {'accuracy': 0.7407532930374146}, 323.37184541113675)
+FedBalancer | INFO flower 2022-05-17 22:04:40,127 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:04:40,127 | server.py:567 | elapsed_time: 0:05:23.372848 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:05:12,877 | server.py:597 | elapsed_time: 0:05:56.123027 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:05:12,897 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:05:12,898 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:05:12,898 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:05:12,898 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:05:12,898 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:05:13,190 | server.py:361 | fit progress: (16, 0.9235062599182129, {'accuracy': 0.7634882926940918}, 356.4358920333907)
+FedBalancer | INFO flower 2022-05-17 22:05:13,191 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:05:13,191 | server.py:567 | elapsed_time: 0:05:56.436580 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:05:36,104 | server.py:597 | elapsed_time: 0:06:19.349626 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:05:36,128 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:05:36,128 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:05:36,128 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:05:36,128 | server.py:635 | Num examples from client 15: 372
+FedBalancer | INFO flower 2022-05-17 22:05:36,129 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:05:36,419 | server.py:361 | fit progress: (17, 1.0035759210586548, {'accuracy': 0.7550050616264343}, 379.6650679009035)
+FedBalancer | INFO flower 2022-05-17 22:05:36,420 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:05:36,420 | server.py:567 | elapsed_time: 0:06:19.665920 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:05:56,535 | server.py:597 | elapsed_time: 0:06:39.780519 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:05:56,558 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:05:56,558 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:05:56,558 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:05:56,558 | server.py:635 | Num examples from client 15: 372
+FedBalancer | INFO flower 2022-05-17 22:05:56,558 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:05:56,871 | server.py:361 | fit progress: (18, 0.9886503219604492, {'accuracy': 0.7634882926940918}, 400.1163397412747)
+FedBalancer | INFO flower 2022-05-17 22:05:56,871 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:05:56,872 | server.py:567 | elapsed_time: 0:06:40.117195 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:06:22,536 | server.py:597 | elapsed_time: 0:07:05.781530 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:06:22,557 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:06:22,557 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:06:22,557 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:06:22,557 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:06:22,557 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:06:22,859 | server.py:361 | fit progress: (19, 1.3212130069732666, {'accuracy': 0.7597556710243225}, 426.1045752344653)
+FedBalancer | INFO flower 2022-05-17 22:06:22,860 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:06:22,860 | server.py:567 | elapsed_time: 0:07:06.105367 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:06:42,211 | server.py:597 | elapsed_time: 0:07:25.456376 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:06:42,228 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:06:42,229 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:06:42,229 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:06:42,229 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:06:42,229 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:06:42,530 | server.py:361 | fit progress: (20, 1.0669230222702026, {'accuracy': 0.7560230493545532}, 445.77587982919067)
+FedBalancer | INFO flower 2022-05-17 22:06:42,531 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:06:42,531 | server.py:567 | elapsed_time: 0:07:25.776950 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:07:10,139 | server.py:597 | elapsed_time: 0:07:53.384682 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:07:10,156 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:07:10,157 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:07:10,157 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:07:10,157 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:07:10,157 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:07:10,439 | server.py:361 | fit progress: (21, 0.7914977073669434, {'accuracy': 0.782829999923706}, 473.68488689884543)
+FedBalancer | INFO flower 2022-05-17 22:07:10,440 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:07:10,440 | server.py:567 | elapsed_time: 0:07:53.685484 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:07:37,104 | server.py:597 | elapsed_time: 0:08:20.349400 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:07:37,121 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:07:37,122 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:07:37,122 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:07:37,122 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:07:37,122 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:07:37,430 | server.py:361 | fit progress: (22, 0.8887426257133484, {'accuracy': 0.7746860980987549}, 500.6758632445708)
+FedBalancer | INFO flower 2022-05-17 22:07:37,431 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:07:37,431 | server.py:567 | elapsed_time: 0:08:20.676610 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:08:05,288 | server.py:597 | elapsed_time: 0:08:48.534003 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:08:05,312 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:08:05,313 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:08:05,313 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:08:05,313 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:08:05,313 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:08:05,605 | server.py:361 | fit progress: (23, 0.9454714059829712, {'accuracy': 0.7780793905258179}, 528.8510027928278)
+FedBalancer | INFO flower 2022-05-17 22:08:05,606 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:08:05,606 | server.py:567 | elapsed_time: 0:08:48.851521 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:08:28,187 | server.py:597 | elapsed_time: 0:09:11.432983 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:08:28,210 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:08:28,210 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:08:28,211 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:08:28,211 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:08:28,211 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:08:28,507 | server.py:361 | fit progress: (24, 0.8820319175720215, {'accuracy': 0.7919918298721313}, 551.7527265567333)
+FedBalancer | INFO flower 2022-05-17 22:08:28,508 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:08:28,508 | server.py:567 | elapsed_time: 0:09:11.753591 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:08:49,614 | server.py:597 | elapsed_time: 0:09:32.859408 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:08:49,647 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:08:49,647 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:08:49,647 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:08:49,647 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:08:49,647 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:08:49,955 | server.py:361 | fit progress: (25, 1.0342943668365479, {'accuracy': 0.7818120121955872}, 573.2006299328059)
+FedBalancer | INFO flower 2022-05-17 22:08:49,956 | client_manager.py:156 | Alive clients count: 21
+FedBalancer | DEBUG flower 2022-05-17 22:08:49,956 | server.py:567 | elapsed_time: 0:09:33.201497 | fit_round: strategy sampled 5 clients (out of 21)
+FedBalancer | DEBUG flower 2022-05-17 22:09:53,678 | server.py:597 | elapsed_time: 0:10:11.879678 | fit_round received 4 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:09:53,700 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:09:53,700 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:09:53,701 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:09:53,701 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:09:54,010 | server.py:361 | fit progress: (26, 0.6884352564811707, {'accuracy': 0.7977604269981384}, 637.2559574237093)
+FedBalancer | INFO flower 2022-05-17 22:09:54,011 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:09:54,011 | server.py:567 | elapsed_time: 0:10:12.212994 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:10:12,263 | server.py:597 | elapsed_time: 0:10:30.464460 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:10:12,284 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:10:12,284 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:10:12,284 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:10:12,284 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:10:12,284 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:10:12,588 | server.py:361 | fit progress: (27, 0.7454046010971069, {'accuracy': 0.795045793056488}, 655.8336461670697)
+FedBalancer | INFO flower 2022-05-17 22:10:12,589 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:10:12,589 | server.py:567 | elapsed_time: 0:10:30.790546 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:10:41,948 | server.py:597 | elapsed_time: 0:11:00.149698 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:10:41,972 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:10:41,973 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:10:41,973 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:10:41,973 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:10:41,973 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:10:42,274 | server.py:361 | fit progress: (28, 0.8351446986198425, {'accuracy': 0.7919918298721313}, 685.5199619680643)
+FedBalancer | INFO flower 2022-05-17 22:10:42,275 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:10:42,275 | server.py:567 | elapsed_time: 0:11:00.476664 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:11:08,475 | server.py:597 | elapsed_time: 0:11:26.676228 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:11:08,496 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:11:08,497 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:11:08,497 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:11:08,497 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:11:08,497 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:11:08,811 | server.py:361 | fit progress: (29, 0.6511299014091492, {'accuracy': 0.8113335371017456}, 712.0563103081658)
+FedBalancer | INFO flower 2022-05-17 22:11:08,811 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:11:08,811 | server.py:567 | elapsed_time: 0:11:27.013003 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:11:29,714 | server.py:597 | elapsed_time: 0:11:47.915527 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:11:29,740 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:11:29,740 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:11:29,740 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:11:29,740 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:11:29,740 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:11:30,052 | server.py:361 | fit progress: (30, 0.9463664293289185, {'accuracy': 0.7818120121955872}, 733.2976322667673)
+FedBalancer | INFO flower 2022-05-17 22:11:30,052 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:11:30,053 | server.py:567 | elapsed_time: 0:11:48.254288 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:11:50,326 | server.py:597 | elapsed_time: 0:12:08.527403 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:11:50,348 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:11:50,349 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:11:50,349 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:11:50,349 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:11:50,349 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:11:50,641 | server.py:361 | fit progress: (31, 0.7655295729637146, {'accuracy': 0.7872412800788879}, 753.886555516161)
+FedBalancer | INFO flower 2022-05-17 22:11:50,642 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:11:50,642 | server.py:567 | elapsed_time: 0:12:08.843489 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:12:13,292 | server.py:597 | elapsed_time: 0:12:31.493762 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:12:13,314 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:12:13,314 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:12:13,314 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:12:13,314 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:12:13,315 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:12:13,606 | server.py:361 | fit progress: (32, 0.7308422327041626, {'accuracy': 0.8276212811470032}, 776.8511527264491)
+FedBalancer | INFO flower 2022-05-17 22:12:13,606 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:12:13,606 | server.py:567 | elapsed_time: 0:12:31.807795 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:12:39,434 | server.py:597 | elapsed_time: 0:12:57.635802 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:12:39,460 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:12:39,461 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:12:39,461 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:12:39,461 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:12:39,461 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:12:39,758 | server.py:361 | fit progress: (33, 0.7914709448814392, {'accuracy': 0.7936884760856628}, 803.0038871690631)
+FedBalancer | INFO flower 2022-05-17 22:12:39,759 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:12:39,759 | server.py:567 | elapsed_time: 0:12:57.960806 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:13:12,248 | server.py:597 | elapsed_time: 0:13:30.449614 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:13:12,272 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:13:12,272 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:13:12,272 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:13:12,272 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:13:12,272 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:13:12,569 | server.py:361 | fit progress: (34, 0.6998744606971741, {'accuracy': 0.8255853652954102}, 835.8141028666869)
+FedBalancer | INFO flower 2022-05-17 22:13:12,570 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:13:12,570 | server.py:567 | elapsed_time: 0:13:30.771663 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:13:33,404 | server.py:597 | elapsed_time: 0:13:51.605758 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:13:33,439 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:13:33,439 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:13:33,439 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:13:33,439 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:13:33,439 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:13:33,739 | server.py:361 | fit progress: (35, 0.8628114461898804, {'accuracy': 0.7967424392700195}, 856.984615970403)
+FedBalancer | INFO flower 2022-05-17 22:13:33,739 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:13:33,740 | server.py:567 | elapsed_time: 0:13:51.941266 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:13:54,564 | server.py:597 | elapsed_time: 0:14:12.765214 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:13:54,584 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:13:54,584 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:13:54,584 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:13:54,584 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:13:54,585 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:13:54,877 | server.py:361 | fit progress: (36, 0.7472929358482361, {'accuracy': 0.8187987804412842}, 878.1229942440987)
+FedBalancer | INFO flower 2022-05-17 22:13:54,878 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:13:54,878 | server.py:567 | elapsed_time: 0:14:13.079584 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:14:15,373 | server.py:597 | elapsed_time: 0:14:33.574675 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:14:15,394 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:14:15,394 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:14:15,394 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:14:15,394 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:14:15,395 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:14:15,699 | server.py:361 | fit progress: (37, 0.7313989400863647, {'accuracy': 0.8316932320594788}, 898.9444999387488)
+FedBalancer | INFO flower 2022-05-17 22:14:15,699 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:14:15,700 | server.py:567 | elapsed_time: 0:14:33.901336 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:14:36,414 | server.py:597 | elapsed_time: 0:14:54.615198 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:14:36,433 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:14:36,433 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:14:36,433 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:14:36,433 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:14:36,433 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:14:36,728 | server.py:361 | fit progress: (38, 0.8153406381607056, {'accuracy': 0.8014930486679077}, 919.9741046875715)
+FedBalancer | INFO flower 2022-05-17 22:14:36,729 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:14:36,729 | server.py:567 | elapsed_time: 0:14:54.931054 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:15:19,248 | server.py:597 | elapsed_time: 0:15:33.609235 | fit_round received 4 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:15:19,264 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:15:19,264 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:15:19,265 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:15:19,265 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:15:19,547 | server.py:361 | fit progress: (39, 0.7541792988777161, {'accuracy': 0.8021717071533203}, 962.792220339179)
+FedBalancer | INFO flower 2022-05-17 22:15:19,547 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:15:19,547 | server.py:567 | elapsed_time: 0:15:33.908074 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:15:39,408 | server.py:597 | elapsed_time: 0:15:53.769297 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:15:39,430 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:15:39,430 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:15:39,431 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:15:39,431 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:15:39,431 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:15:39,738 | server.py:361 | fit progress: (40, 0.6725136637687683, {'accuracy': 0.8225314021110535}, 982.9833635315299)
+FedBalancer | INFO flower 2022-05-17 22:15:39,738 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:15:39,739 | server.py:567 | elapsed_time: 0:15:54.099486 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:15:59,885 | server.py:597 | elapsed_time: 0:16:14.246143 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:15:59,908 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:15:59,909 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:15:59,909 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:15:59,909 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:15:59,909 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:16:00,211 | server.py:361 | fit progress: (41, 0.6612902283668518, {'accuracy': 0.8493382930755615}, 1003.456081113778)
+FedBalancer | INFO flower 2022-05-17 22:16:00,211 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:16:00,212 | server.py:567 | elapsed_time: 0:16:14.572693 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:16:20,896 | server.py:597 | elapsed_time: 0:16:35.256725 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:16:20,917 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:16:20,917 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:16:20,917 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:16:20,917 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:16:20,917 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:16:21,213 | server.py:361 | fit progress: (42, 0.7440065145492554, {'accuracy': 0.8327112197875977}, 1024.4581288089976)
+FedBalancer | INFO flower 2022-05-17 22:16:21,213 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:16:21,214 | server.py:567 | elapsed_time: 0:16:35.574430 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:16:48,871 | server.py:597 | elapsed_time: 0:17:03.231590 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:16:48,897 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:16:48,897 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:16:48,897 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:16:48,897 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:16:48,897 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:16:49,189 | server.py:361 | fit progress: (43, 0.7378490567207336, {'accuracy': 0.8432304263114929}, 1052.4347111638635)
+FedBalancer | INFO flower 2022-05-17 22:16:49,190 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:16:49,190 | server.py:567 | elapsed_time: 0:17:03.550782 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:17:12,442 | server.py:597 | elapsed_time: 0:17:26.802700 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:17:12,462 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:17:12,463 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:17:12,463 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:17:12,463 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:17:12,463 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:17:12,758 | server.py:361 | fit progress: (44, 0.8280676603317261, {'accuracy': 0.8089582920074463}, 1076.0034569818527)
+FedBalancer | INFO flower 2022-05-17 22:17:12,758 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:17:12,758 | server.py:567 | elapsed_time: 0:17:27.119268 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:17:36,688 | server.py:597 | elapsed_time: 0:17:51.048999 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:17:36,707 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:17:36,708 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:17:36,708 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:17:36,708 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:17:36,708 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:17:37,001 | server.py:361 | fit progress: (45, 0.6750423908233643, {'accuracy': 0.8289785981178284}, 1100.246882667765)
+FedBalancer | INFO flower 2022-05-17 22:17:37,002 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:17:37,002 | server.py:567 | elapsed_time: 0:17:51.362681 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:18:16,190 | server.py:597 | elapsed_time: 0:18:30.040862 | fit_round received 4 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:18:16,207 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:18:16,207 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:18:16,207 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:18:16,207 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:18:16,519 | server.py:361 | fit progress: (46, 0.6769954562187195, {'accuracy': 0.8517135977745056}, 1139.7647098740563)
+FedBalancer | INFO flower 2022-05-17 22:18:16,520 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:18:16,520 | server.py:567 | elapsed_time: 0:18:30.371203 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:18:45,693 | server.py:597 | elapsed_time: 0:18:59.544521 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:18:45,712 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:18:45,712 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:18:45,712 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:18:45,712 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:18:45,712 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:18:46,001 | server.py:361 | fit progress: (47, 0.6342329978942871, {'accuracy': 0.8316932320594788}, 1169.246423448436)
+FedBalancer | INFO flower 2022-05-17 22:18:46,001 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:18:46,001 | server.py:567 | elapsed_time: 0:18:59.852647 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:19:06,515 | server.py:597 | elapsed_time: 0:19:20.366261 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:19:06,537 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:19:06,537 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:19:06,537 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:19:06,538 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:19:06,538 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:19:06,865 | server.py:361 | fit progress: (48, 0.5724914073944092, {'accuracy': 0.833050549030304}, 1190.110302186571)
+FedBalancer | INFO flower 2022-05-17 22:19:06,865 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:19:06,865 | server.py:567 | elapsed_time: 0:19:20.716775 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:19:30,283 | server.py:597 | elapsed_time: 0:19:44.133993 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:19:30,304 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:19:30,304 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:19:30,304 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:19:30,304 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:19:30,304 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:19:30,613 | server.py:361 | fit progress: (49, 0.7008786201477051, {'accuracy': 0.8167628049850464}, 1213.8585126595572)
+FedBalancer | INFO flower 2022-05-17 22:19:30,613 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:19:30,614 | server.py:567 | elapsed_time: 0:19:44.464909 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:19:52,259 | server.py:597 | elapsed_time: 0:20:06.110213 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:19:52,276 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:19:52,277 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:19:52,277 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:19:52,277 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:19:52,277 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:19:52,566 | server.py:361 | fit progress: (50, 0.5988178253173828, {'accuracy': 0.8564642071723938}, 1235.8118269219995)
+FedBalancer | INFO flower 2022-05-17 22:19:52,567 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:19:52,567 | server.py:567 | elapsed_time: 0:20:06.418115 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:20:15,615 | server.py:597 | elapsed_time: 0:20:29.466667 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:20:15,635 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:20:15,636 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:20:15,636 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:20:15,636 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:20:15,636 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:20:15,941 | server.py:361 | fit progress: (51, 0.5910926461219788, {'accuracy': 0.8415337800979614}, 1259.1865984527394)
+FedBalancer | INFO flower 2022-05-17 22:20:15,942 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:20:15,942 | server.py:567 | elapsed_time: 0:20:29.793134 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:20:44,110 | server.py:597 | elapsed_time: 0:20:57.961416 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:20:44,133 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:20:44,134 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:20:44,134 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:20:44,134 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:20:44,134 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:20:44,421 | server.py:361 | fit progress: (52, 0.6019320487976074, {'accuracy': 0.8150661587715149}, 1287.6665870491415)
+FedBalancer | INFO flower 2022-05-17 22:20:44,422 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:20:44,422 | server.py:567 | elapsed_time: 0:20:58.273044 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:21:04,671 | server.py:597 | elapsed_time: 0:21:18.522587 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:21:04,691 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:21:04,692 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:21:04,692 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:21:04,692 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:21:04,692 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:21:04,993 | server.py:361 | fit progress: (53, 0.6864384412765503, {'accuracy': 0.8201560974121094}, 1308.2384553533047)
+FedBalancer | INFO flower 2022-05-17 22:21:04,993 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:21:04,994 | server.py:567 | elapsed_time: 0:21:18.844882 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:21:25,865 | server.py:597 | elapsed_time: 0:21:39.716349 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:21:25,883 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:21:25,884 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:21:25,884 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:21:25,884 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:21:25,884 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:21:26,183 | server.py:361 | fit progress: (54, 0.6590220928192139, {'accuracy': 0.8401764631271362}, 1329.4286551736295)
+FedBalancer | INFO flower 2022-05-17 22:21:26,184 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:21:26,184 | server.py:567 | elapsed_time: 0:21:40.035140 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:21:46,848 | server.py:597 | elapsed_time: 0:22:00.699434 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:21:46,873 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:21:46,873 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:21:46,873 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:21:46,873 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:21:46,873 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:21:47,168 | server.py:361 | fit progress: (55, 0.6161755919456482, {'accuracy': 0.8371224999427795}, 1350.413246408105)
+FedBalancer | INFO flower 2022-05-17 22:21:47,168 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:21:47,168 | server.py:567 | elapsed_time: 0:22:01.019451 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:22:06,864 | server.py:597 | elapsed_time: 0:22:20.715722 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:22:06,885 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:22:06,885 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:22:06,885 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:22:06,885 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:22:06,885 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:22:07,157 | server.py:361 | fit progress: (56, 0.5665403604507446, {'accuracy': 0.8588395118713379}, 1370.402693035081)
+FedBalancer | INFO flower 2022-05-17 22:22:07,158 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:22:07,158 | server.py:567 | elapsed_time: 0:22:21.009110 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:22:27,876 | server.py:597 | elapsed_time: 0:22:41.726963 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:22:27,897 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:22:27,898 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:22:27,898 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:22:27,898 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:22:27,898 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:22:28,190 | server.py:361 | fit progress: (57, 0.6111932992935181, {'accuracy': 0.8449270725250244}, 1391.4359946278855)
+FedBalancer | INFO flower 2022-05-17 22:22:28,191 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:22:28,191 | server.py:567 | elapsed_time: 0:22:42.042260 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:22:49,120 | server.py:597 | elapsed_time: 0:23:02.971196 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:22:49,143 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:22:49,143 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:22:49,144 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:22:49,144 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:22:49,144 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:22:49,432 | server.py:361 | fit progress: (58, 0.5101017355918884, {'accuracy': 0.8646080493927002}, 1412.677967960015)
+FedBalancer | INFO flower 2022-05-17 22:22:49,433 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:22:49,433 | server.py:567 | elapsed_time: 0:23:03.284447 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:23:10,199 | server.py:597 | elapsed_time: 0:23:24.050428 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:23:10,216 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:23:10,217 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:23:10,217 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:23:10,217 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:23:10,217 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:23:10,518 | server.py:361 | fit progress: (59, 0.5195032954216003, {'accuracy': 0.8561248779296875}, 1433.7633038433269)
+FedBalancer | INFO flower 2022-05-17 22:23:10,518 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:23:10,518 | server.py:567 | elapsed_time: 0:23:24.369552 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:23:36,866 | server.py:597 | elapsed_time: 0:23:50.717353 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:23:36,887 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:23:36,887 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:23:36,887 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:23:36,887 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:23:36,888 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:23:37,178 | server.py:361 | fit progress: (60, 0.5098355412483215, {'accuracy': 0.8622328042984009}, 1460.4238683385774)
+FedBalancer | INFO flower 2022-05-17 22:23:37,179 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:23:37,179 | server.py:567 | elapsed_time: 0:23:51.030650 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:23:57,798 | server.py:597 | elapsed_time: 0:24:11.649242 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:23:57,817 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:23:57,818 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:23:57,818 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:23:57,818 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:23:57,818 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:23:58,109 | server.py:361 | fit progress: (61, 0.5270916819572449, {'accuracy': 0.8591788411140442}, 1481.3546438971534)
+FedBalancer | INFO flower 2022-05-17 22:23:58,110 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:23:58,110 | server.py:567 | elapsed_time: 0:24:11.961104 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:24:18,269 | server.py:597 | elapsed_time: 0:24:32.119763 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:24:18,286 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:24:18,287 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:24:18,287 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:24:18,287 | server.py:635 | Num examples from client 6: 281
+FedBalancer | INFO flower 2022-05-17 22:24:18,287 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:24:18,600 | server.py:361 | fit progress: (62, 0.5791153311729431, {'accuracy': 0.8615541458129883}, 1501.8460150025785)
+FedBalancer | INFO flower 2022-05-17 22:24:18,601 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:24:18,601 | server.py:567 | elapsed_time: 0:24:32.452412 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:24:55,391 | server.py:597 | elapsed_time: 0:25:09.242585 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:24:55,416 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:24:55,416 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:24:55,417 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:24:55,417 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:24:55,417 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:24:55,695 | server.py:361 | fit progress: (63, 0.5462549924850464, {'accuracy': 0.861214816570282}, 1538.9403868345544)
+FedBalancer | INFO flower 2022-05-17 22:24:55,695 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:24:55,696 | server.py:567 | elapsed_time: 0:25:09.546876 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:25:16,493 | server.py:597 | elapsed_time: 0:25:30.344571 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:25:16,515 | server.py:635 | Num examples from client 13: 408
+FedBalancer | INFO flower 2022-05-17 22:25:16,515 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:25:16,515 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:25:16,515 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:25:16,515 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:25:16,817 | server.py:361 | fit progress: (64, 0.6094115376472473, {'accuracy': 0.8601968288421631}, 1560.0624766033143)
+FedBalancer | INFO flower 2022-05-17 22:25:16,817 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:25:16,817 | server.py:567 | elapsed_time: 0:25:30.668696 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:25:39,472 | server.py:597 | elapsed_time: 0:25:53.322790 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:25:39,492 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:25:39,492 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:25:39,492 | server.py:635 | Num examples from client 4: 325
+FedBalancer | INFO flower 2022-05-17 22:25:39,492 | server.py:635 | Num examples from client 14: 321
+FedBalancer | INFO flower 2022-05-17 22:25:39,492 | server.py:635 | Num examples from client 11: 368
+FedBalancer | INFO flower 2022-05-17 22:25:39,800 | server.py:361 | fit progress: (65, 0.5426509380340576, {'accuracy': 0.8568035364151001}, 1583.0451716249809)
+FedBalancer | INFO flower 2022-05-17 22:25:39,800 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:25:39,800 | server.py:567 | elapsed_time: 0:25:53.651458 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:25:59,503 | server.py:597 | elapsed_time: 0:26:13.353834 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:25:59,524 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:25:59,524 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:25:59,525 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:25:59,525 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:25:59,525 | server.py:635 | Num examples from client 3: 302
+FedBalancer | INFO flower 2022-05-17 22:25:59,820 | server.py:361 | fit progress: (66, 0.5054144859313965, {'accuracy': 0.8680013418197632}, 1603.0660853087902)
+FedBalancer | INFO flower 2022-05-17 22:25:59,821 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:25:59,821 | server.py:567 | elapsed_time: 0:26:13.672304 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:26:20,409 | server.py:597 | elapsed_time: 0:26:34.260368 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:26:20,429 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:26:20,429 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:26:20,429 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:26:20,429 | server.py:635 | Num examples from client 8: 323
+FedBalancer | INFO flower 2022-05-17 22:26:20,429 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:26:20,729 | server.py:361 | fit progress: (67, 0.556043267250061, {'accuracy': 0.8591788411140442}, 1623.9741866299883)
+FedBalancer | INFO flower 2022-05-17 22:26:20,729 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:26:20,729 | server.py:567 | elapsed_time: 0:26:34.580693 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:26:41,787 | server.py:597 | elapsed_time: 0:26:55.638544 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:26:41,806 | server.py:635 | Num examples from client 18: 376
+FedBalancer | INFO flower 2022-05-17 22:26:41,806 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:26:41,807 | server.py:635 | Num examples from client 19: 382
+FedBalancer | INFO flower 2022-05-17 22:26:41,807 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:26:41,807 | server.py:635 | Num examples from client 7: 316
+FedBalancer | INFO flower 2022-05-17 22:26:42,106 | server.py:361 | fit progress: (68, 0.468068927526474, {'accuracy': 0.8618934750556946}, 1645.3519740663469)
+FedBalancer | INFO flower 2022-05-17 22:26:42,107 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:26:42,107 | server.py:567 | elapsed_time: 0:26:55.958126 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:27:18,991 | server.py:597 | elapsed_time: 0:27:32.842590 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:27:19,010 | server.py:635 | Num examples from client 5: 308
+FedBalancer | INFO flower 2022-05-17 22:27:19,011 | server.py:635 | Num examples from client 20: 344
+FedBalancer | INFO flower 2022-05-17 22:27:19,011 | server.py:635 | Num examples from client 17: 392
+FedBalancer | INFO flower 2022-05-17 22:27:19,011 | server.py:635 | Num examples from client 21: 383
+FedBalancer | INFO flower 2022-05-17 22:27:19,011 | server.py:635 | Num examples from client 1: 347
+FedBalancer | INFO flower 2022-05-17 22:27:19,313 | server.py:361 | fit progress: (69, 0.5274416208267212, {'accuracy': 0.8703766465187073}, 1682.5584340523928)
+FedBalancer | INFO flower 2022-05-17 22:27:19,314 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:27:19,314 | server.py:567 | elapsed_time: 0:27:33.165260 | fit_round: strategy sampled 5 clients (out of 20)
+FedBalancer | DEBUG flower 2022-05-17 22:27:43,541 | server.py:597 | elapsed_time: 0:27:57.392060 | fit_round received 5 results and 0 failures
+FedBalancer | INFO flower 2022-05-17 22:27:43,563 | server.py:635 | Num examples from client 16: 409
+FedBalancer | INFO flower 2022-05-17 22:27:43,563 | server.py:635 | Num examples from client 10: 366
+FedBalancer | INFO flower 2022-05-17 22:27:43,563 | server.py:635 | Num examples from client 12: 360
+FedBalancer | INFO flower 2022-05-17 22:27:43,563 | server.py:635 | Num examples from client 9: 328
+FedBalancer | INFO flower 2022-05-17 22:27:43,563 | server.py:635 | Num examples from client 2: 341
+FedBalancer | INFO flower 2022-05-17 22:27:43,874 | server.py:361 | fit progress: (70, 0.4885682165622711, {'accuracy': 0.8690193295478821}, 1707.1196090355515)
+FedBalancer | INFO flower 2022-05-17 22:27:43,874 | client_manager.py:156 | Alive clients count: 20
+FedBalancer | DEBUG flower 2022-05-17 22:27:43,875 | server.py:567 | elapsed_time: 0:27:57.725861 | fit_round: strategy sampled 5 clients (out of 20)

@@ -8,22 +8,10 @@ import numpy as np
 
 import sys
 
+from args import parse_args
+
 def main() -> None:
     # Create strategy
-    
-    # WHEN MODEL = LR and INPUT SIZE = 561
-    # model = tf.keras.Sequential(
-    #     [
-    #         tf.keras.Input(shape=(561)),
-    #         tf.keras.layers.Dense(units=6, activation="softmax"),
-    #     ]
-    # )
-
-    # WHEN MODEL = DNN and INPUT SIZE = 561
-    # inputs = tf.keras.Input(shape=(561,), name="digits")
-    # x = tf.keras.layers.Dense(units=100, activation="relu", name="layer1")(inputs)
-    # outputs = tf.keras.layers.Dense(units=6, activation="softmax", name="predictions")(x)
-    # model = tf.keras.Model(inputs=inputs, outputs=outputs)
 
     # WHEN MODEL = CNN and INPUT SIZE = 128 * 9
     inputs = tf.keras.Input(shape=(1152,), name="digits")
@@ -32,7 +20,6 @@ def main() -> None:
     x = tf.keras.layers.MaxPooling1D(pool_size=4)(x)
     x = tf.keras.layers.Flatten()(x)
     x = tf.keras.layers.Dense(units=256, activation="relu")(x)
-    # outputs = tf.keras.layers.Dense(units=6, activation="softmax", name="predictions")(x)
     outputs = tf.keras.layers.Dense(units=6, activation="softmax", name="predictions")(x)
     model = tf.keras.Model(inputs=inputs, outputs=outputs)
 
@@ -41,9 +28,7 @@ def main() -> None:
     x_test = None
     y_test = None
 
-    # FEDAVG - DDL FIXED 1.0
-
-    fedavg_strategy = fl.server.strategy.FedAvgAndroid(
+    strategy = fl.server.strategy.FedAvgAndroid(
         fraction_fit=1.0,
         fraction_eval=0.0,
         min_fit_clients=1,
@@ -64,112 +49,21 @@ def main() -> None:
         ddl_baseline_wfa=False,
         num_epochs=5,
         batch_size=10,
-        clients_per_round=5, #TODO: CHANGE TO 5 in real experiment
+        clients_per_round=5,
         fb_p=0.0,
         lss=0.0,
         dss=0.0,
         w=0,
-        total_client_num=21, #TODO: CHANGE TO 21 in real experiment
+        total_client_num=21,
     )
-
-    # FEDPROX
-
-    prox_strategy = fl.server.strategy.FedAvgAndroid(
-        fraction_fit=1.0,
-        fraction_eval=0.0,
-        min_fit_clients=1,
-        min_eval_clients=1,
-        min_available_clients=1,
-        eval_fn=get_eval_fn(model),
-        sample_loss_fn=get_sample_loss_fn(model),
-        on_fit_config_fn=fit_config,
-        initial_parameters=None,
-
-        ss_baseline=True,
-        fedprox=True,
-        fedbalancer=False,
-        fb_client_selection=False,
-        ddl_baseline_fixed=True,
-        ddl_baseline_fixed_value_multiplied_at_mean=1.0,
-        ddl_baseline_smartpc=False,
-        ddl_baseline_wfa=False,
-        num_epochs=5,
-        batch_size=10,
-        clients_per_round=5, #TODO: CHANGE TO 5 in real experiment
-        fb_p=0.0,
-        lss=0.0,
-        dss=0.0,
-        w=0,
-        total_client_num=21, #TODO: CHANGE TO 21 in real experiment
-    )
-
-    # FEDBALANCER
-
-    fb_strategy = fl.server.strategy.FedAvgAndroid(
-        fraction_fit=1.0,
-        fraction_eval=0.0,
-        min_fit_clients=1,
-        min_eval_clients=1,
-        min_available_clients=1,
-        eval_fn=get_eval_fn(model),
-        sample_loss_fn=get_sample_loss_fn(model),
-        on_fit_config_fn=fit_config,
-        initial_parameters=None,
-
-        latency_sampling=True,
-        ss_baseline=False,
-        fedprox=False,
-        fedbalancer=True,
-        fb_client_selection=False,
-        ddl_baseline_fixed=True,
-        ddl_baseline_fixed_value_multiplied_at_mean=1.0,
-        ddl_baseline_smartpc=False,
-        ddl_baseline_wfa=False,
-        num_epochs=5,
-        batch_size=10,
-        clients_per_round=1, #TODO: CHANGE TO 5 in real experiment
-        fb_p=0.0,
-        lss=0.05,
-        dss=0.05,
-        w=20,
-        total_client_num=1, #TODO: CHANGE TO 21 in real experiment
-    )
-
-    # fedavg_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedavg_final_experiment_05161107_2.log'
-    # fedavg_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedavg_final_experiment_05161107_ddl_2T.log'
-    # fedavg_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedavg_final_experiment_05171150_ddl_smartpc.log'
-    # fedavg_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedavg_final_experiment_05161107_ddl_wfa.log'
-
-    # prox_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedprox_final_experiment_05161107_ddl_2T.log'
-    # prox_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedprox_ss_final_experiment_05171150.log'
     
-    # prox_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedprox_1devices_210515_test.log'
-    # prox_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedprox_final_experiment_05151735_1.log'
-    # prox_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/elapsed_time_test.log'
-    
-    # fb_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedbalancer_21devices_210517_1407_fb_final_with_latencysampling.log'
-    
-    # fb_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/latency_profile_final_210517_1400.log'
+    args = parse_args()
+    client_id = args.client_id
 
-    # fb_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fedbalancer_final_experiment_05161107_1_fb_p0_0_dss0_25_lss0_1_w5.log'
-
-    # fb_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/fb_test.log'
-
-    # latency_profile_filename = '/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/test_disconnect_huawei.log'
-
-    # filename = fedavg_filename
-    # strategy = fedavg_strategy
-
-    # filename = prox_filename
-    # strategy = prox_strategy
-
-    fb_filename = sys.argv[2]
-
-    filename = fb_filename
-    strategy = fb_strategy
+    filename = 'log/client_'+str(client_id)+'_latency.log'
 
     # Start Flower server for 10 rounds of federated learning
-    fl.server.start_server("[::]:"+str(sys.argv[1]), config={"num_rounds": 1000}, strategy=strategy, filename=filename)
+    fl.server.start_server("[::]:"+str(8999 - client_id), config={"num_rounds": 1000}, strategy=strategy, filename=filename)
 
 def fit_config(rnd: int, batch_size: int, num_epochs: int, deadline: float, fedprox: bool, fedbalancer: bool, fb_p: float, ss_baseline: bool):
     """Return training configuration dict for each round.
