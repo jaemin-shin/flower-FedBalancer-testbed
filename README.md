@@ -50,6 +50,7 @@ We evaluated based on the [UCI-HAR dataset](https://archive.ics.uci.edu/ml/datas
 ## How to run: Step 4 - Perform latency sampling on 21 Android devices
 
 - Prepare 21 Android devices and install the Android client app in ```android/client```
+- PROVIDE HOW TO RUN WITH SMALLER NUMBER OF ANDROID CLIENTS
 TBD
 
 ## How to run: Step 5 - Run federated learning!
