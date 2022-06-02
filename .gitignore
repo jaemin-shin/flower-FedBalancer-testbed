@@ -161,6 +161,7 @@ baselines/datasets/leaf
 
 # FedBalancer added gitignore
 data/har/*
+android/tflite_convertor/identity_model/*
 *.tflite
 android/client/app/src/main/assets/data/*
 android/client/.gradle
@@ -179,7 +180,11 @@ android/client/gen-external-apklibs
 *.apk
 *.aab
 *.ap_
+*.pb
+*.data-00000-of-00001
+*.index
 android/client/.externalNativeBuild
 android/client/obj/
 android/client/.idea/
+data/data/*
 

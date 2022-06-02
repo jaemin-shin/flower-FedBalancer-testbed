@@ -116,17 +116,27 @@ test_output['users'] = test_users_list
 test_output['num_samples'] = test_output_num_samples
 test_output['user_data'] = test_output_user_data
 
-with open('train_har.json', 'w') as outfile:
+with open('data/train/train_har.json', 'w') as outfile:
     json.dump(train_output, outfile)
 
-with open('test_har.json', 'w') as outfile:
+with open('data/test/test_har.json', 'w') as outfile:
     json.dump(test_output, outfile)
 
+trn_f = open('data/train/train_har.json')
+tst_f = open('data/test/test_har.json')
 
+trn = json.load(trn_f)
+tst = json.load(tst_f)
 
-os.system('mkdir -p har/train/0')
-os.system('mkdir -p har/train/1')
-os.system('mkdir -p har/train/2')
-os.system('mkdir -p har/train/3')
-os.system('mkdir -p har/train/4')
-os.system('mkdir -p har/train/5')
+for user_idx, trn_user in enumerate(trn['users']):
+    user_samples_location_text = []
+    for sample_idx in range(len(trn['user_data'][trn_user]['x'])):
+        sample_data = trn['user_data'][trn_user]['x'][sample_idx]
+        sample_label = trn['user_data'][trn_user]['y'][sample_idx]
+        with open("har/train/"+str(sample_label)+"/user"+str(user_idx)+"_sample"+str(sample_idx)+".txt","w") as f:
+            f.write(",".join(str(x) for x in sample_data))
+            f.close()
+        user_samples_location_text.append("train/"+str(sample_label)+"/user"+str(user_idx)+"_sample"+str(sample_idx)+".txt")
+    with open("har/user"+str(user_idx)+"_train.txt","w") as f:
+        f.write('\n'.join(user_samples_location_text))
+        f.close()

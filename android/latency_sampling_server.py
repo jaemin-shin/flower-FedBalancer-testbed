@@ -39,6 +39,7 @@ def main() -> None:
         on_fit_config_fn=fit_config,
         initial_parameters=None,
 
+        latency_sampling=True,
         ss_baseline=False,
         fedprox=False,
         fedbalancer=False,
@@ -83,8 +84,7 @@ def fit_config(rnd: int, batch_size: int, num_epochs: int, deadline: float, fedp
     return config
 
 def get_eval_fn(model):
-    # test_f = open('/mnt/sting/jmshin/FedBalancer/FLASH_jm/data/har/data/test/test_har.json')
-    test_f = open('/mnt/sting/jmshin/FedBalancer/FLASH_jm/data/har_raw/data/test/test_raw_har.json')
+    test_f = open('../data/data/test/test_har.json')
     test = json.load(test_f)
     x_test = np.array(test['user_data']['testuser_1']['x'])
     y_test = np.array(test['user_data']['testuser_1']['y']).reshape(-1,1)
@@ -92,13 +92,6 @@ def get_eval_fn(model):
     # The `evaluate` function will be called after every round
     def evaluate(weights: fl.common.Weights) -> Optional[Tuple[float, float]]:
         model.set_weights(weights)
-
-        # y_pred = model.predict(x_test)
-        # loss_list = tf.keras.losses.sparse_categorical_crossentropy(y_test.flatten(), y_pred).numpy()
-
-        # print(np.percentile(loss_list, 0), np.percentile(loss_list, 20), np.percentile(loss_list, 40), np.percentile(loss_list, 60), np.percentile(loss_list, 80), np.percentile(loss_list, 100)) 
-        # print(list(tf.keras.losses.sparse_categorical_crossentropy(y_test.flatten(), y_pred).numpy()))
-        # print(np.mean(tf.keras.losses.sparse_categorical_crossentropy(y_test.flatten(), y_pred).numpy()))
 
         results = model.evaluate(x_test, y_test)
         return results
@@ -110,7 +103,6 @@ def get_sample_loss_fn(model):
     def calculate_sample_loss(weights: fl.common.Weights, x_test:np.ndarray, y_test:np.ndarray) -> List[float]:
         model.set_weights(weights)
         y_pred = model.predict(x_test)
-        # results = tf.nn.sparse_softmax_cross_entropy_with_logits(labels=y_test.flatten(), logits=y_pred)
         results = tf.keras.losses.sparse_categorical_crossentropy(y_test.flatten(), y_pred)
         return list(results.numpy())
 

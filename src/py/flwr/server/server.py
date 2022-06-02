@@ -137,7 +137,7 @@ class Server:
         
         # Load client data if FedBalancer
         if self.strategy.fedbalancer or (self.strategy.ss_baseline):
-            train_clients, train_groups, train_data, clients_id_to_device_id = read_dir('/mnt/sting/jmshin/FedBalancer/FLASH_jm/data/har_raw/data/train/')
+            train_clients, train_groups, train_data, clients_id_to_device_id = read_dir('../data/data/train/')
             self.train_data = train_data
             self.clients_id_to_device_id = clients_id_to_device_id
         
