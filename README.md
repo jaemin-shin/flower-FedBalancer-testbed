@@ -14,7 +14,7 @@ This system is written and evaluated based on the following setup:
 
 As an alternative setup, you can use general Ubuntu servers with other Android smartphones.
 
-## Installation - Server
+## How to run: Step 1 - Server setup
 
 - Install Python build dependencies
 ```
@@ -34,23 +34,25 @@ $ ./dev/bootstrap.sh
 
 <!-- We recommend you to setup Python environment using ```pyenv-virtualenv``` based on ```Developer Machine Setup``` in this [link](https://flower.dev/docs/getting-started-for-contributors.html) as follows: -->
 
-## Dataset setup
+## How to run: Step 2 - Dataset setup
 
 We evaluated based on the [UCI-HAR dataset](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones).
 - Go to ```data/``` and follow instructions on preprocessing the benchmark dataset
 - Make ```data``` directory in the ```asset``` directory of Android client in ```android/client```
 - Copy all the contents from the ```data/har``` directory to ```data``` of asset directory
 
-## TensorFlow Lite model setup for on-device training
+## How to run: Step 3 - TensorFlow Lite model setup for on-device training
 
 - Go to ```android/tflite_convertor``` and run ```python convert_to_tflite.py```
 - Make ```model``` directory in the ```asset``` directory of Android client in ```android/client```
 - Copy all the contents from the ```android/tflite_convertor/tflite_model``` directory to ```model``` of asset directory
 
-## How to run 
+## How to run: Step 4 - Perform latency sampling on 21 Android devices
 
 - Prepare 21 Android devices and install the Android client app in ```android/client```
 TBD
+
+## How to run: Step 5 - Run federated learning!
 
 ## Note
 
