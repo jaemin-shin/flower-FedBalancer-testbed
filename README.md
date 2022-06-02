@@ -16,13 +16,13 @@ As an alternative setup, you can use general Ubuntu servers with other Android s
 
 ## Installation - Server
 
-- Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv). We recommend using [pyenv-installer](https://github.com/pyenv/pyenv-installer) for Ubuntu servers.
 - Install Python build dependencies
 ```
 $ sudo apt-get update; sudo apt-get install make build-essential libssl-dev zlib1g-dev \
 libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 ```
+- Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv). We recommend using [pyenv-installer](https://github.com/pyenv/pyenv-installer) for Ubuntu servers.
 - Setup Flower and install required packages in development mode (as pip install -e)
 ```
 $ pyenv install 3.7.12
@@ -34,8 +34,22 @@ $ ./dev/bootstrap.sh
 
 <!-- We recommend you to setup Python environment using ```pyenv-virtualenv``` based on ```Developer Machine Setup``` in this [link](https://flower.dev/docs/getting-started-for-contributors.html) as follows: -->
 
-## How to run
+## Dataset setup
 
+We evaluated based on the [UCI-HAR dataset](https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones).
+- Go to ```data/``` and follow instructions on preprocessing the benchmark dataset
+- Make ```data``` directory in the ```asset``` directory of Android client in ```android/client```
+- Copy all the contents from the ```data/har``` directory to ```data``` of asset directory
+
+## TensorFlow Lite model setup for on-device training
+
+- Go to ```android/tflite_convertor``` and run ```python convert_to_tflite.py```
+- Make ```model``` directory in the ```asset``` directory of Android client in ```android/client```
+- Copy all the contents from the ```android/tflite_convertor/tflite_model``` directory to ```model``` of asset directory
+
+## How to run 
+
+- Prepare 21 Android devices and install the Android client app in ```android/client```
 TBD
 
 ## Note
