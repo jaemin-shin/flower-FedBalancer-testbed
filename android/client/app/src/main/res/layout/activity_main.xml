@@ -16,36 +16,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:hint="Client Partition ID (1-10)"
-            android:inputType="numberDecimal"
-            android:text="1" />
+            android:hint="Client Partition ID (1-21)"
+            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
 
-<!--    <EditText-->
-<!--        android:id="@+id/serverIP"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:hint="FL Server IP"-->
-<!--        android:inputType="phone"-->
-<!--        android:text="143.248.36.214" />-->
-
-
-<!--    <EditText-->
-<!--        android:id="@+id/serverPort"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:ems="10"-->
-<!--        android:hint="FL Server Port"-->
-<!--        android:inputType="numberDecimal"-->
-<!--        android:text="8999" />-->
-
-    <LinearLayout
+    <EditText
+        android:id="@+id/serverIP"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:ems="10"
+        android:hint="FL Server IP"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/serverPort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="FL Server Port"
+        android:inputType="numberDecimal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <Button
             android:id="@+id/load_data"
             android:layout_width="wrap_content"
@@ -56,7 +52,10 @@
             android:onClick="loadData"
             android:text="Load" />
 
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <Button
             android:id="@+id/connect"
             android:layout_width="wrap_content"
@@ -66,7 +65,19 @@
             android:backgroundTint="#9DE1EA"
             android:enabled="false"
             android:onClick="connect"
-            android:text="Setup" />
+            android:text="Setup For FL" />
+
+        <Button
+            android:id="@+id/connect_samplelatency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="5sp"
+            android:backgroundTint="#9DE1EA"
+            android:enabled="false"
+            android:onClick="connect_samplelatency"
+            android:text="Setup For Latency Sampling" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/trainFederated"
@@ -77,28 +88,9 @@
             android:backgroundTint="#9DE1EA"
             android:enabled="false"
             android:onClick="runGRCP"
-            android:text="Train" />
+            android:text="Start" />
 
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5sp"
-            android:backgroundTint="#9DE1EA"
-            android:onClick="restartActivity"
-            android:text="Re" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/sample_latency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="5sp"
-        android:backgroundTint="#9DE1EA"
-        android:onClick="restartLatencySamplingActivity"
-        android:text="SampleLatency" />
 
     <TextView
         android:layout_width="match_parent"

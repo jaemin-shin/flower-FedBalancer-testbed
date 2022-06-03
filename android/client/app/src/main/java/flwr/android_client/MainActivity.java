@@ -48,14 +48,15 @@ import java.util.concurrent.CountDownLatch;
 import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
-    private String ip;
-    private String port;
+    private EditText ip;
+    private EditText port;
     private String latency_sampling_port;
 
     private boolean is_latency_sampling;
 
     private Button loadDataButton;
     private Button connectButton;
+    private Button connectSampleLatencyButton;
     private Button trainButton;
     private TextView resultText;
     private EditText device_id;
@@ -89,24 +90,23 @@ public class MainActivity extends AppCompatActivity {
         resultText.setMovementMethod(new ScrollingMovementMethod());
         device_id = (EditText) findViewById(R.id.device_id_edit_text);
 
-        ip = "143.248.36.214"; //TODO: ENTER YOUR IP HERE
-        port = "8999";
+        ip = (EditText) findViewById(R.id.serverIP);
+        port = (EditText) findViewById(R.id.serverPort);
 
         loadDataButton = (Button) findViewById(R.id.load_data) ;
         connectButton = (Button) findViewById(R.id.connect);
+        connectSampleLatencyButton = (Button) findViewById(R.id.connect_samplelatency);
         trainButton = (Button) findViewById(R.id.trainFederated);
 
-        runOnUiThread(new Runnable(){
-            @Override public void run() {
-                device_id.setText(Integer.toString(1));
-            }
-        });
+//        runOnUiThread(new Runnable(){
+//            @Override public void run() {
+//                device_id.setText(Integer.toString(1));
+//            }
+//        });
 
         Log.e(TAG, Build.MODEL);
 
         fc = new FlowerClient(this);
-
-        // loadDataWithoutView();
     }
 
     public static void hideKeyboard(Activity activity) {
@@ -145,75 +145,26 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    latency_sampling_port = Integer.toString(8999 - Integer.parseInt(device_id.getText().toString()));
                     if ((Integer.parseInt(device_id.getText().toString()) == 13) || (Integer.parseInt(device_id.getText().toString()) == 16) || (Integer.parseInt(device_id.getText().toString()) == 17) || (Integer.parseInt(device_id.getText().toString()) == 21)) {
                         FedBalancerSingleton.getInstance().setIsBigClient(true);
                     }
                     fc.loadData(Integer.parseInt(device_id.getText().toString()));
                     setResultText("Training dataset is loaded in memory.");
                     connectButton.setEnabled(true);
+                    connectSampleLatencyButton.setEnabled(true);
                 }
             }, 1000);
         }
-    }
-
-    public void loadDataWithoutView(){
-        if (TextUtils.isEmpty(device_id.getText().toString())) {
-            Toast.makeText(this, "Please enter a client partition ID between 1 and 21 (inclusive)", Toast.LENGTH_LONG).show();
-        }
-        else if (Integer.parseInt(device_id.getText().toString()) > 21 ||  Integer.parseInt(device_id.getText().toString()) < 1)
-        {
-            Toast.makeText(this, "Please enter a client partition ID between 1 and 21 (inclusive)", Toast.LENGTH_LONG).show();
-        }
-        else{
-            hideKeyboard(this);
-            setResultText("Loading the local training dataset in memory. It will take several seconds.");
-            loadDataButton.setEnabled(false);
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    latency_sampling_port = Integer.toString(8999 - Integer.parseInt(device_id.getText().toString()));
-                    if ((Integer.parseInt(device_id.getText().toString()) == 13) || (Integer.parseInt(device_id.getText().toString()) == 16) || (Integer.parseInt(device_id.getText().toString()) == 17) || (Integer.parseInt(device_id.getText().toString()) == 21)) {
-                        FedBalancerSingleton.getInstance().setIsBigClient(true);
-                    }
-                    fc.loadData(Integer.parseInt(device_id.getText().toString()));
-                    setResultText("Training dataset is loaded in memory.");
-                    connectButton.setEnabled(true);
-                    connectWithoutView();
-                    runGRCPWithoutView();
-                }
-            }, 1000);
-        }
-    }
-
-    public void restartActivity(View view)
-    {
-        // do your work Here
-        Intent intent= new Intent(MainActivity.this, MainActivity.class);
-        intent.putExtra("id", "0");
-        startActivity(intent);
-        finish();
-    }
-
-    public void restartLatencySamplingActivity(View view)
-    {
-        // do your work Here
-        Intent intent= new Intent(MainActivity.this, MainActivity.class);
-        intent.putExtra("id", "1");
-        startActivity(intent);
-        finish();
     }
 
     public void connect(View view) {
-        if (is_latency_sampling) {
-            port = latency_sampling_port;
-        }
+        String host = ip.getText().toString();
+        String portStr = port.getText().toString();
 
-        String host = ip;
-        String portStr = port;
         if (TextUtils.isEmpty(host) || TextUtils.isEmpty(portStr) || !Patterns.IP_ADDRESS.matcher(host).matches()) {
-            Toast.makeText(this, "Please enter the correct IP and port of the FL server", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter the correct IP and" +
+                    "" +
+                    " port of the FL server", Toast.LENGTH_LONG).show();
         }
         else {
             int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
@@ -221,19 +172,21 @@ public class MainActivity extends AppCompatActivity {
             hideKeyboard(this);
             trainButton.setEnabled(true);
             connectButton.setEnabled(false);
+            connectSampleLatencyButton.setEnabled(false);
             setResultText("Channel object created. Ready to train!");
         }
     }
 
-    public void connectWithoutView() {
-        if (is_latency_sampling) {
-            port = latency_sampling_port;
-        }
+    public void connect_samplelatency(View view) {
+        latency_sampling_port = Integer.toString(8999 - Integer.parseInt(device_id.getText().toString()));
 
-        String host = ip;
-        String portStr = port;
+        String host = ip.getText().toString();
+        String portStr = latency_sampling_port;
+
         if (TextUtils.isEmpty(host) || TextUtils.isEmpty(portStr) || !Patterns.IP_ADDRESS.matcher(host).matches()) {
-            Toast.makeText(this, "Please enter the correct IP and port of the FL server", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please enter the correct IP and" +
+                    "" +
+                    " port of the FL server", Toast.LENGTH_LONG).show();
         }
         else {
             int port = TextUtils.isEmpty(portStr) ? 0 : Integer.valueOf(portStr);
@@ -241,15 +194,12 @@ public class MainActivity extends AppCompatActivity {
             hideKeyboard(this);
             trainButton.setEnabled(true);
             connectButton.setEnabled(false);
-            setResultText("Channel object created. Ready to train!");
+            connectSampleLatencyButton.setEnabled(false);
+            setResultText("Channel object created. Ready to sample latency!");
         }
     }
 
     public void runGRCP(View view){
-        new GrpcTask(new FlowerServiceRunnable(), channel, this).execute();
-    }
-
-    public void runGRCPWithoutView(){
         new GrpcTask(new FlowerServiceRunnable(), channel, this).execute();
     }
 
@@ -429,11 +379,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
 
-                    //Log.e(TAG, "SAMPLE SELECTION TIME: " + (System.currentTimeMillis() - handleStartTime));
-
                     SampleLatencyReturnValues slrv;
-
-                    // boolean isTrained = false;
 
                     if (fedprox || fedbalancer) {
                         int ne = -1;
