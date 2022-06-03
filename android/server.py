@@ -85,7 +85,7 @@ def fit_config(rnd: int, batch_size: int, num_epochs: int, deadline: float, fedp
     return config
 
 def get_eval_fn(model):
-    test_f = open('/mnt/sting/jmshin/FedBalancer/FLASH_jm/data/har_raw/data/test/test_raw_har.json')
+    test_f = open('../data/data/test/test_har.json')
     test = json.load(test_f)
     x_test = np.array(test['user_data']['testuser_1']['x'])
     y_test = np.array(test['user_data']['testuser_1']['y']).reshape(-1,1)

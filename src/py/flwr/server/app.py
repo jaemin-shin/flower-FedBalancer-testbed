@@ -95,7 +95,6 @@ def start_server(  # pylint: disable=too-many-arguments
     >>>     )
     >>> )
     """
-    print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     initialized_server, initialized_config = _init_defaults(server, config, strategy)
 
     # Start gRPC server

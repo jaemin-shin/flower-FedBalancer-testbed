@@ -162,40 +162,8 @@ class Server:
         if self.strategy.ddl_baseline_smartpc or self.strategy.ddl_baseline_wfa:
             self.deadline = 100000
         else:
-            log(INFO, "Requesting latency sampling over all clients (" + str(self.strategy.total_client_num)+" clients currently)")
-
-            # f = open('/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/latency_profile_final_210515_paddingsamemodel.log')
-            # lines = f.readlines()
-
-            # download_times = {}
-            # upload_times = {}
-            # per_epoch_train_times = {}
-            # per_batch_train_times = {}
-            # inference_times = {}
-            # round_completion_times = {}
-            # networking_times = {}
-
-            # client_id = -1
-            # for line in lines[1459:]:
-            #     tmp = line.strip().split('|')
-            #     if 'client_id' in tmp[-1].split(',')[0]:
-            #         client_id = int(tmp[-1].split(',')[1])
-            #     elif 'download_times' in tmp[-1].split(',')[0]:
-            #         download_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'upload_times' in tmp[-1].split(',')[0]:
-            #         upload_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'per_epoch_train_times' in tmp[-1].split(',')[0]:
-            #         per_epoch_train_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'per_batch_train_times' in tmp[-1].split(',')[0]:
-            #         per_batch_train_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'inference_times' in tmp[-1].split(',')[0]:
-            #         inference_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'round_completion_times' in tmp[-1].split(',')[0]:
-            #         round_completion_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-            #     elif 'networking_times' in tmp[-1].split(',')[0]:
-            #         networking_times[client_id] = ast.literal_eval(','.join(tmp[-1].split(',')[1:]))
-
             if self.strategy.latency_sampling:
+                log(INFO, "Requesting latency sampling over all clients (" + str(self.strategy.total_client_num)+" clients currently)")
                 for iteration in range(self.sample_latency_iteration):
                     all_clients = self._client_manager.sample(len(list(self._client_manager.clients)))
                     for client in all_clients:
@@ -211,19 +179,10 @@ class Server:
                             max_workers=self.max_workers
                         )
 
-                        # print(server_msg_sent_time, server_msg_receive_time)
-
                         if len(results) != 0 and len(results[0]) != 0:
-                            # print("EPOCH LIST", results[0][1].train_time_per_epoch_list)
 
                             client.download_times.append(round(max(0, (datetime.strptime(results[0][1].msg_receive_time, "%Y-%m-%d %H:%M:%S.%f") - server_msg_sent_time).total_seconds()), 3))
                             client.upload_times.append(round(max(0, (server_msg_receive_time - datetime.strptime(results[0][1].msg_sent_time, "%Y-%m-%d %H:%M:%S.%f")).total_seconds()), 3))
-
-                            # if results[0][1].train_time_per_epoch > 10.0:
-                            #     results[0][1].train_time_per_epoch /= 5
-                            #     results[0][1].train_time_per_batch /= 5
-                            # client.per_epoch_train_times.append(round(results[0][1].train_time_per_epoch, 3))
-                            # client.per_batch_train_times.append(round(results[0][1].train_time_per_batch, 3))
 
                             client.per_epoch_train_times.append(round(np.mean(results[0][1].train_time_per_epoch_list), 3))
                             client.per_batch_train_times.append(round(np.mean(results[0][1].train_time_per_batch_list), 3))
@@ -231,7 +190,6 @@ class Server:
                             client.inference_times.append(round(results[0][1].inference_time, 3))
 
                             client.round_completion_times.append(round(((server_msg_receive_time) - (server_msg_sent_time)).total_seconds(), 3))
-                            # client.networking_times.append(round(((server_msg_receive_time) - (server_msg_sent_time)).total_seconds() - results[0][1].train_time_per_epoch * self.strategy.num_epochs - results[0][1].inference_time, 3))
                             client.networking_times.append(round(((server_msg_receive_time) - (server_msg_sent_time)).total_seconds() - np.mean(results[0   ][1].train_time_per_epoch_list) * self.strategy.num_epochs - results[0][1].inference_time, 3))
 
                             log(INFO, "client_id,"+str(client.device_id))
@@ -243,22 +201,12 @@ class Server:
                             log(INFO, "round_completion_times,"+str(client.round_completion_times))
                             log(INFO, "networking_times,"+str(client.networking_times))
 
-                            # log(INFO, "client_id,"+str(client.device_id))
-                            # log(INFO, "download_times,"+str(client.download_times)+" from log: "+str(np.mean(download_times[client.device_id])))
-                            # log(INFO, "upload_times,"+str(client.upload_times)+" from log: "+str(np.mean(upload_times[client.device_id])))
-                            # log(INFO, "per_epoch_train_times,"+str(client.per_epoch_train_times)+" from log: "+str(np.mean(per_epoch_train_times[client.device_id])))
-                            # log(INFO, "per_batch_train_times,"+str(client.per_batch_train_times)+" from log: "+str(np.mean(per_batch_train_times[client.device_id])))
-                            # log(INFO, "inference_times,"+str(client.inference_times)+" from log: "+str(np.mean(inference_times[client.device_id])))
-                            # log(INFO, "round_completion_times,"+str(client.round_completion_times)+" from log: "+str(np.mean(round_completion_times[client.device_id])))
-                            # log(INFO, "networking_times,"+str(client.networking_times)+" from log: "+str(np.mean(networking_times[client.device_id])))
-                
             for client in all_clients:
-                f = open('/home/jmshin/FedBalancer_realexperiment/flower/examples/android/log/client_'+str(client.device_id)+'_latency.log')
+                f = open('log/client_'+str(client.device_id)+'_latency.log')
                 lines = f.readlines()
 
                 for line_idx in range(len(lines)-1, 0, -1):
                     tmp = lines[line_idx].strip().split('|')
-                    print(tmp)
                     if 'client_id' in tmp[-1].split(',')[0]:
                         break
                     elif 'download_times' in tmp[-1].split(',')[0]:
@@ -286,25 +234,12 @@ class Server:
                 client.round_completion_times += round_completion_times
                 client.networking_times += networking_times
 
-                # for client in all_clients:
-                    # client.download_time /= self.sample_latency_iteration
-                    # client.upload_time /= self.sample_latency_iteration
-                    # client.per_epoch_train_time /= self.sample_latency_iteration
-                    # client.per_batch_train_time /= self.sample_latency_iteration
-                    # client.inference_time /= self.sample_latency_iteration
-
-                    # client.round_completion_time /= self.sample_latency_iteration
-                    # client.networking_time /= self.sample_latency_iteration
-
-                    # print(client.download_time, client.upload_time, np.mean(client.per_epoch_train_times), np.mean(client.per_batch_train_times), client.inference_time)
-
             # Configure deadline based on the calculated latency
             if self.strategy.ddl_baseline_fixed or self.strategy.fedbalancer:
                 round_duration_summ_list = []
                 for c in all_clients:
                     if self.strategy.fedbalancer:                        
                         round_duration_summ_list.append(np.mean(c.round_completion_times))
-                        # round_duration_summ_list.append(np.mean(round_completion_times[c.device_id]))
                     else:
                         if self.strategy.ss_baseline and c.device_id in [13, 16, 17, 21]:
                             big_clients_data_len = {}
@@ -313,19 +248,16 @@ class Server:
                             big_clients_data_len[17] = 392
                             big_clients_data_len[21] = 383
 
-                            # print(big_clients_data_len[c.device_id], (big_clients_data_len[c.device_id] - 382), (big_clients_data_len[c.device_id] - 382) / big_clients_data_len[c.device_id])
                             minus_ratio = (big_clients_data_len[c.device_id] - 382) / big_clients_data_len[c.device_id]
                             print("MINUS RATIO", np.mean(c.per_epoch_train_times)*self.strategy.num_epochs*minus_ratio)
                             round_duration_summ_list.append(np.mean(c.round_completion_times) - np.mean(c.inference_times) - np.mean(c.per_epoch_train_times)*self.strategy.num_epochs*minus_ratio)
                         else:
                             round_duration_summ_list.append(np.mean(c.round_completion_times) - np.mean(c.inference_times))
-                        # round_duration_summ_list.append(np.mean(round_completion_times[c.device_id]) - np.mean(inference_times[c.device_id]))
                 if self.strategy.ddl_baseline_fixed:
                     self.deadline = (np.mean(round_duration_summ_list) * self.strategy.ddl_baseline_fixed_value_multiplied_at_mean)
                 if self.strategy.fedbalancer:
                     self.deadline = (np.mean(round_duration_summ_list))
             
-            # print(round_duration_summ_list)
             log(INFO, "Deadline {}".format(self.deadline))
             self.oort_non_pacer_deadline = self.deadline
         
@@ -340,7 +272,7 @@ class Server:
         start_time = timeit.default_timer()
 
         for current_round in range(1, num_rounds + 1):
-            self.current_round = current_round - 1 # This is just to align with how we implemented at FLASH simulation
+            self.current_round = current_round - 1 # This is just to align with how we implemented FedBalancer at FLASH simulation
             # Train model and replace previous global model
             res_fit = self.fit_round(rnd=current_round)
             if res_fit:
@@ -362,16 +294,6 @@ class Server:
                 )
                 history.add_loss_centralized(rnd=current_round, loss=loss_cen)
                 history.add_metrics_centralized(rnd=current_round, metrics=metrics_cen)
-
-            # Evaluate model on a sample of available clients
-            # res_fed = self.evaluate_round(rnd=current_round)
-            # if res_fed:
-            #     loss_fed, evaluate_metrics_fed, _ = res_fed
-            #     if loss_fed:
-            #         history.add_loss_distributed(rnd=current_round, loss=loss_fed)
-            #         history.add_metrics_distributed(
-            #             rnd=current_round, metrics=evaluate_metrics_fed
-            #         )
 
         # Bookkeeping
         end_time = timeit.default_timer()
@@ -546,10 +468,6 @@ class Server:
             log(INFO, "fit_round: no clients selected, cancel")
             return None
 
-        # curr_time = datetime.now()
-        # self.elapsed_time += curr_time - self.last_checked_time
-        # self.last_checked_time = curr_time
-
         if self.strategy.fedbalancer:
             self.update_fb_variables(client_instructions)
 
@@ -584,11 +502,6 @@ class Server:
         else:
             self.update_elapsed_time(self.deadline)
 
-        #TODO: Add logic when the round ended before deadline
-        # curr_time = datetime.now()
-        # self.elapsed_time += timedelta(milliseconds=self.deadline*1000)
-        # self.last_checked_time = curr_time
-
         log(
             DEBUG,
             "elapsed_time: %s | fit_round received %s results and %s failures",
@@ -612,12 +525,6 @@ class Server:
 
             # Update training epoch and batch latency
             for client, fit_res, time in results:
-                # if fit_res.train_time_per_epoch >= 2 * np.mean(client.per_epoch_train_times):
-                #     client.per_epoch_train_times.append(round(fit_res.train_time_per_epoch/self.strategy.num_epochs,3))
-                #     client.per_batch_train_times.append(round(fit_res.train_time_per_batch/self.strategy.num_epochs,3))
-
-                # client.per_epoch_train_times.append(round(fit_res.train_time_per_epoch,3))
-                # client.per_batch_train_times.append(round(fit_res.train_time_per_batch,3))
                 client.per_epoch_train_times.append(round(np.mean(fit_res.train_time_per_epoch_list),3))
                 client.per_batch_train_times.append(round(np.mean(fit_res.train_time_per_batch_list),3))
 
@@ -633,8 +540,6 @@ class Server:
                     current_round_exploited_utility += client.client_utility
                 
                 log(INFO, "Num examples from client " + str(client.device_id) + ": " + str(fit_res.num_examples))
-
-            # loss_list = [fit_res.loss_sum for client, fit_res, time in results]
 
             if self.strategy.fedbalancer:
                 self.update_fb_variable_percentages(results)
@@ -764,30 +669,13 @@ def fit_clients(
     with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
         
         submitted_fs = {
-            # executor.submit(fit_client, client_proxy, ins)
-            # for client_proxy, ins in client_instructions
             executor.submit(fit_client, client_proxy, parameters, config, loss_threshold)
             for client_proxy, parameters, config in client_instructions
         }
         finished_fs, _ = concurrent.futures.wait(
             fs=submitted_fs,
-            # timeout=None,
             timeout=deadline
         )
-        # submitted_fs = {
-        #     executor.submit(fit_client, client_proxy, ins)
-        #     for client_proxy, ins in client_instructions
-        # }
-        # try:
-        #     finished_fs, _ = concurrent.futures.as_completed(
-        #         fs=submitted_fs,
-        #         # timeout=None,
-        #         timeout=10
-        #     )
-        # except concurrent.futures._base.TimeoutError:
-        #     for pid, process in executor._processes.items():
-        #         process.terminate()
-        #     executor.shutdown()
 
     # Gather results
     results: List[Tuple[ClientProxy, FitRes, int]] = []
@@ -800,7 +688,6 @@ def fit_clients(
         else:
             # Success case
             result = future.result()
-            # print(result[2].total_seconds())
             results.append(result)
     
     smartpc_elapsed_time = 0.0
@@ -816,17 +703,10 @@ def fit_clients(
 
     return results, failures, smartpc_elapsed_time
 
-#def fit_client(client: ClientProxy, ins: FitIns) -> Tuple[ClientProxy, FitRes]:
 def fit_client(client: ClientProxy, parameters: Parameters, config: dict, loss_threshold: float) -> Tuple[ClientProxy, FitRes]:
     """Refine parameters on a single client."""
     before_fit = datetime.now()
-    
-    # ins.config["train_time_per_epoch"] = client.per_epoch_train_time
-    # ins.config["networking_time"] = client.networking_time
-    # ins.sampleloss = client.current_whole_data_loss_list
-    # fit_res = client.fit(ins)
 
-    print(client, client.device_id, np.mean(client.per_epoch_train_times[-5:]), np.mean(client.per_batch_train_times[-5:]), np.mean(client.networking_times[-5:]))
     if len(client.per_epoch_train_times) >= 5:
         config["train_time_per_epoch"] = np.mean(client.per_epoch_train_times[-5:])
     else:
@@ -845,8 +725,6 @@ def fit_client(client: ClientProxy, parameters: Parameters, config: dict, loss_t
     
     config["inference_time"] = np.mean(client.inference_times)
     config["loss_threshold"] = loss_threshold
-
-    # ins = FitIns(parameters, config, client.current_whole_data_loss_list)
 
     fit_res = client.fit(FitIns(parameters, config, client.current_whole_data_loss_list))
 

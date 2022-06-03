@@ -270,7 +270,7 @@ class SimpleClientManager(ClientManager):
         selected_clients_ids = np.random.choice(c_id_over_cutoff_loss_ids, int(num_clients*(1-self.epsilon)), replace=False, p=c_id_over_cutoff_loss_probs)
 
         #Randomly sample clients from epsilon - not prioritizing device speed as in Oort
-        #From now on, we prioritize device speed as in Oort TODO: SHOULD THINK ABOUT IF PRIORITIZING SPEED IS A GOOD APPROACH; IT MAKES SLOW DEVICES NEVER BE EXPLORED
+        #From now on, we prioritize device speed as in Oort 
         print("c_id_less_cutoff_loss_ids len:", len(c_id_less_cutoff_loss_ids))
         if self.epsilon > 0.0:
             c_ids_tobe_removed = []
@@ -288,13 +288,11 @@ class SimpleClientManager(ClientManager):
 
             if len(c_id_less_cutoff_loss_ids) < epsilon_selected_clients_len:
                 additional_c_id_less_cutoff_loss_ids = np.random.choice(c_ids_tobe_removed, min(len(c_ids_tobe_removed), int(epsilon_selected_clients_len - len(c_id_less_cutoff_loss_ids))), replace=False)         
-                # c_id_less_cutoff_loss_ids += additional_c_id_less_cutoff_loss_ids
                 c_id_less_cutoff_loss_ids = [*c_id_less_cutoff_loss_ids, *additional_c_id_less_cutoff_loss_ids]
             
             remaining_clients_ids_and_device_speed = []
             
             for c_id in c_id_less_cutoff_loss_ids:
-                # remaining_clients_ids_and_device_speed.append((c_id, self.clients_info[str(c_id)]["speed"]))
                 remaining_clients_ids_and_device_speed.append((c_id, 1/np.mean(self.clients[c_id].per_epoch_train_times)))
             
             random.shuffle(remaining_clients_ids_and_device_speed)
@@ -304,10 +302,8 @@ class SimpleClientManager(ClientManager):
                 epsilon_selected_clients_ids.append(elem[0])
             
             if len(epsilon_selected_clients_ids) < epsilon_selected_clients_len:
-                # selected_clients_ids = np.random.choice(c_id_over_cutoff_loss_ids, min(int(num_clients - len(epsilon_selected_clients_ids)), len(c_id_over_cutoff_loss_ids)), replace=False, p=c_id_over_cutoff_loss_probs)
                 selected_clients_ids = np.random.choice(c_id_over_cutoff_loss_ids, min(int(epsilon_selected_clients_len - len(epsilon_selected_clients_ids)), len(c_id_over_cutoff_loss_ids)), replace=False, p=c_id_over_cutoff_loss_probs)
             
-            # epsilon_selected_clients_ids = np.random.choice(c_id_less_cutoff_loss_ids, num_clients - int(num_clients*(1-self.epsilon)), replace=False)
             print("SELECTED CLIENTS IDS: ", len(selected_clients_ids), "EPSILON SELECTED CLIENTS IDS: ", len(epsilon_selected_clients_ids))
 
             selected_clients_ids = [*selected_clients_ids, *epsilon_selected_clients_ids]
@@ -321,5 +317,4 @@ class SimpleClientManager(ClientManager):
             log(INFO, 'epsilon {}'.format(self.epsilon))
             self.epsilon = self.epsilon * 0.98
 
-        # sampled_cids = random.sample(available_cids, num_clients)
         return [self.clients[cid] for cid in selected_clients_ids]

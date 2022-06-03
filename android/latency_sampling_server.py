@@ -44,18 +44,18 @@ def main() -> None:
         fedprox=False,
         fedbalancer=False,
         fb_client_selection=False,
-        ddl_baseline_fixed=False,
+        ddl_baseline_fixed=True,
         ddl_baseline_fixed_value_multiplied_at_mean=1.0,
-        ddl_baseline_smartpc=True,
+        ddl_baseline_smartpc=False,
         ddl_baseline_wfa=False,
         num_epochs=5,
         batch_size=10,
-        clients_per_round=5,
+        clients_per_round=1,
         fb_p=0.0,
         lss=0.0,
         dss=0.0,
         w=0,
-        total_client_num=21,
+        total_client_num=1,
     )
     
     args = parse_args()
