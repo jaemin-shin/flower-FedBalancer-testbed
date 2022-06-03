@@ -2,7 +2,7 @@
 
 This repository contains the testbed implementation and corresponding experiments of the paper:
 
-> [MobiSys'22](https://www.sigmobile.org/mobisys/2022/)
+> [ACM MobiSys'22](https://www.sigmobile.org/mobisys/2022/)
 > 
 > Jaemin Shin et al., [FedBalancer: Data and Pace Control for Efficient Federated Learning on Heterogeneous Clients](https://arxiv.org/abs/2201.01601)
 
@@ -48,14 +48,53 @@ We evaluated based on the [UCI-HAR dataset](https://archive.ics.uci.edu/ml/datas
 - Copy all the contents from the ```android/tflite_convertor/tflite_model``` directory to ```model``` of asset directory
 
 ## How to run: Step 4 - Perform latency sampling on 21 Android devices
+<img src="https://github.com/jaemin-shin/flower-FedBalancer-testbed/blob/main/android_app_img.jpg" width="200" />
 
+Before running federated learning, we recommend you to perform latency sampling on participating devices.
 - Prepare 21 Android devices and install the Android client app in ```android/client```
-- PROVIDE HOW TO RUN WITH SMALLER NUMBER OF ANDROID CLIENTS
-TBD
+- On Android client app, enter client ID, server machine IP, and port in the app screen on 21 devices.
+  - Each devices should have different client ID between 1 - 21.
+  - Here, you should enter the port that you will run federated learning. We recommend you to use 8999 port.
+- On server, run following below:
+  - For efficient latency sampling, this runs 21 server instances with different ports. We configured each instance to use ```8999 - client_id``` port (e.g., server with port 8998 is used by a client with ID 1).
+```
+$ cd android
+$ ./latency_sampling_run.sh
+```
+- On Android client app, press 'LOAD' button to load client data on each of 21 devices.
+- On Android client app, press 'SETUP FOR LATENCY SAMPLING' button to prepare the app for latency sampling on 21 devices.
+- On Android client app, press 'START' to start latency sampling on 21 devices.
+
+After sampling round completion time for 10 rounds on each device, the server instances terminate.
+Sampled latency information of each client are saved in ```android/log/client_x_latency.log```.
 
 ## How to run: Step 5 - Run federated learning!
 
+- Terminate and re-run the Android client app on 21 Android devices.
+- On Android client app, enter client ID, server machine IP, and port in the app screen on 21 devices.
+  - Each devices should have different client ID between 1 - 21.
+  - Here, enter the port that you will run federated learning. We recommend you to use 8999 port.
+- On server, run following below:
+  - We prepared the config files in ```configs``` so that you could run to test FedBalancer and baselines in our paper.
+  - For each parameter item in a config file, please refer to [FedBalancer](https://github.com/jaemin-shin/FedBalancer) for explanation.
+```
+$ cd android
+$ python server.py --config=configs/{config_name}.cfg # e.g. python server.py --config=configs/fedavg_ddl_1T.cfg
+```
+- On Android client app, press 'LOAD' button to load client data on each of 21 devices.
+- On Android client app, press 'SETUP' button to prepare the app for federated learning on 21 devices.
+- On Android client app, press 'START' to start latency sampling on 21 devices.
+
+## Parsing Results
+
+- After running federated learning, the result log is saved in ```android/log```.
+- Please refer to the jupyter notebook ipynb scripts in ```results_parsing``` directory.
+
 ## Note
+
+In this repository, we "simulate" deadlines for each training round. As Flower uses [Futures](https://docs.python.org/3/library/asyncio-future.html) Python library to implement client training at a round, it cannot terminate a round while waiting for a client to finish their task. Thus, we implemented our server to wait until every clients to finish their task but to reject client updates that arrived later than the round deadline. For this reason, we measure ```elapsed_time``` variable in ```src/py/flwr/server/server.py``` to measure the time elapsed during FL assuming that the round terminates after the deadline.
+
+## Acknowledgement on Flower
 
 This repository is built top on a forked repository of [Flower](https://github.com/adap/flower), which is a friendly federated learning framework that is maintained by a wonderful community of researchers and engineers. Therefore, this repository contains same license file as in Flower. 
 
