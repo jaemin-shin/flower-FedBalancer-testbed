@@ -102,7 +102,23 @@ This repository is built top on a forked repository of [Flower](https://github.c
 
 If you publish work that uses this repository, please cite FedBalancer and Flower as follows:
 
-(FedBalancer bibtext - TBD)
+```bibtex
+@inproceedings{10.1145/3498361.3538917,
+author = {Shin, Jaemin and Li, Yuanchun and Liu, Yunxin and Lee, Sung-Ju},
+title = {FedBalancer: Data and Pace Control for Efficient Federated Learning on Heterogeneous Clients},
+year = {2022},
+isbn = {9781450391856},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3498361.3538917},
+doi = {10.1145/3498361.3538917},
+booktitle = {Proceedings of the 20th Annual International Conference on Mobile Systems, Applications and Services},
+pages = {436–449},
+numpages = {14},
+location = {Portland, Oregon},
+series = {MobiSys '22}
+}
+```
 
 ```bibtex
 @article{beutel2020flower,
